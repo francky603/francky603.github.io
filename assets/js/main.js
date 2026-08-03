@@ -122,7 +122,7 @@
   }
 
   function drawGrid(ctx, cx, cy, R, N, p) {
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.strokeStyle = 'rgba(23, 35, 59, 0.14)';
     ctx.lineWidth = 1;
     for (var ring = 1; ring <= 4; ring++) {
       var r = (R * ring) / 4 * p;
@@ -144,7 +144,7 @@
   }
 
   function drawLabels(ctx, cx, cy, R, N, labels, p) {
-    ctx.fillStyle = '#a7b4cc';
+    ctx.fillStyle = '#5b6b85';
     ctx.font = '13px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
