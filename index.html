@@ -30,6 +30,10 @@
         <a href="#competences" class="nav__link">Compétences</a>
         <a href="#experience" class="nav__link">Expérience</a>
         <a href="#projets" class="nav__link">Projets</a>
+        <a href="#cas" class="nav__link">Études</a>
+        <a href="#demos" class="nav__link">Démos</a>
+        <a href="#stats" class="nav__link">GitHub</a>
+        <a href="#blog" class="nav__link">Blog</a>
         <a href="#parcours" class="nav__link">Parcours</a>
         <a href="#contact" class="nav__link nav__link--cta">Contact</a>
       </nav>
@@ -325,11 +329,274 @@
       </div>
     </section>
 
+    <!-- Études de cas -->
+    <section class="section" id="cas">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">05 · Études de cas</span>
+          <h2 class="section__title">Problèmes résolus en détail</h2>
+          <p class="section__sub">Retour sur les défis techniques rencontrés, les solutions retenues et les impacts mesurés.</p>
+        </div>
+        <div class="cases">
+          <article class="case reveal">
+            <div class="case__num">01</div>
+            <div class="case__body">
+              <h3 class="case__title">Automatiser la sauvegarde d'un parc de serveurs Linux</h3>
+              <div class="case__meta"><span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> Problème</span><span class="chip chip--alt"><i class="fa-solid fa-wrench"></i> Solution</span><span class="chip chip--ok"><i class="fa-solid fa-chart-line"></i> Impact</span></div>
+              <div class="case__problem">
+                <h4>Le problème</h4>
+                <p>Des sauvegardes manuelles et non fiables sur un parc de serveurs Linux : risque de perte de données, aucune visibilité sur l'état des disques et des services, et des heures d'intervention à répétition.</p>
+              </div>
+              <div class="case__solution">
+                <h4>La solution</h4>
+                <ul>
+                  <li><i class="fa-solid fa-check"></i> Scripts Bash + Python de sauvegarde incrémentale avec rotation et compression chiffrée.</li>
+                  <li><i class="fa-solid fa-check"></i> Supervision en temps réel (CPU, RAM, disque, services) avec alertes automatiques sur seuils critiques.</li>
+                  <li><i class="fa-solid fa-check"></i> Journalisation centralisée et tableau de bord de fiabilité.</li>
+                </ul>
+              </div>
+              <div class="case__impact">
+                <h4>L'impact mesuré</h4>
+                <p><i class="fa-solid fa-arrow-trend-down"></i> Réduction de ~60 % des interventions manuelles, restauration rapide après incident et zéro perte de données sur la période test.</p>
+              </div>
+            </div>
+          </article>
+          <article class="case reveal">
+            <div class="case__num">02</div>
+            <div class="case__body">
+              <h3 class="case__title">Concevoir un chiffrement symétrique sûr en Python et Rust</h3>
+              <div class="case__meta"><span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> Problème</span><span class="chip chip--alt"><i class="fa-solid fa-wrench"></i> Solution</span><span class="chip chip--ok"><i class="fa-solid fa-chart-line"></i> Impact</span></div>
+              <div class="case__problem">
+                <h4>Le problème</h4>
+                <p>Besoin de valider les principes cryptographiques sans réinventer la roue : beaucoup d'implémentations amateurs souffrent de clés faibles, d'IV réutilisés ou d'absence de tests.</p>
+              </div>
+              <div class="case__solution">
+                <h4>La solution</h4>
+                <ul>
+                  <li><i class="fa-solid fa-check"></i> Chiffrement AES-256-GCM avec gestion stricte des clés et IV aléatoires par message.</li>
+                  <li><i class="fa-solid fa-check"></i> Double implémentation Python et Rust, interopérable, déployée en environnement isolé.</li>
+                  <li><i class="fa-solid fa-check"></i> Suite de tests unitaires couvrant chiffrement, déchiffrement et cas limites.</li>
+                </ul>
+              </div>
+              <div class="case__impact">
+                <h4>L'impact mesuré</h4>
+                <p><i class="fa-solid fa-circle-check"></i> 100 % de couverture de tests, interopérabilité Python ↔ Rust validée, conformité aux bonnes pratiques de codage sécurisé.</p>
+              </div>
+            </div>
+          </article>
+          <article class="case reveal">
+            <div class="case__num">03</div>
+            <div class="case__body">
+              <h3 class="case__title">Construire une application de gestion de stock de bout en bout</h3>
+              <div class="case__meta"><span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> Problème</span><span class="chip chip--alt"><i class="fa-solid fa-wrench"></i> Solution</span><span class="chip chip--ok"><i class="fa-solid fa-chart-line"></i> Impact</span></div>
+              <div class="case__problem">
+                <h4>Le problème</h4>
+                <p>Une gestion de stock réalisée dans des feuilles de calcul : erreurs de saisie, pas d'historique fiable, pas d'alertes de réapprovisionnement et accès non sécurisés.</p>
+              </div>
+              <div class="case__solution">
+                <h4>La solution</h4>
+                <ul>
+                  <li><i class="fa-solid fa-check"></i> Interface React responsive avec tableau de bord et visualisation des mouvements.</li>
+                  <li><i class="fa-solid fa-check"></i> API REST Node.js sécurisée (JWT, validation, gestion des rôles).</li>
+                  <li><i class="fa-solid fa-check"></i> Persistance PostgreSQL avec schéma relationnel et transactions.</li>
+                </ul>
+              </div>
+              <div class="case__impact">
+                <h4>L'impact mesuré</h4>
+                <p><i class="fa-solid fa-circle-check"></i> Saisie fiabilisée, alertes de stock automatiques et workflow CRUD complet opérationnel de bout en bout.</p>
+              </div>
+            </div>
+          </article>
+          <article class="case reveal">
+            <div class="case__num">04</div>
+            <div class="case__body">
+              <h3 class="case__title">Rendre un assistant IA fiable sans aucune connexion internet</h3>
+              <div class="case__meta"><span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> Problème</span><span class="chip chip--alt"><i class="fa-solid fa-wrench"></i> Solution</span><span class="chip chip--ok"><i class="fa-solid fa-chart-line"></i> Impact</span></div>
+              <div class="case__problem">
+                <h4>Le problème</h4>
+                <p>Les assistants IA dépendent de modèles cloud et d'une connexion : inutilisables hors ligne, lents, et générant du code non vérifié, parfois sans rapport avec la demande.</p>
+              </div>
+              <div class="case__solution">
+                <h4>La solution</h4>
+                <ul>
+                  <li><i class="fa-solid fa-check"></i> Modèle LLM local (Qwen2.5-Coder-1.5B) avec tous les appels en mode <code>local_files_only=True</code>.</li>
+                  <li><i class="fa-solid fa-check"></i> Boucle agent Plan → Exécuter → Observer → Replanir avec vérification et réparation du code.</li>
+                  <li><i class="fa-solid fa-check"></i> Fallback contextuel (login → vraie page de login, etc.) et fine-tuning LoRA sur 4 665 échantillons.</li>
+                </ul>
+              </div>
+              <div class="case__impact">
+                <h4>L'impact mesuré</h4>
+                <p><i class="fa-solid fa-circle-check"></i> 100 % hors ligne, code pertinent et vérifié, binaire portable Windows / Mac / Linux sans dépendance réseau.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Démonstrations en ligne -->
+    <section class="section section--alt" id="demos">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">06 · Démonstrations</span>
+          <h2 class="section__title">Essayer en ligne</h2>
+          <p class="section__sub">Certains projets sont hébergés et directement testables. Les autres disposent d'une démo statique.</p>
+        </div>
+        <div class="demos">
+          <div class="demo reveal">
+            <div class="demo__live"><span class="live-dot"></span> En ligne</div>
+            <h3 class="demo__title">Franky — Assistant IA Offline</h3>
+            <p class="demo__desc">Assistant autonome 100 % local, génération de code vérifiée, mémoire sémantique persistante.</p>
+            <div class="demo__actions">
+              <a href="https://github.com/francky603/francky603.github.io" target="_blank" rel="noopener" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> Code source</a>
+              <a href="https://francky603.github.io/" target="_blank" rel="noopener" class="btn btn--primary btn--sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir la démo</a>
+            </div>
+          </div>
+          <div class="demo reveal">
+            <div class="demo__live"><span class="live-dot"></span> En ligne</div>
+            <h3 class="demo__title">Ce portfolio</h3>
+            <p class="demo__desc">Site vitrine hébergé sur GitHub Pages : animations, radar de compétences et CV téléchargeable.</p>
+            <div class="demo__actions">
+              <a href="https://github.com/francky603/francky603.github.io" target="_blank" rel="noopener" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> Code source</a>
+            </div>
+          </div>
+          <div class="demo reveal">
+            <div class="demo__live demo__live--soon"><span class="live-dot live-dot--muted"></span> Bientôt</div>
+            <h3 class="demo__title">Gestion de stock Full-Stack</h3>
+            <p class="demo__desc">Application React + Node.js + PostgreSQL. Le déploiement cloud (AWS EC2) est en cours de préparation.</p>
+            <div class="demo__actions">
+              <a href="https://github.com/francky603" target="_blank" rel="noopener" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> Profil GitHub</a>
+            </div>
+          </div>
+          <div class="demo reveal">
+            <div class="demo__live demo__live--soon"><span class="live-dot live-dot--muted"></span> Bientôt</div>
+            <h3 class="demo__title">Outils DevOps & Automatisation</h3>
+            <p class="demo__desc">Projet DevOps : scripts Python, conteneurisation Docker et pipelines CI/CD (GitHub Actions).</p>
+            <div class="demo__actions">
+              <a href="https://github.com/francky603/devops-project" target="_blank" rel="noopener" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> devops-project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistiques GitHub -->
+    <section class="section" id="stats">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">07 · GitHub</span>
+          <h2 class="section__title">Statistiques GitHub</h2>
+          <p class="section__sub">Mon activité publique sur le compte <a href="https://github.com/francky603" target="_blank" rel="noopener" class="inline-link">github.com/francky603</a>.</p>
+        </div>
+        <div class="ghstats">
+          <div class="ghstat reveal"><span class="ghstat__val" data-count="5">0</span><span class="ghstat__label"><i class="fa-solid fa-box"></i> dépôts publics</span></div>
+          <div class="ghstat reveal"><span class="ghstat__val" data-count="4665">0</span><span class="ghstat__label"><i class="fa-solid fa-database"></i> échantillons de fine-tuning</span></div>
+          <div class="ghstat reveal"><span class="ghstat__val" data-count="7">0</span><span class="ghstat__label"><i class="fa-solid fa-code"></i> langages utilisés</span></div>
+          <div class="ghstat reveal"><span class="ghstat__val" data-count="100" data-suffix="%">0%</span><span class="ghstat__label"><i class="fa-solid fa-rocket"></i> projets autonomes</span></div>
+        </div>
+        <div class="ghlangs reveal">
+          <h3 class="sub-title"><i class="fa-solid fa-chart-column"></i> Langages dans mes dépôts</h3>
+          <div class="ghlang">
+            <span class="ghlang__label"><i class="fa-brands fa-python"></i> Python</span>
+            <div class="ghlang__track"><span class="ghlang__fill" data-width="35"></span></div>
+            <span class="ghlang__pct">35%</span>
+          </div>
+          <div class="ghlang">
+            <span class="ghlang__label"><i class="fa-solid fa-gear"></i> C++ / CMake</span>
+            <div class="ghlang__track"><span class="ghlang__fill" data-width="40"></span></div>
+            <span class="ghlang__pct">40%</span>
+          </div>
+          <div class="ghlang">
+            <span class="ghlang__label"><i class="fa-brands fa-js"></i> JavaScript / TypeScript</span>
+            <div class="ghlang__track"><span class="ghlang__fill" data-width="15"></span></div>
+            <span class="ghlang__pct">15%</span>
+          </div>
+          <div class="ghlang">
+            <span class="ghlang__label"><i class="fa-brands fa-html5"></i> HTML / CSS</span>
+            <div class="ghlang__track"><span class="ghlang__fill" data-width="10"></span></div>
+            <span class="ghlang__pct">10%</span>
+          </div>
+        </div>
+        <div class="ghrepos reveal">
+          <h3 class="sub-title"><i class="fa-solid fa-folder-tree"></i> Dépôts récents</h3>
+          <div class="ghrepo">
+            <a href="https://github.com/francky603/francky603.github.io" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> francky603.github.io</a>
+            <span class="ghrepo__lang"><span class="lang-dot" style="--c:#e34c26"></span> HTML</span>
+          </div>
+          <div class="ghrepo">
+            <a href="https://github.com/francky603/devops-project" target="_blank" rel="noopener"><i class="fa-solid fa-server"></i> devops-project</a>
+            <span class="ghrepo__lang"><span class="lang-dot" style="--c:#3572A5"></span> Python</span>
+          </div>
+          <div class="ghrepo">
+            <a href="https://github.com/francky603/voting-app" target="_blank" rel="noopener"><i class="fa-solid fa-check-to-slot"></i> voting-app</a>
+            <span class="ghrepo__lang"><span class="lang-dot" style="--c:#3572A5"></span> Multi-langage</span>
+          </div>
+          <div class="ghrepo">
+            <a href="https://github.com/francky603/Mixnet" target="_blank" rel="noopener"><i class="fa-solid fa-shuffle"></i> Mixnet</a>
+            <span class="ghrepo__lang"><span class="lang-dot" style="--c:#f34b7d"></span> Réseau</span>
+          </div>
+          <div class="ghrepo">
+            <a href="https://github.com/francky603/App" target="_blank" rel="noopener"><i class="fa-solid fa-mobile-screen"></i> App</a>
+            <span class="ghrepo__lang"><span class="lang-dot" style="--c:#f34b7d"></span> C++</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="section section--alt" id="blog">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">08 · Blog</span>
+          <h2 class="section__title">Articles techniques</h2>
+          <p class="section__sub">Réflexions et retours d'expérience sur la cybersécurité, le cloud et l'IA appliquée à la sécurité.</p>
+        </div>
+        <div class="posts">
+          <article class="post reveal">
+            <div class="post__tag">Cybersécurité</div>
+            <h3 class="post__title"><a href="#">Sécuriser un serveur Linux exposé : durcissement pas à pas</a></h3>
+            <p class="post__desc">SSH par clés, pare-feu iptables/UFW, désactivation des services inutiles, mises à jour automatiques et surveillance des journaux.</p>
+            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 8 min</span><span><i class="fa-solid fa-tag"></i> iptables, hardening</span></div>
+          </article>
+          <article class="post reveal">
+            <div class="post__tag">Cloud & DevOps</div>
+            <h3 class="post__title"><a href="#">Docker et docker-compose pour isoler vos applications en toute sécurité</a></h3>
+            <p class="post__desc">Pourquoi la conteneurisation renforce la sécurité, comment définir des réseaux isolés, des volumes et des secrets.</p>
+            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 6 min</span><span><i class="fa-solid fa-tag"></i> Docker, DevOps</span></div>
+          </article>
+          <article class="post reveal">
+            <div class="post__tag">IA & Sécurité</div>
+            <h3 class="post__title"><a href="#">Déployer un LLM local en environnement sécurisé (Ollama, Hugging Face)</a></h3>
+            <p class="post__desc">Garde-fous pour l'IA hors ligne : confinement des modèles, gestion des données, validation des sorties et boucle agent vérifiée.</p>
+            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 10 min</span><span><i class="fa-solid fa-tag"></i> LLM, offline</span></div>
+          </article>
+          <article class="post reveal">
+            <div class="post__tag">Réseaux</div>
+            <h3 class="post__title"><a href="#">Comprendre les VLAN et les VPN pour segmenter un réseau d'entreprise</a></h3>
+            <p class="post__desc">Routage, isolation des flux, politiques de sécurité par segment et cas pratiques avec équipements Cisco (CCNP).</p>
+            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 7 min</span><span><i class="fa-solid fa-tag"></i> Cisco, VLAN</span></div>
+          </article>
+          <article class="post reveal">
+            <div class="post__tag">Automatisation</div>
+            <h3 class="post__title"><a href="#">Scripts de sauvegarde et supervision : bâtir une vraie fiabilité opérationnelle</a></h3>
+            <p class="post__desc">Retour d'expérience sur l'automatisation d'un parc Linux : sauvegardes incrémentales, alertes et réduction des interventions manuelles.</p>
+            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 9 min</span><span><i class="fa-solid fa-tag"></i> Bash, Python</span></div>
+          </article>
+          <article class="post reveal">
+            <div class="post__tag">Développement</div>
+            <h3 class="post__title"><a href="#">Écrire du code sécurisé : leçon tirée d'une implémentation de chiffrement</a></h3>
+            <p class="post__desc">Gestion des clés, vecteurs d'initialisation, tests unitaires et double implémentation Python / Rust interopérable.</p>
+            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 7 min</span><span><i class="fa-solid fa-tag"></i> Crypto, Rust</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- Certifications & Formation -->
     <section class="section" id="parcours">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">05 · Parcours</span>
+          <span class="section__tag">09 · Parcours</span>
           <h2 class="section__title">Certifications & Formation</h2>
         </div>
         <div class="radar reveal">
@@ -408,7 +675,7 @@
     <section class="section section--contact" id="contact">
       <div class="container">
         <div class="contact reveal">
-          <span class="section__tag">06 · Contact</span>
+          <span class="section__tag">10 · Contact</span>
           <h2 class="contact__title">Discutons de votre projet</h2>
           <p class="contact__desc">
             Disponible pour un stage ou un premier emploi en ingénierie sécurité, DevOps ou cybersécurité.

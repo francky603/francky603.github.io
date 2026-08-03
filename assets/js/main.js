@@ -67,7 +67,7 @@
   /* ---------- IntersectionObserver : reveal + compteurs + barres + radar ---------- */
   var revealEls = document.querySelectorAll('.reveal');
   var counters = document.querySelectorAll('[data-count]');
-  var fills = document.querySelectorAll('.bar__fill, .lang__fill');
+  var fills = document.querySelectorAll('.bar__fill, .lang__fill, .ghlang__fill');
   var radarCanvas = document.getElementById('radarChart');
   var radarDone = false;
 
@@ -197,7 +197,7 @@
           observer.unobserve(el);
           if (el.classList.contains('reveal')) el.classList.add('visible');
           if (el.hasAttribute('data-count')) animateCounter(el);
-          if (el.classList.contains('bar__fill') || el.classList.contains('lang__fill')) animateBar(el);
+          if (el.classList.contains('bar__fill') || el.classList.contains('lang__fill') || el.classList.contains('ghlang__fill')) animateBar(el);
           if (el === radarCanvas) drawRadar();
         });
       },
