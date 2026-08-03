@@ -4,21 +4,21 @@
    ============================================================ */
 
 :root {
-  --bg: #060a13;
-  --bg-alt: #0a1120;
-  --bg-soft: #0e1729;
-  --card: #0d1626;
-  --border: rgba(148, 184, 255, 0.12);
-  --border-strong: rgba(148, 184, 255, 0.25);
-  --text: #e6edf7;
-  --text-muted: #93a4bd;
-  --text-dim: #6b7c99;
-  --accent: #4f8cff;
-  --accent-2: #22d3ee;
-  --accent-3: #7c5cff;
-  --success: #34d399;
-  --gradient: linear-gradient(120deg, #4f8cff, #22d3ee);
-  --gradient-2: linear-gradient(120deg, #7c5cff, #4f8cff);
+  --bg: #070a12;
+  --bg-alt: #0c1322;
+  --bg-soft: #101a2e;
+  --card: #0f1828;
+  --border: rgba(255, 109, 109, 0.14);
+  --border-strong: rgba(255, 109, 109, 0.3);
+  --text: #f0f4fa;
+  --text-muted: #a7b4cc;
+  --text-dim: #76849f;
+  --accent: #ff5252;
+  --accent-2: #4d9fff;
+  --accent-3: #ff8a5c;
+  --success: #3ddc97;
+  --gradient: linear-gradient(120deg, #ff5252, #4d9fff);
+  --gradient-2: linear-gradient(120deg, #ff8a5c, #ff5252);
   --radius: 16px;
   --radius-sm: 10px;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);

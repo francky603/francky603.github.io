@@ -58,6 +58,7 @@
   /* ---------- Barres de progression (largeur animée) ---------- */
   function animateBar(bar) {
     var pct = bar.getAttribute('data-width') || bar.style.getPropertyValue('--pct') || '100%';
+    if (pct.indexOf('%') === -1) pct += '%';
     // force reflow puis applique la largeur -> transition CSS animée
     void bar.offsetWidth;
     bar.style.width = pct;
@@ -82,10 +83,10 @@
 
     var labels = ['Réseaux', 'Sécurité', 'Cloud', 'Dev & IA', 'Systèmes', 'Automatisation'];
     var series = [
-      { color: '#4f8cff', values: [0.9, 0.85, 0.75, 0.85, 0.85, 0.9] },
-      { color: '#22d3ee', values: [0.75, 0.7, 0.85, 0.8, 0.7, 0.8] },
-      { color: '#34d399', values: [0.8, 0.75, 0.8, 0.95, 0.75, 0.85] },
-      { color: '#7c5cff', values: [0.85, 0.8, 0.75, 0.85, 0.95, 0.9] }
+      { color: '#ff5252', values: [0.9, 0.85, 0.75, 0.85, 0.85, 0.9] },
+      { color: '#4d9fff', values: [0.75, 0.7, 0.85, 0.8, 0.7, 0.8] },
+      { color: '#ff8a5c', values: [0.8, 0.75, 0.8, 0.95, 0.75, 0.85] },
+      { color: '#3ddc97', values: [0.85, 0.8, 0.75, 0.85, 0.95, 0.9] }
     ];
     var N = labels.length;
     var anim = { p: 0 };
@@ -121,7 +122,7 @@
   }
 
   function drawGrid(ctx, cx, cy, R, N, p) {
-    ctx.strokeStyle = 'rgba(148, 184, 255, 0.15)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
     ctx.lineWidth = 1;
     for (var ring = 1; ring <= 4; ring++) {
       var r = (R * ring) / 4 * p;
@@ -143,7 +144,7 @@
   }
 
   function drawLabels(ctx, cx, cy, R, N, labels, p) {
-    ctx.fillStyle = '#93a4bd';
+    ctx.fillStyle = '#a7b4cc';
     ctx.font = '13px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -213,7 +214,9 @@
       el.textContent = (el.getAttribute('data-count') || '0') + (el.getAttribute('data-suffix') || '');
     });
     fills.forEach(function (el) {
-      el.style.width = el.getAttribute('data-width') || el.style.getPropertyValue('--pct') || '100%';
+      var p = el.getAttribute('data-width') || el.style.getPropertyValue('--pct') || '100%';
+      if (p.indexOf('%') === -1) p += '%';
+      el.style.width = p;
     });
     drawRadar();
   }
