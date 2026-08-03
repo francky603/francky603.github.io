@@ -1341,6 +1341,95 @@ ul {
   margin-right: 6px;
 }
 
+.project__note {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 82, 82, 0.05);
+  border: 1px solid rgba(255, 82, 82, 0.22);
+  font-size: 0.88rem;
+}
+
+.project__note p {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  color: var(--text-muted);
+}
+
+.project__note p i {
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.project__note strong {
+  color: var(--text);
+}
+
+.project__note code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(23, 35, 59, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.project__table {
+  margin: 14px 0;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.project__table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.project__table th,
+.project__table td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.project__table thead th {
+  background: rgba(47, 128, 237, 0.08);
+  color: var(--text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.project__table thead th:first-child {
+  background: rgba(23, 35, 59, 0.05);
+  color: var(--text-dim);
+}
+
+.project__table tbody td {
+  color: var(--text-muted);
+}
+
+.project__table tbody tr:first-child td {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.project__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.project__table tbody tr:hover td {
+  background: rgba(23, 35, 59, 0.03);
+}
+
+.project__table tbody td i {
+  color: var(--success);
+}
+
 /* Radar chart */
 .radar {
   margin-bottom: 56px;
