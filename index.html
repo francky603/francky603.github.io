@@ -335,11 +335,11 @@
                 état persistant.
               </p>
               <div class="project__note">
-                <p><i class="fa-solid fa-bug"></i> <strong>Bug identifié :</strong> deux états <code>!StateC2(~clt.1, ~cn, ~r.1, ...)</code> sont créés avec le même <code>~cn</code> parce que <code>!StateC1</code> est persistant → <code>ClientKeyExchange</code> tire deux fois, chacun déclenchant <code>ClientAuth</code> → deux <code>ClientAuthEvent(~cn, 'HybridStandard')</code>.</p>
-                <p><i class="fa-solid fa-wrench"></i> <strong>Cause :</strong> <code>!StateC1</code> n'est pas consommé. <strong>Fix minimal :</strong> verrou linéaire par nonce.</p>
+                <p><i class="fa-solid fa-bug"></i> <strong>Bug :</strong> <code>!StateC1</code> persistant non consommé → deux <code>!StateC2(~clt.1, ~cn, ~r.1, ...)</code> créés avec le même <code>~cn</code> → <code>ClientKeyExchange</code> tire deux fois → double <code>ClientAuthEvent(~cn, 'HybridStandard')</code>.</p>
+                <p><i class="fa-solid fa-wrench"></i> <strong>Fix :</strong> verrou linéaire par nonce.</p>
               </div>
               <div class="project__points">
-                <p><i class="fa-solid fa-check"></i> Analyse formelle des états et des transitions du protocole</p>
+                <p><i class="fa-solid fa-check"></i> Analyse formelle des états et transitions du protocole</p>
                 <p><i class="fa-solid fa-check"></i> Hybridation TLS + KEM post-quantique (HybridStandard)</p>
                 <p><i class="fa-solid fa-check"></i> Correction par verrouillage linéaire sur le nonce</p>
               </div>
@@ -356,18 +356,17 @@
               </p>
               <div class="project__table">
                 <table>
-                  <thead><tr><th></th><th>pqcrypto-* (choisi)</th><th>oqs (haut niveau)</th><th>liboqs-sys (FFI)</th></tr></thead>
+                  <thead><tr><th></th><th>pqcrypto-* (choisi)</th><th>oqs / liboqs-sys</th></tr></thead>
                   <tbody>
-                    <tr><td>Langage</td><td>Rust pur</td><td>Wrapper Rust sur C</td><td>Liaison C directe (unsafe)</td></tr>
-                    <tr><td>Dépendance binaire</td><td><i class="fa-solid fa-check"></i> Aucune</td><td>liboqs .dll/.so</td><td>liboqs .dll/.so</td></tr>
-                    <tr><td>Sécurité mémoire</td><td>Garantie Rust (pas de unsafe)</td><td>unsafe wrapper, bugs C possibles</td><td>unsafe partout, risques C</td></tr>
-                    <tr><td>Algorithmes</td><td>Kyber, Frodo, HQC, Dilithium, SPHINCS+, Falcon</td><td>KEM + Signatures (idem + BIKE, McEliece)</td><td>Toute liboqs (idem)</td></tr>
-                    <tr><td>Mise à jour</td><td>Rythme des crates Rust</td><td>Version de liboqs</td><td>liboqs compilé</td></tr>
-                    <tr><td>Portabilité</td><td><i class="fa-solid fa-check"></i> cargo build partout</td><td>liboqs pré-compilé / build source</td><td>liboqs + bindgen / .h fournis</td></tr>
+                    <tr><td>Langage</td><td>Rust pur</td><td>Wrapper/FFI sur C</td></tr>
+                    <tr><td>Dépendance</td><td><i class="fa-solid fa-check"></i> Aucune binaire</td><td>liboqs .dll/.so</td></tr>
+                    <tr><td>Sécurité mémoire</td><td>Garantie Rust (pas de unsafe)</td><td>unsafe, bugs C possibles</td></tr>
+                    <tr><td>Algorithmes</td><td>Kyber, Frodo, HQC, Dilithium, SPHINCS+, Falcon</td><td>Idem + BIKE, McEliece</td></tr>
+                    <tr><td>Portabilité</td><td><i class="fa-solid fa-check"></i> cargo build partout</td><td>liboqs compilé / bindgen</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Le programme s'installe avec un simple <code>cargo build</code> — sans liboqs, sans .dll à distribuer, sans unsafe dans la couche crypto. Le prix : un sous-ensemble d'algorithmes légèrement plus restreint.</p>
+              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Simple <code>cargo build</code> — sans liboqs, sans .dll, sans unsafe. Le prix : un sous-ensemble d'algorithmes plus restreint.</p>
             </div>
           </article>
         </div>
