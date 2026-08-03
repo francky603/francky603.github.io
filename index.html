@@ -268,8 +268,7 @@
               </p>
               <div class="project__points">
                 <p><i class="fa-solid fa-check"></i> Chiffrement/déchiffrement AES avec gestion sûre des clés</p>
-                <p><i class="fa-solid fa-check"></i> Vecteurs d'initialisation (IV) aléatoires par message</p>
-                <p><i class="fa-solid fa-check"></i> Implémentation équivalente en Python et Rust (interop)</p>
+                <p><i class="fa-solid fa-check"></i> Implémentation équivalente Python et Rust (interop)</p>
               </div>
               <div class="project__metrics">
                 <div class="metric"><span class="metric__val" data-count="2">0</span><span class="metric__label">langages implémentés</span></div>
@@ -313,8 +312,7 @@
               <div class="project__points">
                 <p><i class="fa-solid fa-check"></i> Boucle agent autonome avec vérification et réparation du code</p>
                 <p><i class="fa-solid fa-check"></i> Fine-tuning LoRA sur 4 665 échantillons Fable5</p>
-                <p><i class="fa-solid fa-check"></i> Mémoire sémantique persistante et planification d'objectifs</p>
-                <p><i class="fa-solid fa-check"></i> Aucune connexion requise (100% local)</p>
+                <p><i class="fa-solid fa-check"></i> Mémoire sémantique persistante, 100% local</p>
               </div>
               <div class="project__metrics">
                 <div class="metric"><span class="metric__val" data-count="4665">0</span><span class="metric__label">échantillons LoRA</span></div>
@@ -335,8 +333,7 @@
                 état persistant.
               </p>
               <div class="project__note">
-                <p><i class="fa-solid fa-bug"></i> <strong>Bug :</strong> <code>!StateC1</code> persistant non consommé → deux <code>!StateC2(~clt.1, ~cn, ~r.1, ...)</code> créés avec le même <code>~cn</code> → <code>ClientKeyExchange</code> tire deux fois → double <code>ClientAuthEvent(~cn, 'HybridStandard')</code>.</p>
-                <p><i class="fa-solid fa-wrench"></i> <strong>Fix :</strong> verrou linéaire par nonce.</p>
+                <p><i class="fa-solid fa-bug"></i> <strong>Bug :</strong> <code>!StateC1</code> persistant non consommé → <code>ClientKeyExchange</code> tire deux fois → double <code>ClientAuthEvent(~cn, 'HybridStandard')</code>. <strong>Fix :</strong> verrou linéaire par nonce.</p>
               </div>
               <div class="project__points">
                 <p><i class="fa-solid fa-check"></i> Analyse formelle des états et transitions du protocole</p>
@@ -358,15 +355,14 @@
                 <table>
                   <thead><tr><th></th><th>pqcrypto-* (choisi)</th><th>oqs / liboqs-sys</th></tr></thead>
                   <tbody>
-                    <tr><td>Langage</td><td>Rust pur</td><td>Wrapper/FFI sur C</td></tr>
-                    <tr><td>Dépendance</td><td><i class="fa-solid fa-check"></i> Aucune binaire</td><td>liboqs .dll/.so</td></tr>
-                    <tr><td>Sécurité mémoire</td><td>Garantie Rust (pas de unsafe)</td><td>unsafe, bugs C possibles</td></tr>
-                    <tr><td>Algorithmes</td><td>Kyber, Frodo, HQC, Dilithium, SPHINCS+, Falcon</td><td>Idem + BIKE, McEliece</td></tr>
-                    <tr><td>Portabilité</td><td><i class="fa-solid fa-check"></i> cargo build partout</td><td>liboqs compilé / bindgen</td></tr>
+                    <tr><td>Langage</td><td>Rust pur</td><td>Wrapper/FFI C</td></tr>
+                    <tr><td>Dépendance</td><td><i class="fa-solid fa-check"></i> Aucune</td><td>liboqs .dll/.so</td></tr>
+                    <tr><td>Algorithmes</td><td>Kyber, Frodo, HQC, Dilithium…</td><td>Idem + BIKE, McEliece</td></tr>
+                    <tr><td>Portabilité</td><td><i class="fa-solid fa-check"></i> cargo build</td><td>liboqs compilé</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Simple <code>cargo build</code> — sans liboqs, sans .dll, sans unsafe. Le prix : un sous-ensemble d'algorithmes plus restreint.</p>
+              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Simple <code>cargo build</code> — sans liboqs, sans .dll, sans unsafe.</p>
             </div>
           </article>
         </div>
