@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio d'ASSOUMANE DJIMRAOU MAHAMADOU — Étudiant en Master Cybersécurité, spécialiste ingénierie Cloud & Sécurité Réseau." />
+  <meta name="author" content="ASSOUMANE DJIMRAOU MAHAMADOU" />
+  <meta property="og:title" content="ASSOUMANE DJIMRAOU MAHAMADOU — Cybersécurité & Cloud" />
+  <meta property="og:description" content="Portfolio — Étudiant en Master Cybersécurité à l'ESMT, spécialisé en ingénierie Cloud & Sécurité Réseau." />
+  <meta property="og:type" content="website" />
+  <title>ASSOUMANE DJIMRAOU MAHAMADOU — Cybersécurité & Cloud</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo">
+        <span class="nav__logo-mark">A</span>
+        <span class="nav__logo-text">DJIMRAOU</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" aria-label="Navigation principale">
+        <a href="#home" class="nav__link">Accueil</a>
+        <a href="#profil" class="nav__link">Profil</a>
+        <a href="#competences" class="nav__link">Compétences</a>
+        <a href="#experience" class="nav__link">Expérience</a>
+        <a href="#projets" class="nav__link">Projets</a>
+        <a href="#parcours" class="nav__link">Parcours</a>
+        <a href="#contact" class="nav__link nav__link--cta">Contact</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="hero__grid"></span>
+        <span class="hero__orb hero__orb--1"></span>
+        <span class="hero__orb hero__orb--2"></span>
+        <span class="hero__orb hero__orb--3"></span>
+      </div>
+      <div class="hero__inner container">
+        <div class="hero__badge reveal">Master Cybersécurité · ESMT Dakar</div>
+        <h1 class="hero__title reveal">
+          ASSOUMANE DJIMRAOU<br />
+          <span class="hero__title-accent">MAHAMADOU</span>
+        </h1>
+        <p class="hero__role reveal">Étudiant en Master Cybersécurité · Ingénierie Cloud & Sécurité Réseau</p>
+        <p class="hero__desc reveal">
+          Rigoureux, curieux et orienté résultats : architecture réseau, cloud computing,
+          automatisation et développement logiciel sécurisé. Disponible pour un stage ou un
+          premier emploi en sécurité, DevOps ou cybersécurité.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#contact" class="btn btn--primary">Me contacter <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#projets" class="btn btn--ghost"><i class="fa-solid fa-code"></i> Voir mes projets</a>
+          <a href="assets/cv-assoumane-djimraou.pdf" class="btn btn--ghost" download><i class="fa-solid fa-download"></i> CV</a>
+        </div>
+        <div class="hero__meta reveal">
+          <span><i class="fa-solid fa-location-dot"></i> Grand Dakar, Sénégal</span>
+          <span><i class="fa-solid fa-phone"></i> +221 78 140 8835</span>
+          <a href="https://linkedin.com/in/mahamadou-assoumane" target="_blank" rel="noopener">
+            <i class="fa-brands fa-linkedin"></i> mahamadou-assoumane
+          </a>
+        </div>
+        <div class="hero__terminal reveal">
+          <div class="terminal__bar"><span class="terminal__dot terminal__dot--red"></span><span class="terminal__dot terminal__dot--yellow"></span><span class="terminal__dot terminal__dot--green"></span><span class="terminal__title">assoumane@esmt:~</span></div>
+          <div class="terminal__body">
+            <p><span class="t-prompt">$</span> whoami</p>
+            <p><span class="t-out">assoumane-djimraou — Security & Cloud Engineer (in progress)</span></p>
+            <p><span class="t-prompt">$</span> cat specialties.txt</p>
+            <p><span class="t-out">[Cisco CCNP] [RHCSA] [AWS] [Rust/Python] [Docker]</span></p>
+            <p><span class="t-prompt">$</span> ./open-to-opportunities --stage --devops --security</p>
+            <p class="t-blink"><span class="t-prompt">$</span> <span class="t-cursor">▋</span></p>
+          </div>
+        </div>
+        <a href="#profil" class="hero__scroll" aria-label="Défiler vers le profil"><i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+    </section>
+
+    <!-- Profil -->
+    <section class="section" id="profil">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">01 · Profil</span>
+          <h2 class="section__title">À propos de moi</h2>
+        </div>
+        <div class="profil">
+          <div class="profil__card reveal">
+            <div class="profil__stat"><span class="profil__stat-num">02</span><span class="profil__stat-label">années d'expérience IT</span></div>
+            <div class="profil__stat"><span class="profil__stat-num">3+</span><span class="profil__stat-label">projets end-to-end</span></div>
+            <div class="profil__stat"><span class="profil__stat-num">4</span><span class="profil__stat-label">certifications pro</span></div>
+          </div>
+          <div class="profil__text reveal">
+            <p>
+              Étudiant en <strong>Master Sécurité des Systèmes d'Information</strong> à l'ESMT, je combine
+              une rigueur analytique et un intérêt soutenu pour les <strong>architectures réseau</strong>, le
+              <strong>cloud computing</strong> et la <strong>cybersécurité</strong>.
+            </p>
+            <p>
+              J'ai des compétences avérées en <strong>administration système</strong>, <strong>automatisation
+              des processus</strong>, <strong>intégration de modèles d'IA locaux</strong> et
+              <strong>développement logiciel sécurisé</strong>. Mon expérience opérationnelle en support
+              technique et en conduite de projets applicatifs me permet d'appréhender les enjeux
+              de bout en bout.
+            </p>
+            <div class="profil__chips">
+              <span class="chip"><i class="fa-solid fa-shield-halved"></i> Sécurité</span>
+              <span class="chip"><i class="fa-solid fa-cloud"></i> Cloud</span>
+              <span class="chip"><i class="fa-solid fa-diagram-project"></i> Réseaux</span>
+              <span class="chip"><i class="fa-solid fa-robot"></i> IA Open Source</span>
+              <span class="chip"><i class="fa-solid fa-terminal"></i> DevOps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compétences -->
+    <section class="section section--alt" id="competences">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">02 · Compétences</span>
+          <h2 class="section__title">Mes expertises</h2>
+        </div>
+        <div class="skills">
+          <article class="skill reveal">
+            <div class="skill__icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="skill__title">Cybersécurité & Réseaux</h3>
+            <ul class="skill__list">
+              <li><span class="t-prompt">▹</span> Cisco CCNP, routage/switching, VLAN, VPN</li>
+              <li><span class="t-prompt">▹</span> Pare-feu iptables / UFW, durcissement de serveurs</li>
+              <li><span class="t-prompt">▹</span> Analyse de vulnérabilités (Nmap, Wireshark, OWASP Top 10)</li>
+              <li><span class="t-prompt">▹</span> Cryptographie symétrique/asymétrique (Python, Rust)</li>
+              <li><span class="t-prompt">▹</span> Téléphonie IP — Asterisk</li>
+            </ul>
+          </article>
+          <article class="skill reveal">
+            <div class="skill__icon"><i class="fa-solid fa-cloud"></i></div>
+            <h3 class="skill__title">Cloud & Virtualisation</h3>
+            <ul class="skill__list">
+              <li><span class="t-prompt">▹</span> AWS : EC2, S3, IAM, VPC, Cloud Foundations</li>
+              <li><span class="t-prompt">▹</span> Conteneurisation : Docker, docker-compose</li>
+              <li><span class="t-prompt">▹</span> Virtualisation : VMware, VirtualBox</li>
+            </ul>
+          </article>
+          <article class="skill reveal">
+            <div class="skill__icon"><i class="fa-solid fa-code"></i></div>
+            <h3 class="skill__title">Développement, IA & BDD</h3>
+            <ul class="skill__list">
+              <li><span class="t-prompt">▹</span> Python, Rust, C#, JavaScript (Node.js), Bash, SQL</li>
+              <li><span class="t-prompt">▹</span> IA Open Source : Hugging Face, Ollama, LM Studio</li>
+              <li><span class="t-prompt">▹</span> Déploiement de LLM en environnement sécurisé</li>
+              <li><span class="t-prompt">▹</span> PostgreSQL, Oracle, MariaDB</li>
+              <li><span class="t-prompt">▹</span> Git, CI/CD (GitHub Actions), API REST, tests unitaires</li>
+            </ul>
+          </article>
+          <article class="skill reveal">
+            <div class="skill__icon"><i class="fa-solid fa-server"></i></div>
+            <h3 class="skill__title">Systèmes d'Exploitation</h3>
+            <ul class="skill__list">
+              <li><span class="t-prompt">▹</span> Linux : Ubuntu, Red Hat (RHCSA), Manjaro, Gentoo</li>
+              <li><span class="t-prompt">▹</span> Windows : Windows Server, Active Directory</li>
+              <li><span class="t-prompt">▹</span> Administration & automatisation de serveurs</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expérience -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">03 · Expérience</span>
+          <h2 class="section__title">Parcours professionnel</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__head">
+                <h3 class="timeline__title">Spécialiste Support IT</h3>
+                <span class="timeline__date">2022 — 2023</span>
+              </div>
+              <p class="timeline__org"><i class="fa-solid fa-building"></i> Ninetec — Niamey, Niger</p>
+              <ul class="timeline__list">
+                <li>Prise en charge des incidents de niveaux 1 et 2, maintenance préventive et curative des équipements informatiques.</li>
+                <li>Administration du réseau local (LAN) : déploiement et paramétrage de routeurs et commutateurs, diagnostic et résolution des dysfonctionnements.</li>
+                <li>Installation, configuration et maintenance des serveurs Windows Server et Linux.</li>
+                <li>Contribution au développement d'applications métier web et de bureau pour l'optimisation des processus internes.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projets -->
+    <section class="section section--alt" id="projets">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">04 · Projets</span>
+          <h2 class="section__title">Projets académiques & personnels</h2>
+        </div>
+        <div class="projects">
+          <article class="project reveal">
+            <div class="project__icon"><i class="fa-solid fa-gears"></i></div>
+            <div class="project__body">
+              <div class="project__tags"><span>Bash</span><span>Python</span><span>Rust</span></div>
+              <h3 class="project__title">Automatisation de Systèmes</h3>
+              <p class="project__desc">
+                Conception et déploiement de scripts de sauvegarde automatisée et de surveillance
+                en temps réel d'un parc de serveurs Linux.
+              </p>
+              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Amélioration de la fiabilité opérationnelle et réduction significative des interventions manuelles.</p>
+            </div>
+          </article>
+          <article class="project reveal">
+            <div class="project__icon"><i class="fa-solid fa-key"></i></div>
+            <div class="project__body">
+              <div class="project__tags"><span>Python</span><span>Rust</span><span>Sécurité</span></div>
+              <h3 class="project__title">Implémentation de Cryptographie</h3>
+              <p class="project__desc">
+                Mise en œuvre d'un algorithme de chiffrement symétrique en Python et Rust,
+                déployé en environnement isolé.
+              </p>
+              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Validation des principes cryptographiques et des pratiques de codage sécurisé (gestion des clés, vecteurs d'initialisation).</p>
+            </div>
+          </article>
+          <article class="project reveal">
+            <div class="project__icon"><i class="fa-solid fa-box-open"></i></div>
+            <div class="project__body">
+              <div class="project__tags"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+              <h3 class="project__title">Application de Gestion de Stock Full-Stack</h3>
+              <p class="project__desc">
+                Développement end-to-end d'une application web : interface React, API REST
+                Node.js et base de données PostgreSQL.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications & Formation -->
+    <section class="section" id="parcours">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">05 · Parcours</span>
+          <h2 class="section__title">Certifications & Formation</h2>
+        </div>
+        <div class="two-col">
+          <div class="reveal">
+            <h3 class="sub-title"><i class="fa-solid fa-award"></i> Certifications</h3>
+            <div class="certs">
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-solid fa-network-wired"></i></span>
+                <div><p class="cert__name">Cisco CCNP</p><p class="cert__org">Cisco Networking Academy</p></div>
+              </div>
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-brands fa-redhat"></i></span>
+                <div><p class="cert__name">Red Hat Certified System Administrator (RHCSA)</p><p class="cert__org">Red Hat Academy</p></div>
+              </div>
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-brands fa-aws"></i></span>
+                <div><p class="cert__name">AWS Academy Cloud Foundations</p><p class="cert__org">AWS Academy</p></div>
+              </div>
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-solid fa-database"></i></span>
+                <div><p class="cert__name">AWS & Huawei Storage Certification</p><p class="cert__org">AWS / Huawei</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal">
+            <h3 class="sub-title"><i class="fa-solid fa-graduation-cap"></i> Formation</h3>
+            <div class="certs">
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-solid fa-shield-halved"></i></span>
+                <div><p class="cert__name">Master en Sécurité des Systèmes d'Information</p><p class="cert__org">ESMT, Dakar · 2024 — 2026</p></div>
+              </div>
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-solid fa-laptop-code"></i></span>
+                <div><p class="cert__name">Licence en Informatique</p><p class="cert__org">École Polytechnique de Niamey · 2021 — 2023</p></div>
+              </div>
+              <div class="cert">
+                <span class="cert__badge"><i class="fa-solid fa-laptop"></i></span>
+                <div><p class="cert__name">BTS en Informatique de Gestion</p><p class="cert__org">École Polytechnique de Niamey · 2021 — 2022</p></div>
+              </div>
+            </div>
+            <h3 class="sub-title sub-title--mt"><i class="fa-solid fa-language"></i> Langues</h3>
+            <div class="langs">
+              <div class="lang"><span>Français</span><div class="lang__bar"><span class="lang__fill" style="width:100%"></span></div><span class="lang__level">Maternelle</span></div>
+              <div class="lang"><span>Anglais</span><div class="lang__bar"><span class="lang__fill" style="width:75%"></span></div><span class="lang__level">B2</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="interests reveal">
+          <h3 class="sub-title"><i class="fa-solid fa-heart"></i> Centres d'intérêt</h3>
+          <div class="interests__chips">
+            <span class="chip"><i class="fa-solid fa-bug"></i> Cybersécurité</span>
+            <span class="chip"><i class="fa-solid fa-bolt"></i> Veille technologique</span>
+            <span class="chip"><i class="fa-solid fa-robot"></i> IA appliquée à la sécurité</span>
+            <span class="chip"><i class="fa-solid fa-code-branch"></i> Open source</span>
+            <span class="chip"><i class="fa-solid fa-network-wired"></i> Architecture réseau & cloud sécurisé</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section--contact" id="contact">
+      <div class="container">
+        <div class="contact reveal">
+          <span class="section__tag">06 · Contact</span>
+          <h2 class="contact__title">Discutons de votre projet</h2>
+          <p class="contact__desc">
+            Disponible pour un stage ou un premier emploi en ingénierie sécurité, DevOps ou cybersécurité.
+            N'hésitez pas à me contacter — je réponds rapidement.
+          </p>
+          <div class="contact__links">
+            <a href="mailto:mahamadouassoumanedjimraou@gmail.com" class="contact__link"><i class="fa-solid fa-envelope"></i><span>mahamadouassoumanedjimraou@gmail.com</span></a>
+            <a href="https://linkedin.com/in/mahamadou-assoumane" target="_blank" rel="noopener" class="contact__link"><i class="fa-brands fa-linkedin"></i><span>linkedin.com/in/mahamadou-assoumane</span></a>
+            <a href="tel:+221781408835" class="contact__link"><i class="fa-solid fa-phone"></i><span>+221 78 140 8835</span></a>
+            <a href="assets/cv-assoumane-djimraou.pdf" download class="contact__link"><i class="fa-solid fa-file-arrow-down"></i><span>Télécharger mon CV</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> ASSOUMANE DJIMRAOU MAHAMADOU — Conçu avec soin.</p>
+      <a href="#home" class="footer__top"><i class="fa-solid fa-arrow-up"></i> Retour en haut</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
