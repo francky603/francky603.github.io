@@ -2428,6 +2428,36 @@ ul {
   border-color: var(--accent-2);
 }
 
+.crypto__select-row {
+  display: flex;
+  gap: 10px;
+}
+
+.crypto__select-row .crypto__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.crypto__select {
+  flex-shrink: 0;
+  width: 132px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}
+
+.crypto__select:hover,
+.crypto__select:focus {
+  border-color: var(--accent-2);
+}
+
 .crypto__result {
   display: flex;
   align-items: center;
@@ -2656,6 +2686,14 @@ body.matrix-mode {
   .ai,
   .crypto {
     grid-template-columns: 1fr;
+  }
+
+  .crypto__select-row {
+    flex-direction: column;
+  }
+
+  .crypto__select {
+    width: 100%;
   }
 
   .soc__grid {
