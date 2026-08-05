@@ -138,87 +138,113 @@
     window.addEventListener('resize', initParticles, { passive: true });
   }
 
-  /* ---------- Terminal typé ---------- */
-  var typedTerminal = document.getElementById('typedTerminal');
-  if (typedTerminal) {
-    var termLines = [
-      { type: 'cmd', text: 'whoami' },
-      { type: 'out', text: 'assoumane-djimraou — Security & Cloud Engineer (in progress)' },
-      { type: 'cmd', text: 'cat specialties.txt' },
-      { type: 'out', text: '[Cisco CCNP] [RHCSA] [AWS] [Rust/Python] [Docker]' },
-      { type: 'cmd', text: './open-to-opportunities --stage --devops --security' }
-    ];
-    var typingStarted = false;
+  /* ---------- Terminal interactif ---------- */
+  var shellBody = document.getElementById('shellBody');
+  var shellForm = document.getElementById('shellForm');
+  var shellInput = document.getElementById('shellInput');
 
-    function startTyping() {
-      if (typingStarted) return;
-      typingStarted = true;
-      var idx = 0;
-      var line = 0;
-      var cursorP = document.querySelector('#typedTerminal .t-blink');
+  if (shellBody && shellForm && shellInput) {
+    var helpText =
+      '<strong>Commandes disponibles :</strong><br>' +
+      '<span class="t-prompt">help</span> — cette aide<br>' +
+      '<span class="t-prompt">whoami</span> — qui je suis<br>' +
+      '<span class="t-prompt">about</span> — en savoir plus<br>' +
+      '<span class="t-prompt">skills</span> — mes expertises<br>' +
+      '<span class="t-prompt">projects</span> — mes projets<br>' +
+      '<span class="t-prompt">contact</span> — mes coordonnées<br>' +
+      '<span class="t-prompt">cv</span> — télécharger mon CV<br>' +
+      '<span class="t-prompt">github</span> — mes dépôts<br>' +
+      '<span class="t-prompt">clear</span> — vider le terminal<br>' +
+      '<span class="t-prompt">matrix</span> — activer le mode Matrix';
 
-      function typeChar() {
-        if (idx >= termLines.length) return;
-        var item = termLines[idx];
-        if (line === 0) typedTerminal.innerHTML = '';
-
-        var p = document.createElement('p');
-        p.classList.add('t-line');
-        if (item.type === 'cmd') {
-          p.innerHTML = '<span class="t-prompt">$</span> <span class="t-typing"></span>';
-          var span = p.querySelector('.t-typing');
-          var ci = 0;
-          (function typeWord() {
-            if (ci < item.text.length) {
-              span.textContent = item.text.slice(0, ++ci);
-              setTimeout(typeWord, 28);
-            } else {
-              insertLine(idx, item, p);
-            }
-          })();
-        } else {
-          p.innerHTML = '<span class="t-out"></span>';
-          insertLine(idx, item, p, true);
-        }
-      }
-
-      function insertLine(i, item, p, instant) {
-        var afterTyping = false;
-        if (item.type === 'cmd') {
-          var span = p.querySelector('.t-typing');
-          var textEl = document.createElement('span');
-          textEl.className = 't-typed';
-          textEl.textContent = item.text;
-          span.parentNode.replaceChild(textEl, span);
-          afterTyping = true;
-        } else if (item.type === 'out') {
-          p.querySelector('.t-out').textContent = item.text;
-        }
-        typedTerminal.appendChild(p);
-        // on garde le curseur clignotant en fin
-        if (cursorP) {
-          if (cursorP.parentNode) cursorP.parentNode.removeChild(cursorP);
-          typedTerminal.appendChild(cursorP);
-        }
-        line++;
-        idx++;
-        if (idx < termLines.length) {
-          setTimeout(typeChar, instant ? 240 : 160);
-        }
-      }
-
-      typeChar();
+    function printLine(text, cls) {
+      var p = document.createElement('p');
+      p.classList.add('t-line');
+      p.innerHTML = '<span class="t-prompt">visitor@portfolio:~$</span> <span class="t-typed">' + text + '</span>';
+      shellBody.appendChild(p);
+      shellBody.scrollTop = shellBody.scrollHeight;
     }
 
-    var terminalObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          startTyping();
-          terminalObs.disconnect();
-        }
-      });
-    }, { threshold: 0.3 });
-    terminalObs.observe(typedTerminal);
+    function printOut(text, cls) {
+      var p = document.createElement('p');
+      p.classList.add('t-out', 't-out--block');
+      if (cls) p.classList.add(cls);
+      p.innerHTML = text;
+      shellBody.appendChild(p);
+      shellBody.scrollTop = shellBody.scrollHeight;
+    }
+
+    function runCommand(cmd) {
+      var c = cmd.trim().toLowerCase();
+      if (!c) return;
+      printLine(cmd.trim());
+      var out = '';
+      var cls = '';
+      switch (c) {
+        case 'help':
+          out = helpText;
+          break;
+        case 'whoami':
+          out = 'ASSOUMANE DJIMRAOU MAHAMADOU<br>Security & Cloud Engineer (in progress) — ESMT Dakar';
+          break;
+        case 'about':
+          out = 'Étudiant en Master Sécurité des Systèmes d\'Information. Rigoureux et orienté résultats : architecture réseau, cloud computing, automatisation et développement logiciel sécurisé.';
+          break;
+        case 'skills':
+          out = '[Réseaux Cisco CCNP] [RHCSA] [AWS] [Rust/Python] [Docker] [IA Offline] [Cryptographie]';
+          break;
+        case 'projects':
+          out = '<strong>6 projets :</strong> Automatisation de Systèmes · Implémentation de Cryptographie · Gestion de Stock Full-Stack · Franky (IA Offline) · Mixnet TLS · Crypto Post-Quantique. Voir la section <a href="#projets" class="inline-link">#projets</a>.';
+          break;
+        case 'contact':
+          out = 'Email : <a href="mailto:mahamadouassoumanedjimraou@gmail.com" class="inline-link">mahamadouassoumanedjimraou@gmail.com</a><br>LinkedIn : <a href="https://www.linkedin.com/in/assoumane-djimraou-mahamadou-19126b3a4" target="_blank" rel="noopener" class="inline-link">assoumane-djimraou-mahamadou</a><br>Téléphone : +221 78 140 8835';
+          break;
+        case 'cv':
+          out = 'Téléchargement : <a href="assets/CV_A.pdf" download="Cv-Assoumane-Djimraou.pdf" class="inline-link">CV_A.pdf</a>';
+          break;
+        case 'github':
+          out = '<a href="https://github.com/francky603" target="_blank" rel="noopener" class="inline-link">github.com/francky603</a> — 5 dépôts publics';
+          break;
+        case 'clear':
+          shellBody.innerHTML = '';
+          return;
+        case 'matrix':
+          startMatrix();
+          out = 'Wake up, Neo... La matrice est activée.';
+          cls = 't-out--ok';
+          break;
+        case 'sudo':
+          out = 'Accès refusé : privilèges root requis. (Il n\'y a pas de barrière ici, mais c\'est plus fun ainsi.)';
+          cls = 't-out--err';
+          break;
+        case 'ls':
+          out = 'home/&nbsp;&nbsp;skills/&nbsp;&nbsp;projects/&nbsp;&nbsp;blog/&nbsp;&nbsp;parcours/&nbsp;&nbsp;contact/';
+          break;
+        case 'date':
+          out = new Date().toString();
+          break;
+        case 'neofetch':
+          out = 'assoumane@portfolio<br>OS : Portfolio v2.0<br>Role : Security & Cloud Engineer<br>Kernel : Rust + Python + React<br>Uptime : ' + Math.floor(performance.now() / 60000) + ' min<br>Shell : interactif (vous y êtes)';
+          break;
+        default:
+          out = 'Commande inconnue : <span class="t-typed">' + cmd.trim() + '</span>. Tapez <span class="t-prompt">help</span> pour la liste des commandes.';
+          cls = 't-out--err';
+      }
+      printOut(out, cls);
+    }
+
+    shellForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      runCommand(shellInput.value);
+      shellInput.value = '';
+    });
+
+    // focus sur clic
+    shellBody.addEventListener('click', function () { shellInput.focus(); });
+    var shellHome = document.querySelector('.hero__terminal');
+    if (shellHome) {
+      shellHome.addEventListener('click', function () { shellInput.focus(); });
+    }
   }
 
   /* ---------- Année dynamique du footer ---------- */
@@ -460,4 +486,199 @@
       startParticles();
     }
   }
+
+  /* ---------- Dashboard SOC : animation temps réel ---------- */
+  var socEl = document.getElementById('socDashboard');
+  if (socEl) {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var socCpuFill = document.getElementById('socCpuFill');
+    var socCpuVal = document.getElementById('socCpuVal');
+    var socMemFill = document.getElementById('socMemFill');
+    var socMemVal = document.getElementById('socMemVal');
+    var socNetFill = document.getElementById('socNetFill');
+    var socNetVal = document.getElementById('socNetVal');
+    var socThreat = document.getElementById('socThreat');
+    var socClock = document.getElementById('socClock');
+    var socScanline = document.getElementById('socScanline');
+    var socThreats = socEl.querySelector('.soc__footer span:first-child');
+
+    var socCpu = 42, socMem = 67, socNet = 0;
+    var threats = ['0 menaces actives', '1 alerte mineure', '0 menaces actives', '0 menaces actives'];
+    var ti = 0;
+
+    function tickClock() {
+      if (!socClock) return;
+      var d = new Date();
+      var p = function (n) { return (n < 10 ? '0' : '') + n; };
+      socClock.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    }
+
+    function tickSoc() {
+      if (reduceMotion) return;
+      socCpu += (Math.random() - 0.5) * 8;
+      socCpu = Math.min(95, Math.max(12, socCpu));
+      socMem += (Math.random() - 0.5) * 4;
+      socMem = Math.min(92, Math.max(45, socMem));
+      socNet += (Math.random() - 0.5) * 20;
+      socNet = Math.min(80, Math.max(0, socNet));
+      if (socCpuFill) socCpuFill.style.width = socCpu.toFixed(0) + '%';
+      if (socCpuVal) socCpuVal.textContent = socCpu.toFixed(0) + '%';
+      if (socMemFill) socMemFill.style.width = socMem.toFixed(0) + '%';
+      if (socMemVal) socMemVal.textContent = socMem.toFixed(0) + '%';
+      if (socNetFill) socNetFill.style.width = (socNet / 80 * 100).toFixed(0) + '%';
+      if (socNetVal) socNetVal.textContent = socNet.toFixed(0) + ' Mb/s';
+      if (socThreat) {
+        var tl = socCpu > 78 ? 'HIGH' : socCpu > 60 ? 'MEDIUM' : 'LOW';
+        socThreat.textContent = tl;
+        socThreat.style.background = tl === 'LOW' ? 'rgba(61,220,151,0.14)' : tl === 'MEDIUM' ? 'rgba(255,178,92,0.16)' : 'rgba(255,82,82,0.18)';
+        socThreat.style.color = tl === 'LOW' ? 'var(--success)' : tl === 'MEDIUM' ? '#ffb25c' : 'var(--accent)';
+        socThreat.style.borderColor = tl === 'LOW' ? 'rgba(61,220,151,0.35)' : tl === 'MEDIUM' ? 'rgba(255,178,92,0.4)' : 'rgba(255,82,82,0.45)';
+      }
+      if (socThreats) {
+        ti = (ti + 1) % threats.length;
+        socThreats.innerHTML = '<i class="fa-solid fa-robot"></i> ' + threats[ti];
+      }
+    }
+
+    tickClock();
+    setInterval(tickClock, 1000);
+    if (!reduceMotion) setInterval(tickSoc, 1800);
+
+    var socObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          socObs.disconnect();
+          if (socCpuFill) socCpuFill.style.width = socCpu + '%';
+          if (socMemFill) socMemFill.style.width = socMem + '%';
+        }
+      });
+    }, { threshold: 0.2 });
+    socObs.observe(socEl);
+  }
+
+  /* ---------- Carte réseau : infobulles au survol ---------- */
+  var netmap = document.getElementById('netmap');
+  var netmapTooltip = document.getElementById('netmapTooltip');
+  if (netmap && netmapTooltip) {
+    var roleTexts = {
+      'Internet': 'Point d\'entrée : accès WAN, opérateurs, DDoS possible.',
+      'Firewall': 'Filtre le trafic entrant/sortant : règles, ACL, NAT.',
+      'Web Server': 'Sert les applications exposées (DMZ).',
+      'Mail Server': 'Gère la messagerie entrante/sortante (DMZ).',
+      'Poste utilisateur': 'Accès interne au réseau d\'entreprise.',
+      'Serveur fichiers': 'Stockage centralisé des données métier.',
+      'SOC': 'Supervision de sécurité : détection et réponse aux incidents.'
+    };
+    netmap.querySelectorAll('.netmap__node').forEach(function (node) {
+      node.addEventListener('mouseenter', function () {
+        netmapTooltip.textContent = roleTexts[node.getAttribute('data-role')] || '';
+        netmapTooltip.style.color = 'var(--accent-2)';
+      });
+      node.addEventListener('mouseleave', function () {
+        netmapTooltip.textContent = 'Survolez un équipement';
+        netmapTooltip.style.color = '';
+      });
+    });
+  }
+
+  /* ---------- Easter egg : Konami + Matrix ---------- */
+  var matrixRunning = false;
+  var matrixCanvas = null;
+  var matrixCtx = null;
+  var matrixAnimId = null;
+  var matrixDrops = [];
+
+  function initMatrix() {
+    if (!matrixCanvas) {
+      matrixCanvas = document.createElement('canvas');
+      matrixCanvas.id = 'matrixCanvas';
+      document.body.appendChild(matrixCanvas);
+    }
+    matrixCtx = matrixCanvas.getContext('2d');
+    var W = (matrixCanvas.width = window.innerWidth);
+    var H = (matrixCanvas.height = window.innerHeight);
+    var fontSize = 14;
+    var cols = Math.floor(W / fontSize);
+    matrixDrops = [];
+    for (var i = 0; i < cols; i++) matrixDrops[i] = Math.floor(Math.random() * -H / fontSize);
+  }
+
+  function matrixFrame() {
+    if (!matrixCtx) return;
+    var H = matrixCanvas.height;
+    matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    matrixCtx.fillRect(0, 0, matrixCanvas.width, H);
+    matrixCtx.fillStyle = '#3ddc97';
+    matrixCtx.font = '14px monospace';
+    for (var i = 0; i < matrixDrops.length; i++) {
+      var ch = String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96));
+      matrixCtx.fillText(ch, i * 14, matrixDrops[i] * 14);
+      if (matrixDrops[i] * 14 > H && Math.random() > 0.975) matrixDrops[i] = 0;
+      matrixDrops[i]++;
+    }
+    matrixAnimId = requestAnimationFrame(matrixFrame);
+  }
+
+  function startMatrix() {
+    if (matrixRunning) return;
+    matrixRunning = true;
+    initMatrix();
+    matrixFrame();
+    document.body.classList.add('matrix-mode');
+  }
+
+  function stopMatrix() {
+    if (!matrixRunning) return;
+    matrixRunning = false;
+    document.body.classList.remove('matrix-mode');
+    if (matrixAnimId) cancelAnimationFrame(matrixAnimId);
+    if (matrixCanvas) matrixCanvas.remove();
+    matrixCanvas = null;
+    matrixCtx = null;
+  }
+
+  // Konami code
+  var konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  var konamiIdx = 0;
+  window.addEventListener('keydown', function (e) {
+    var key = e.key;
+    if (key === konami[konamiIdx]) {
+      konamiIdx++;
+      if (konamiIdx === konami.length) {
+        startMatrix();
+        konamiIdx = 0;
+      }
+    } else {
+      konamiIdx = key === 'ArrowUp' ? 1 : 0;
+    }
+  });
+
+  // Clics répétés sur le logo -> matrix
+  var logo = document.querySelector('.nav__logo');
+  var logoClicks = 0;
+  var logoTimer = null;
+  if (logo) {
+    logo.addEventListener('click', function (e) {
+      e.preventDefault();
+      logoClicks++;
+      if (logoTimer) clearTimeout(logoTimer);
+      logoTimer = setTimeout(function () { logoClicks = 0; }, 1200);
+      if (logoClicks >= 5) {
+        if (matrixRunning) stopMatrix();
+        else startMatrix();
+        logoClicks = 0;
+      }
+    });
+  }
+
+  // Pause des animations quand l'onglet est caché + réduction des animations
+  var hidden = 'hidden';
+  document.addEventListener('visibilitychange', function () {
+    if (document[hidden]) {
+      if (matrixRunning) stopMatrix();
+      if (particleRunning) particleRunning = false;
+    } else {
+      if (!matrixRunning) startParticles();
+    }
+  });
 })();

@@ -33,6 +33,8 @@
         <a href="#home" class="nav__link">Accueil</a>
         <a href="#profil" class="nav__link">Profil</a>
         <a href="#competences" class="nav__link">Compétences</a>
+        <a href="#soc" class="nav__link">SOC</a>
+        <a href="#network" class="nav__link">Réseau</a>
         <a href="#experience" class="nav__link">Expérience</a>
         <a href="#projets" class="nav__link">Projets</a>
         <a href="#cas" class="nav__link">Études</a>
@@ -82,10 +84,19 @@
           </a>
         </div>
         <div class="hero__terminal reveal">
-          <div class="terminal__bar"><span class="terminal__dot terminal__dot--red"></span><span class="terminal__dot terminal__dot--yellow"></span><span class="terminal__dot terminal__dot--green"></span><span class="terminal__title">assoumane@esmt:~</span></div>
-          <div class="terminal__body" id="typedTerminal" aria-live="polite">
-            <p class="t-blink"><span class="t-prompt">$</span> <span class="t-cursor">▋</span></p>
+          <div class="terminal__bar"><span class="terminal__dot terminal__dot--red"></span><span class="terminal__dot terminal__dot--yellow"></span><span class="terminal__dot terminal__dot--green"></span><span class="terminal__title">assoumane@portfolio: ~ — interactive shell</span></div>
+          <div class="terminal__body terminal__body--shell" id="shellBody" aria-live="polite">
+            <p class="t-line"><span class="t-prompt">visitor@portfolio:~$</span> <span class="t-typed">help</span></p>
+            <p class="t-out t-out--block">
+              Bonjour ! Je suis un shell interactif.<br>
+              Tapez <strong>help</strong> pour voir la liste des commandes disponibles.
+            </p>
+            <p class="t-line t-blink"><span class="t-prompt">visitor@portfolio:~$</span> <span class="t-cursor">▋</span></p>
           </div>
+          <form class="shell__form" id="shellForm" autocomplete="off">
+            <span class="t-prompt">visitor@portfolio:~$</span>
+            <input type="text" class="shell__input" id="shellInput" placeholder="help" spellcheck="false" autocomplete="off" aria-label="Terminal interactif — commandes" />
+          </form>
         </div>
         <a href="#profil" class="hero__scroll" aria-label="Défiler vers le profil"><i class="fa-solid fa-chevron-down"></i></a>
       </div>
@@ -200,11 +211,108 @@
       </div>
     </section>
 
-    <!-- Expérience -->
+    <!-- Dashboard SOC -->
+    <section class="section" id="soc">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">03 · SOC</span>
+          <h2 class="section__title">Centre de supervision de sécurité</h2>
+          <p class="section__sub">Vue temps réel simulée de l'état des systèmes — comme un vrai tableau de bord SOC (Security Operations Center).</p>
+        </div>
+        <div class="soc reveal" id="socDashboard">
+          <div class="soc__top">
+            <div class="soc__status"><span class="soc__pulse"></span> <span id="socClock">--:--:--</span> &nbsp;·&nbsp; SIEM ACTIVE</div>
+            <div class="soc__tabs"><span class="soc__tab soc__tab--active">Overview</span><span class="soc__tab">Alerts</span><span class="soc__tab">Network</span></div>
+          </div>
+          <div class="soc__grid">
+            <div class="soc__card">
+              <span class="soc__label"><i class="fa-solid fa-microchip"></i> CPU</span>
+              <div class="soc__bar"><span class="soc__fill" id="socCpuFill"></span></div>
+              <div class="soc__meta"><span class="soc__val" id="socCpuVal">0%</span><span class="soc__hint">12 cores · 2 vCPU</span></div>
+            </div>
+            <div class="soc__card">
+              <span class="soc__label"><i class="fa-solid fa-memory"></i> Mémoire</span>
+              <div class="soc__bar"><span class="soc__fill soc__fill--blue" id="socMemFill"></span></div>
+              <div class="soc__meta"><span class="soc__val" id="socMemVal">0%</span><span class="soc__hint">16 GB DDR4</span></div>
+            </div>
+            <div class="soc__card">
+              <span class="soc__label"><i class="fa-solid fa-network-wired"></i> Réseau</span>
+              <div class="soc__bar"><span class="soc__fill soc__fill--orange" id="socNetFill"></span></div>
+              <div class="soc__meta"><span class="soc__val" id="socNetVal">0 Mb/s</span><span class="soc__hint">en temps réel</span></div>
+            </div>
+            <div class="soc__card">
+              <span class="soc__label"><i class="fa-solid fa-shield-halved"></i> Threat Level</span>
+              <div class="soc__threat"><span class="soc__threat-badge" id="socThreat">LOW</span></div>
+              <div class="soc__meta"><span class="soc__hint">analyse continue</span></div>
+            </div>
+            <div class="soc__card">
+              <span class="soc__label"><i class="fa-solid fa-fire"></i> Firewall</span>
+              <div class="soc__onoff soc__onoff--on" id="socFirewall"><i class="fa-solid fa-lock"></i> ACTIVE</div>
+              <div class="soc__meta"><span class="soc__hint">iptables · UFW</span></div>
+            </div>
+            <div class="soc__card">
+              <span class="soc__label"><i class="fa-solid fa-vault"></i> VPN</span>
+              <div class="soc__onoff soc__onoff--on" id="socVpn"><i class="fa-solid fa-circle-check"></i> CONNECTED</div>
+              <div class="soc__meta"><span class="soc__hint">tunnel sécurisé</span></div>
+            </div>
+            <div class="soc__card soc__card--wide">
+              <span class="soc__label"><i class="fa-solid fa-magnifying-glass"></i> Dernière analyse</span>
+              <div class="soc__scanline" id="socScanline"></div>
+              <div class="soc__meta"><span class="soc__val soc__val--ok"><i class="fa-solid fa-circle-check"></i> OK</span><span class="soc__hint">aucune vulnérabilité critique détectée</span></div>
+            </div>
+          </div>
+          <div class="soc__footer">
+            <span><i class="fa-solid fa-robot"></i> 0 menaces actives</span>
+            <span><i class="fa-solid fa-user-secret"></i> 3 connecteurs</span>
+            <span><i class="fa-solid fa-file-shield"></i> 99.98% disponibilité</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carte réseau interactive -->
+    <section class="section section--alt" id="network">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">04 · Réseau</span>
+          <h2 class="section__title">Architecture réseau — survolez chaque équipement</h2>
+          <p class="section__sub">Schéma de segmentation d'entreprise : Internet → DMZ → LAN interne → SOC.</p>
+        </div>
+        <div class="netmap reveal" id="netmap">
+          <div class="netmap__node netmap__node--internet" data-role="Internet">
+            <i class="fa-solid fa-globe"></i><span>Internet</span>
+          </div>
+          <div class="netmap__conn netmap__conn--1"><span class="netmap__flow"></span></div>
+          <div class="netmap__node netmap__node--firewall" data-role="Firewall">
+            <i class="fa-solid fa-fire"></i><span>Firewall</span>
+          </div>
+          <div class="netmap__conn netmap__conn--2"><span class="netmap__flow"></span></div>
+          <div class="netmap__zone netmap__zone--dmz">
+            <div class="netmap__zone-title">DMZ</div>
+            <div class="netmap__node netmap__node--server" data-role="Web Server"><i class="fa-solid fa-server"></i><span>Web</span></div>
+            <div class="netmap__node netmap__node--server" data-role="Mail Server"><i class="fa-solid fa-envelope"></i><span>Mail</span></div>
+          </div>
+          <div class="netmap__conn netmap__conn--3"><span class="netmap__flow"></span></div>
+          <div class="netmap__zone netmap__zone--lan">
+            <div class="netmap__zone-title">Internal LAN</div>
+            <div class="netmap__node netmap__node--pc" data-role="Poste utilisateur"><i class="fa-solid fa-desktop"></i><span>PC</span></div>
+            <div class="netmap__node netmap__node--pc" data-role="Serveur fichiers"><i class="fa-solid fa-database"></i><span>Data</span></div>
+          </div>
+          <div class="netmap__conn netmap__conn--4"><span class="netmap__flow"></span></div>
+          <div class="netmap__node netmap__node--soc" data-role="SOC">
+            <i class="fa-solid fa-shield-halved"></i><span>SOC</span>
+          </div>
+          <div class="netmap__tooltip" id="netmapTooltip">Survolez un équipement</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Expérience / Timeline -->
     <section class="section" id="experience">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">03 · Expérience</span>
+          <span class="section__tag">05 · Expérience</span>
           <h2 class="section__title">Parcours professionnel</h2>
         </div>
         <div class="timeline">
@@ -224,6 +332,61 @@
               </ul>
             </div>
           </article>
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__head">
+                <h3 class="timeline__title">Certification Cisco CCNP</h3>
+                <span class="timeline__date">2024</span>
+              </div>
+              <p class="timeline__org"><i class="fa-solid fa-network-wired"></i> Cisco Networking Academy</p>
+              <ul class="timeline__list">
+                <li>Routage et commutation avancés : OSPF, EIGRP, VLAN, VTP.</li>
+                <li>Segmentation réseau, ACL et mise en place de tunnels VPN.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__head">
+                <h3 class="timeline__title">Master Sécurité des Systèmes d'Information</h3>
+                <span class="timeline__date">2024 — 2026</span>
+              </div>
+              <p class="timeline__org"><i class="fa-solid fa-graduation-cap"></i> ESMT — Dakar, Sénégal</p>
+              <ul class="timeline__list">
+                <li>Cybersécurité offensive & défensive, cryptographie, cloud sécurisé.</li>
+                <li>Projets : automatisation, crypto post-quantique, assistant IA hors ligne.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__head">
+                <h3 class="timeline__title">Projets IA & Sécurité</h3>
+                <span class="timeline__date">2025 — 2026</span>
+              </div>
+              <p class="timeline__org"><i class="fa-solid fa-robot"></i> Recherche & développement personnel</p>
+              <ul class="timeline__list">
+                <li>Franky : assistant IA 100% hors ligne, fine-tuning LoRA sur 4 665 échantillons.</li>
+                <li>Mixnet : correction d'une machine à états TLS hybride (post-quantique).</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline__item timeline__item--future reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__head">
+                <h3 class="timeline__title">PhD Cybersécurité <span class="timeline__future-tag">À venir</span></h3>
+                <span class="timeline__date">Future</span>
+              </div>
+              <p class="timeline__org"><i class="fa-solid fa-arrow-trend-up"></i> Objectif à long terme</p>
+              <ul class="timeline__list">
+                <li>Recherche en IA appliquée à la détection de menaces et à la vérification formelle.</li>
+              </ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -232,7 +395,7 @@
     <section class="section section--alt" id="projets">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">04 · Projets</span>
+          <span class="section__tag">06 · Projets</span>
           <h2 class="section__title">Projets académiques & personnels</h2>
         </div>
         <div class="projects">
@@ -298,6 +461,12 @@
                 <div class="metric"><span class="metric__val" data-count="15" data-suffix="+">0+</span><span class="metric__label">routes API REST</span></div>
                 <div class="metric"><span class="metric__val" data-count="100" data-suffix="%">0%</span><span class="metric__label">workflow CRUD</span></div>
               </div>
+              <div class="project__arch" aria-label="Architecture du projet">
+                <span class="arch__node">React</span><i class="fa-solid fa-arrow-right"></i>
+                <span class="arch__node">Node.js API</span><i class="fa-solid fa-arrow-right"></i>
+                <span class="arch__node">PostgreSQL</span><i class="fa-solid fa-arrow-right"></i>
+                <span class="arch__node">Docker</span>
+              </div>
             </div>
           </article>
           <article class="project reveal" data-tilt>
@@ -319,6 +488,12 @@
                 <div class="metric"><span class="metric__val" data-count="4665">0</span><span class="metric__label">échantillons LoRA</span></div>
                 <div class="metric"><span class="metric__val" data-count="100" data-suffix="%">0%</span><span class="metric__label">hors ligne</span></div>
                 <div class="metric"><span class="metric__val" data-count="3">0</span><span class="metric__label">OS supportés</span></div>
+              </div>
+              <div class="project__arch" aria-label="Architecture du projet">
+                <span class="arch__node">User</span><i class="fa-solid fa-arrow-right"></i>
+                <span class="arch__node">Agent Loop</span><i class="fa-solid fa-arrow-right"></i>
+                <span class="arch__node">LLM local</span><i class="fa-solid fa-arrow-right"></i>
+                <span class="arch__node">Mémoire</span>
               </div>
               <p class="project__result"><i class="fa-solid fa-circle-check"></i> Binaire autonome, génération de code fiable sans internet.</p>
             </div>
@@ -374,7 +549,7 @@
     <section class="section" id="cas">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">05 · Études de cas</span>
+          <span class="section__tag">07 · Études de cas</span>
           <h2 class="section__title">Problèmes résolus en détail</h2>
           <p class="section__sub">Retour sur les défis techniques rencontrés, les solutions retenues et les impacts mesurés.</p>
         </div>
@@ -479,7 +654,7 @@
     <section class="section" id="stats">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">06 · GitHub</span>
+          <span class="section__tag">08 · GitHub</span>
           <h2 class="section__title">Statistiques GitHub</h2>
           <p class="section__sub">Mon activité publique sur le compte <a href="https://github.com/francky603" target="_blank" rel="noopener" class="inline-link">github.com/francky603</a>.</p>
         </div>
@@ -542,7 +717,7 @@
     <section class="section section--alt" id="blog">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">07 · Blog</span>
+          <span class="section__tag">09 · Blog</span>
           <h2 class="section__title">Articles techniques</h2>
           <p class="section__sub">Réflexions et retours d'expérience sur la cybersécurité, le cloud et l'IA appliquée à la sécurité.</p>
         </div>
@@ -591,7 +766,7 @@
     <section class="section" id="parcours">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">08 · Parcours</span>
+          <span class="section__tag">10 · Parcours</span>
           <h2 class="section__title">Certifications & Formation</h2>
         </div>
         <div class="radar reveal">
@@ -670,7 +845,7 @@
     <section class="section section--contact" id="contact">
       <div class="container">
         <div class="contact reveal">
-          <span class="section__tag">09 · Contact</span>
+          <span class="section__tag">11 · Contact</span>
           <h2 class="contact__title">Discutons de votre projet</h2>
           <p class="contact__desc">
             Disponible pour un stage ou un premier emploi en ingénierie sécurité, DevOps ou cybersécurité.

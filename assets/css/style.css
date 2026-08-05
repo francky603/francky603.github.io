@@ -474,6 +474,70 @@ ul {
   animation: blink 1s step-end infinite;
 }
 
+.t-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.t-typed {
+  color: var(--text);
+}
+
+.t-out--block {
+  display: block;
+  margin: 4px 0 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(77, 159, 255, 0.07);
+  border: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+.t-out--block strong {
+  color: var(--accent-2);
+}
+
+.t-out--err {
+  color: var(--accent);
+}
+
+.t-out--ok {
+  color: var(--success);
+}
+
+.terminal__body--shell {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-bottom: 12px;
+}
+
+.shell__form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px 14px;
+  font-family: var(--font-mono);
+  border-top: 1px solid var(--border);
+  background: rgba(13, 17, 23, 0.35);
+}
+
+.shell__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  caret-color: var(--accent-2);
+}
+
+.shell__input::placeholder {
+  color: var(--text-dim);
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -1726,6 +1790,411 @@ ul {
   color: var(--accent-2);
 }
 
+/* ---------- Dashboard SOC ---------- */
+.soc {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.soc__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.soc__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--success);
+}
+
+.soc__pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.6);
+  animation: socPulse 1.8s infinite;
+}
+
+@keyframes socPulse {
+  0% { box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.55); }
+  70% { box-shadow: 0 0 0 12px rgba(61, 220, 151, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(61, 220, 151, 0); }
+}
+
+.soc__tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.soc__tab {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.soc__tab--active {
+  color: var(--accent-2);
+  background: rgba(77, 159, 255, 0.12);
+}
+
+.soc__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+.soc__card {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.soc__card--wide {
+  grid-column: span 3;
+}
+
+.soc__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.soc__label i {
+  color: var(--accent-2);
+}
+
+.soc__bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.soc__fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), #ff8a5c);
+  transition: width 0.6s ease;
+}
+
+.soc__fill--blue {
+  background: linear-gradient(90deg, var(--accent-2), #7fb7ff);
+}
+
+.soc__fill--orange {
+  background: linear-gradient(90deg, #ffb25c, var(--accent-3));
+}
+
+.soc__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 0.8rem;
+}
+
+.soc__val {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.soc__val--ok {
+  color: var(--success);
+}
+
+.soc__hint {
+  color: var(--text-dim);
+}
+
+.soc__threat-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  background: rgba(61, 220, 151, 0.14);
+  color: var(--success);
+  border: 1px solid rgba(61, 220, 151, 0.35);
+  transition: all 0.5s ease;
+}
+
+.soc__onoff {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.soc__onoff--on {
+  background: rgba(61, 220, 151, 0.14);
+  color: var(--success);
+  border: 1px solid rgba(61, 220, 151, 0.35);
+}
+
+.soc__scanline {
+  position: relative;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.soc__scanline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(61, 220, 151, 0.35), transparent);
+  animation: scanMove 2.4s linear infinite;
+}
+
+@keyframes scanMove {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+.soc__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.soc__footer i {
+  color: var(--accent-2);
+  margin-right: 6px;
+}
+
+/* ---------- Carte réseau interactive ---------- */
+.netmap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  padding: 40px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.netmap__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: rgba(77, 159, 255, 0.08);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  min-width: 84px;
+}
+
+.netmap__node i {
+  font-size: 1.4rem;
+  color: var(--accent-2);
+}
+
+.netmap__node:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-2);
+  box-shadow: 0 10px 30px rgba(77, 159, 255, 0.25);
+}
+
+.netmap__node--internet i { color: var(--accent-3); }
+.netmap__node--firewall i { color: var(--accent); }
+.netmap__node--soc i { color: var(--success); }
+
+.netmap__conn {
+  position: relative;
+  width: 60px;
+  height: 2px;
+  background: rgba(77, 159, 255, 0.3);
+  overflow: hidden;
+}
+
+.netmap__flow {
+  position: absolute;
+  top: 0;
+  left: -60px;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent-2), transparent);
+  animation: flowMove 1.6s linear infinite;
+}
+
+@keyframes flowMove {
+  0% { left: -60px; }
+  100% { left: 100%; }
+}
+
+.netmap__zone {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.netmap__zone-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.netmap__zone--lan .netmap__zone-title { color: var(--accent-3); }
+
+.netmap__tooltip {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: rgba(13, 17, 23, 0.9);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+/* ---------- Architecture projets ---------- */
+.project__arch {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+}
+
+.project__arch i {
+  color: var(--accent-2);
+  font-size: 0.75rem;
+}
+
+.arch__node {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: rgba(77, 159, 255, 0.1);
+  border: 1px solid rgba(77, 159, 255, 0.2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-2);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.arch__node:hover {
+  background: rgba(77, 159, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ---------- Timeline : élément futur ---------- */
+.timeline__future-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-3);
+  background: rgba(255, 138, 92, 0.15);
+  border: 1px solid rgba(255, 138, 92, 0.35);
+}
+
+.timeline__item--future .timeline__dot {
+  background: var(--accent-3);
+  box-shadow: 0 0 0 4px rgba(255, 138, 92, 0.2);
+}
+
+/* ---------- Mode Matrix ---------- */
+#matrixCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+}
+
+body.matrix-mode {
+  cursor: crosshair;
+}
+
+/* ---------- Réduction des animations ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .cursor-glow {
+    display: none;
+  }
+}
+
 /* ---------- Curseur à halo ---------- */
 .cursor-glow {
   position: fixed;
@@ -1807,6 +2276,10 @@ ul {
     grid-template-columns: 1fr 1fr;
   }
 
+  .soc__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .demos,
   .posts {
     grid-template-columns: 1fr 1fr;
@@ -1863,6 +2336,43 @@ ul {
   .demos,
   .posts {
     grid-template-columns: 1fr;
+  }
+
+  .soc__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .soc__card--wide {
+    grid-column: span 1;
+  }
+
+  .netmap {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .netmap__conn {
+    width: 2px;
+    height: 40px;
+  }
+
+  .netmap__flow {
+    left: -1px;
+    top: -40px;
+    width: 2px;
+    height: 40px;
+    animation: flowMoveV 1.6s linear infinite;
+  }
+
+  @keyframes flowMoveV {
+    0% { top: -40px; }
+    100% { top: 100%; }
+  }
+
+  .netmap__tooltip {
+    white-space: normal;
+    max-width: 90%;
+    text-align: center;
   }
 
   .project__metrics {
