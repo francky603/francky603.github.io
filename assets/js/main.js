@@ -681,4 +681,106 @@
       if (!matrixRunning) startParticles();
     }
   });
+
+  /* ---------- Démo IA : Franky ---------- */
+  var aiForm = document.getElementById('aiForm');
+  var aiInput = document.getElementById('aiInput');
+  var aiLog = document.getElementById('aiLog');
+
+  if (aiForm && aiInput && aiLog) {
+    var agentSteps = document.querySelectorAll('.agent__step');
+    var agentActive = 0;
+
+    function runAgentLoop(callback) {
+      if (!agentSteps.length) { callback(); return; }
+      agentSteps.forEach(function (s) { s.classList.remove('agent__step--active'); });
+      agentActive = 0;
+      agentSteps[0].classList.add('agent__step--active');
+      var timer = setInterval(function () {
+        agentActive++;
+        if (agentActive >= agentSteps.length) {
+          clearInterval(timer);
+          agentSteps.forEach(function (s) { s.classList.remove('agent__step--active'); });
+          callback();
+          return;
+        }
+        agentSteps[agentActive].classList.add('agent__step--active');
+      }, 420);
+    }
+
+    function addMsg(who, text) {
+      var m = document.createElement('div');
+      m.classList.add('ai__msg', who === 'user' ? 'ai__msg--user' : 'ai__msg--bot');
+      var w = document.createElement('span');
+      w.classList.add('ai__who');
+      w.textContent = who === 'user' ? 'Vous' : 'Franky';
+      var t = document.createElement('span');
+      t.classList.add('ai__text');
+      t.textContent = text;
+      m.appendChild(w);
+      m.appendChild(t);
+      aiLog.appendChild(m);
+      aiLog.scrollTop = aiLog.scrollHeight;
+      return t;
+    }
+
+    function frankyReply(q) {
+      var s = q.toLowerCase();
+      if (/(bonjour|salut|hello|hey)/.test(s)) return 'Bonjour ! Content de te voir. Je peux te parler d\'IA hors ligne, de mes projets, ou de cybersécurité.';
+      if (/(model|modele|llm|qwen)/.test(s)) return 'Je tourne sur Qwen2.5-Coder 1.5B, optimisé par fine-tuning LoRA sur 4 665 échantillons du dataset Fable5. 100% hors ligne, aucune télémétrie.';
+      if (/(offline|hors ligne|internet|connexion)/.test(s)) return 'Aucune connexion requise : modèles locaux via Ollama/LM Studio, binaire autonome multi-OS. C\'est le cœur du projet Franky.';
+      if (/(projet|frank|portfolio)/.test(s)) return 'Franky inclut une boucle agent Plan → Exécuter → Observer → Replanir, une mémoire sémantique persistante et une génération de code avec vérification automatique.';
+      if (/(securit|security|attaque|crypto)/.test(s)) return 'Sécurité d\'abord : sandbox de génération, validation des sorties, chiffrement AES et signatures post-quantiques dans mes autres projets.';
+      if (/(skill|competence|techno|langage)/.test(s)) return 'Rust, Python, React/Node, Docker, Cisco (CCNP), AWS, et de la cryptographie. Voir la section Compétences pour le détail !';
+      if (/(cv|recruter|stage|emploi|embauche)/.test(s)) return 'Bonne idée ! Le CV est téléchargeable en haut de page (bouton CV). Je suis ouvert aux stages en sécurité, DevOps et cybersécurité.';
+      return 'Bonne question ! Je suis un assistant simulé dans ce portfolio. Sur le vrai projet Franky, ma réponse passerait par la boucle agent : planifier, exécuter, observer, replanifier.';
+    }
+
+    aiForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var q = aiInput.value.trim();
+      if (!q) return;
+      addMsg('user', q);
+      aiInput.value = '';
+      runAgentLoop(function () {
+        var t = addMsg('bot', '');
+        var text = frankyReply(q);
+        var i = 0;
+        (function typeReply() {
+          if (i <= text.length) {
+            t.textContent = text.slice(0, i++);
+            aiLog.scrollTop = aiLog.scrollHeight;
+            setTimeout(typeReply, 14);
+          }
+        })();
+      });
+    });
+  }
+
+  /* ---------- Atelier Crypto : hachage SHA-256 ---------- */
+  var hashInput = document.getElementById('hashInput');
+  var hashOutput = document.getElementById('hashOutput');
+  var hashHex = document.getElementById('hashHex');
+
+  function sha256hex(str) {
+    var enc = new TextEncoder().encode(str);
+    if (window.crypto && window.crypto.subtle) {
+      return window.crypto.subtle.digest('SHA-256', enc).then(function (buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+          return ('0' + b.toString(16)).slice(-2);
+        }).join('');
+      });
+    }
+    return Promise.resolve('—');
+  }
+
+  if (hashInput && hashHex) {
+    function updateHash() {
+      sha256hex(hashInput.value).then(function (h) {
+        hashHex.textContent = h;
+      });
+    }
+    hashInput.addEventListener('input', updateHash);
+    updateHash();
+  }
 })();

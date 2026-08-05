@@ -35,6 +35,8 @@
         <a href="#competences" class="nav__link">Compétences</a>
         <a href="#soc" class="nav__link">SOC</a>
         <a href="#network" class="nav__link">Réseau</a>
+        <a href="#ia" class="nav__link">IA</a>
+        <a href="#crypto" class="nav__link">Crypto</a>
         <a href="#experience" class="nav__link">Expérience</a>
         <a href="#projets" class="nav__link">Projets</a>
         <a href="#cas" class="nav__link">Études</a>
@@ -307,12 +309,84 @@
       </div>
     </section>
 
+    <!-- Démo IA interactive -->
+    <section class="section" id="ia">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">05 · IA</span>
+          <h2 class="section__title">Assistant IA — Franky, démo interactive</h2>
+          <p class="section__sub">Franky est mon assistant 100% hors ligne (Qwen2.5-Coder 1.5B, fine-tuning LoRA). Posez-lui une question : la réponse et la boucle agent sont simulées.</p>
+        </div>
+        <div class="ai reveal">
+          <div class="ai__chat">
+            <div class="ai__bar">
+              <span class="ai__status"><span class="soc__pulse"></span> Franky · offline · Qwen2.5-Coder-1.5B</span>
+            </div>
+            <div class="ai__log" id="aiLog" aria-live="polite">
+              <div class="ai__msg ai__msg--bot"><span class="ai__who">Franky</span><span class="ai__text">Salut ! Je suis Franky, assistant IA 100% hors ligne. Demande-moi ce que je sais faire, quel modèle j'utilise, ou pose-moi une question technique.</span></div>
+            </div>
+            <form class="ai__form" id="aiForm" autocomplete="off">
+              <input type="text" class="ai__input" id="aiInput" placeholder="Demande-moi quelque chose…" spellcheck="false" autocomplete="off" aria-label="Chat avec Franky" />
+              <button type="submit" class="ai__send" aria-label="Envoyer"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+          </div>
+          <div class="ai__agent">
+            <h3 class="sub-title"><i class="fa-solid fa-diagram-project"></i> Boucle agent</h3>
+            <div class="agent">
+              <div class="agent__step" data-step="plan"><span class="agent__icon"><i class="fa-solid fa-map"></i></span><div><strong>Plan</strong><small>décompose la demande</small></div></div>
+              <div class="agent__step" data-step="execute"><span class="agent__icon"><i class="fa-solid fa-code"></i></span><div><strong>Exécuter</strong><small>génère / appelle l'outil</small></div></div>
+              <div class="agent__step" data-step="observe"><span class="agent__icon"><i class="fa-solid fa-magnifying-glass"></i></span><div><strong>Observer</strong><small>vérifie le résultat</small></div></div>
+              <div class="agent__step" data-step="replan"><span class="agent__icon"><i class="fa-solid fa-rotate"></i></span><div><strong>Replanir</strong><small>corrige et itère</small></div></div>
+            </div>
+            <div class="ai__facts">
+              <div class="ai__fact"><span>4 665</span> échantillons LoRA (Fable5)</div>
+              <div class="ai__fact"><span>100%</span> hors ligne</div>
+              <div class="ai__fact"><span>3 OS</span> Windows · Mac · Linux</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Atelier Cryptographie -->
+    <section class="section section--alt" id="crypto">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="section__tag">06 · Crypto</span>
+          <h2 class="section__title">Atelier cryptographie — essayez en direct</h2>
+          <p class="section__sub">Hachage SHA-256 réel (Web Crypto API) et exploration de la cryptographie post-quantique.</p>
+        </div>
+        <div class="crypto reveal">
+          <div class="crypto__hash">
+            <label class="crypto__label" for="hashInput"><i class="fa-solid fa-fingerprint"></i> Texte à hacher (SHA-256)</label>
+            <input type="text" class="crypto__input" id="hashInput" value="Bonjour, monde sécurisé" spellcheck="false" />
+            <div class="crypto__result" id="hashOutput">
+              <span class="crypto__tag">SHA-256</span>
+              <code id="hashHex">—</code>
+            </div>
+            <p class="crypto__note"><i class="fa-solid fa-circle-info"></i> Le hachage s'exécute dans votre navigateur, rien n'est envoyé en ligne. Un hachage est une empreinte irréversible.</p>
+          </div>
+          <div class="crypto__pq">
+            <h3 class="sub-title"><i class="fa-solid fa-cubes"></i> Cryptographie post-quantique</h3>
+            <p class="crypto__desc">Les ordinateurs quantiques menacent RSA et ECC. Les algorithmes post-quantiques (NIST) y résistent.</p>
+            <div class="pq-grid">
+              <div class="pq-card"><span class="pq-card__name">Kyber</span><span class="pq-card__type">KEM · clés</span><span class="pq-card__badge pq-card__badge--nist">NIST</span></div>
+              <div class="pq-card"><span class="pq-card__name">Dilithium</span><span class="pq-card__type">Signatures</span><span class="pq-card__badge pq-card__badge--nist">NIST</span></div>
+              <div class="pq-card"><span class="pq-card__name">FrodoKEM</span><span class="pq-card__type">KEM · lattice</span><span class="pq-card__badge pq-card__badge--safe">prudent</span></div>
+              <div class="pq-card"><span class="pq-card__name">SPHINCS+</span><span class="pq-card__type">Signatures</span><span class="pq-card__badge pq-card__badge--safe">stateless</span></div>
+            </div>
+            <p class="crypto__note crypto__note--ok"><i class="fa-solid fa-check"></i> Mon projet Rust : <code>pqcrypto-*</code> — un simple <code>cargo build</code>, sans liboqs ni unsafe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- Expérience / Timeline -->
     <section class="section" id="experience">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">05 · Expérience</span>
+          <span class="section__tag">07 · Expérience</span>
           <h2 class="section__title">Parcours professionnel</h2>
         </div>
         <div class="timeline">
@@ -395,7 +469,7 @@
     <section class="section section--alt" id="projets">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">06 · Projets</span>
+          <span class="section__tag">08 · Projets</span>
           <h2 class="section__title">Projets académiques & personnels</h2>
         </div>
         <div class="projects">
@@ -549,7 +623,7 @@
     <section class="section" id="cas">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">07 · Études de cas</span>
+          <span class="section__tag">09 · Études de cas</span>
           <h2 class="section__title">Problèmes résolus en détail</h2>
           <p class="section__sub">Retour sur les défis techniques rencontrés, les solutions retenues et les impacts mesurés.</p>
         </div>
@@ -654,7 +728,7 @@
     <section class="section" id="stats">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">08 · GitHub</span>
+          <span class="section__tag">10 · GitHub</span>
           <h2 class="section__title">Statistiques GitHub</h2>
           <p class="section__sub">Mon activité publique sur le compte <a href="https://github.com/francky603" target="_blank" rel="noopener" class="inline-link">github.com/francky603</a>.</p>
         </div>
@@ -717,7 +791,7 @@
     <section class="section section--alt" id="blog">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">09 · Blog</span>
+          <span class="section__tag">11 · Blog</span>
           <h2 class="section__title">Articles techniques</h2>
           <p class="section__sub">Réflexions et retours d'expérience sur la cybersécurité, le cloud et l'IA appliquée à la sécurité.</p>
         </div>
@@ -766,7 +840,7 @@
     <section class="section" id="parcours">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">10 · Parcours</span>
+          <span class="section__tag">12 · Parcours</span>
           <h2 class="section__title">Certifications & Formation</h2>
         </div>
         <div class="radar reveal">
@@ -845,7 +919,7 @@
     <section class="section section--contact" id="contact">
       <div class="container">
         <div class="contact reveal">
-          <span class="section__tag">11 · Contact</span>
+          <span class="section__tag">13 · Contact</span>
           <h2 class="contact__title">Discutons de votre projet</h2>
           <p class="contact__desc">
             Disponible pour un stage ou un premier emploi en ingénierie sécurité, DevOps ou cybersécurité.
