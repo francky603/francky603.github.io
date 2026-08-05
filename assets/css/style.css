@@ -159,6 +159,11 @@ ul {
   background: rgba(77, 159, 255, 0.08);
 }
 
+.nav__link.active {
+  color: var(--accent-2);
+  background: rgba(77, 159, 255, 0.1);
+}
+
 .nav__link--cta {
   background: var(--gradient);
   color: #fff;
@@ -309,10 +314,17 @@ ul {
 }
 
 .hero__title-accent {
-  background: var(--gradient);
+  background: linear-gradient(110deg, #ff5252 20%, #4d9fff 40%, #ff8a5c 55%, #4d9fff 75%, #ff5252 90%);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: titleShimmer 6s linear infinite;
+}
+
+@keyframes titleShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: -200% 50%; }
 }
 
 .hero__role {
@@ -1234,6 +1246,33 @@ ul {
   box-shadow: var(--shadow);
 }
 
+.project[data-tilt] {
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project[data-tilt]:hover {
+  transform: perspective(900px) rotateX(calc(var(--tilt-x, 0) * 1deg)) rotateY(calc(var(--tilt-y, 0) * 1deg)) translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 82, 82, 0.12), 0 0 40px rgba(77, 159, 255, 0.1);
+}
+
+.project[data-tilt]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(600px circle at var(--tilt-xp, 50%) var(--tilt-yp, 50%), rgba(255, 255, 255, 0.08), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project[data-tilt]:hover::after {
+  opacity: 1;
+}
+
 .project__icon {
   width: 48px;
   height: 48px;
@@ -1685,6 +1724,52 @@ ul {
 
 .footer__top:hover {
   color: var(--accent-2);
+}
+
+/* ---------- Curseur à halo ---------- */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(77, 159, 255, 0.14), rgba(255, 82, 82, 0.08) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-glow {
+    opacity: 1;
+  }
+}
+
+/* ---------- Barre de progression du scroll ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  z-index: 200;
+  background: var(--gradient);
+  box-shadow: 0 0 12px rgba(255, 82, 82, 0.6);
+  transition: width 0.08s linear;
+}
+
+/* ---------- Canvas de particules ---------- */
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
 }
 
 /* ---------- Reveal animation ---------- */

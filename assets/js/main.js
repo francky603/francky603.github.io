@@ -2,6 +2,225 @@
 (function () {
   'use strict';
 
+  /* ---------- Barre de progression du scroll ---------- */
+  var progressBar = document.getElementById('scrollProgress');
+  if (progressBar) {
+    var onScrollProgress = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressBar.style.width = p + '%';
+    };
+    window.addEventListener('scroll', onScrollProgress, { passive: true });
+    onScrollProgress();
+  }
+
+  /* ---------- Curseur à halo ---------- */
+  var glow = document.getElementById('cursorGlow');
+  if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var gx = 0, gy = 0, tx = 0, ty = 0;
+    window.addEventListener('mousemove', function (e) {
+      tx = e.clientX;
+      ty = e.clientY;
+    }, { passive: true });
+    (function glowLoop() {
+      gx += (tx - gx) * 0.08;
+      gy += (ty - gy) * 0.08;
+      glow.style.transform = 'translate(' + (gx - 170) + 'px,' + (gy - 170) + 'px)';
+      requestAnimationFrame(glowLoop);
+    })();
+  }
+
+  /* ---------- Tilt 3D sur les cartes projets ---------- */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.project[data-tilt]').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--tilt-x', ((py - 0.5) * -10).toFixed(2));
+        card.style.setProperty('--tilt-y', ((px - 0.5) * 10).toFixed(2));
+        card.style.setProperty('--tilt-xp', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--tilt-yp', (py * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.setProperty('--tilt-x', '0');
+        card.style.setProperty('--tilt-y', '0');
+      });
+    });
+  }
+
+  /* ---------- Scrollspy : lien actif dans la nav ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+  var spySections = navLinks
+    .map(function (a) {
+      var id = a.getAttribute('href');
+      return id && id.charAt(0) === '#' ? document.querySelector(id) : null;
+    })
+    .filter(Boolean);
+
+  var onSpy = function () {
+    var pos = window.scrollY + 120;
+    var current = '';
+    spySections.forEach(function (sec) {
+      if (sec.offsetTop <= pos) current = '#' + sec.id;
+    });
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === current);
+    });
+  };
+  window.addEventListener('scroll', onSpy, { passive: true });
+  onSpy();
+
+  /* ---------- Réseau de particules (hero) ---------- */
+  var particleCanvas = document.getElementById('particleCanvas');
+  var particleCtx = null;
+  var particles = [];
+  var particleRunning = false;
+
+  function initParticles() {
+    if (!particleCanvas) return;
+    if (!particleCtx) particleCtx = particleCanvas.getContext('2d');
+    var W = (particleCanvas.width = particleCanvas.offsetWidth);
+    var H = (particleCanvas.height = particleCanvas.offsetHeight);
+    var count = Math.min(Math.floor((W * H) / 16000), 90);
+    particles = [];
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        r: Math.random() * 1.8 + 0.6
+      });
+    }
+  }
+
+  function drawParticles() {
+    var ctx = particleCtx;
+    var W = particleCanvas.width;
+    var H = particleCanvas.height;
+    ctx.clearRect(0, 0, W, H);
+    var linkDist = 120;
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(77, 159, 255, 0.55)';
+      ctx.fill();
+      for (var j = i + 1; j < particles.length; j++) {
+        var q = particles[j];
+        var dx = p.x - q.x;
+        var dy = p.y - q.y;
+        var d2 = dx * dx + dy * dy;
+        if (d2 < linkDist * linkDist) {
+          var a = 1 - Math.sqrt(d2) / linkDist;
+          ctx.strokeStyle = 'rgba(77, 159, 255, ' + (a * 0.16).toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+    }
+    if (particleRunning) requestAnimationFrame(drawParticles);
+  }
+
+  function startParticles() {
+    if (!particleCanvas) return;
+    particleRunning = true;
+    initParticles();
+    drawParticles();
+    window.addEventListener('resize', initParticles, { passive: true });
+  }
+
+  /* ---------- Terminal typé ---------- */
+  var typedTerminal = document.getElementById('typedTerminal');
+  if (typedTerminal) {
+    var termLines = [
+      { type: 'cmd', text: 'whoami' },
+      { type: 'out', text: 'assoumane-djimraou — Security & Cloud Engineer (in progress)' },
+      { type: 'cmd', text: 'cat specialties.txt' },
+      { type: 'out', text: '[Cisco CCNP] [RHCSA] [AWS] [Rust/Python] [Docker]' },
+      { type: 'cmd', text: './open-to-opportunities --stage --devops --security' }
+    ];
+    var typingStarted = false;
+
+    function startTyping() {
+      if (typingStarted) return;
+      typingStarted = true;
+      var idx = 0;
+      var line = 0;
+      var cursorP = document.querySelector('#typedTerminal .t-blink');
+
+      function typeChar() {
+        if (idx >= termLines.length) return;
+        var item = termLines[idx];
+        if (line === 0) typedTerminal.innerHTML = '';
+
+        var p = document.createElement('p');
+        p.classList.add('t-line');
+        if (item.type === 'cmd') {
+          p.innerHTML = '<span class="t-prompt">$</span> <span class="t-typing"></span>';
+          var span = p.querySelector('.t-typing');
+          var ci = 0;
+          (function typeWord() {
+            if (ci < item.text.length) {
+              span.textContent = item.text.slice(0, ++ci);
+              setTimeout(typeWord, 28);
+            } else {
+              insertLine(idx, item, p);
+            }
+          })();
+        } else {
+          p.innerHTML = '<span class="t-out"></span>';
+          insertLine(idx, item, p, true);
+        }
+      }
+
+      function insertLine(i, item, p, instant) {
+        var afterTyping = false;
+        if (item.type === 'cmd') {
+          var span = p.querySelector('.t-typing');
+          var textEl = document.createElement('span');
+          textEl.className = 't-typed';
+          textEl.textContent = item.text;
+          span.parentNode.replaceChild(textEl, span);
+          afterTyping = true;
+        } else if (item.type === 'out') {
+          p.querySelector('.t-out').textContent = item.text;
+        }
+        typedTerminal.appendChild(p);
+        // on garde le curseur clignotant en fin
+        if (cursorP) {
+          if (cursorP.parentNode) cursorP.parentNode.removeChild(cursorP);
+          typedTerminal.appendChild(cursorP);
+        }
+        line++;
+        idx++;
+        if (idx < termLines.length) {
+          setTimeout(typeChar, instant ? 240 : 160);
+        }
+      }
+
+      typeChar();
+    }
+
+    var terminalObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          startTyping();
+          terminalObs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    terminalObs.observe(typedTerminal);
+  }
+
   /* ---------- Année dynamique du footer ---------- */
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -219,5 +438,26 @@
       el.style.width = p;
     });
     drawRadar();
+  }
+
+  /* ---------- Démarrage des particules quand le hero est visible ---------- */
+  var heroEl = document.querySelector('.hero');
+  if (heroEl) {
+    if ('IntersectionObserver' in window) {
+      var heroObs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              startParticles();
+              heroObs.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      heroObs.observe(heroEl);
+    } else {
+      startParticles();
+    }
   }
 })();
