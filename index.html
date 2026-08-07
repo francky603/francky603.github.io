@@ -876,39 +876,103 @@ loss -= lr * grad</code></pre>
       </div>
     </section>
 
-    <!-- Laboratoire / Homelab -->
+    <!-- Laboratoire / Homelab : app web sécurisée -->
     <section class="section section--alt" id="lab">
       <div class="container">
         <div class="section__head reveal">
           <span class="section__tag">11 · Laboratoire</span>
-          <h2 class="section__title">Homelab — lab réseau &amp; SOC</h2>
-          <p class="section__sub">Mon environnement d'entraînement : supervision, corrélation de logs et isolation de périmètre.</p>
+          <h2 class="section__title">Homelab — app web dynamique &amp; sécurisée</h2>
+          <p class="section__sub">Déploiement complet d'une application web avec API et base de données, durcie contre injection SQL, XSS et DDoS, avec reprise automatique en cas d'arrêt.</p>
         </div>
+
         <div class="lab reveal">
-          <div class="lab__text">
-            <p>Mise en place d'un <strong>SIEM Wazuh sur Docker</strong> : corrélation de logs, détection de règles et alerte en temps réel sur un parc de <strong>3 VM Linux</strong>.</p>
-            <p>Segmentation réseau en <strong>VLAN</strong>, pare-feu d'interconnexion, agent de sécurité Wazuh sur chaque hôte et supervision centralisée des événements.</p>
+          <div class="lab__schema" aria-label="Schéma de l'application web sécurisée">
+            <div class="lab__row">
+              <div class="lab__node lab__node--edge"><i class="fa-solid fa-user"></i> Client / Navigateur</div>
+              <span class="lab__badge"><i class="fa-solid fa-lock"></i> HTTPS · TLS 1.3</span>
+            </div>
+            <div class="lab__flow"><i class="fa-solid fa-arrow-down-long"></i></div>
+            <div class="lab__row">
+              <div class="lab__node lab__node--waf"><i class="fa-solid fa-fire"></i> WAF · Rate-limit</div>
+              <span class="lab__badge lab__badge--hot"><i class="fa-solid fa-bolt"></i> bloque DDoS &amp; brute-force</span>
+            </div>
+            <div class="lab__flow"><i class="fa-solid fa-arrow-down-long"></i></div>
+            <div class="lab__row">
+              <div class="lab__node lab__node--proxy"><i class="fa-solid fa-right-left"></i> Reverse proxy — Nginx</div>
+              <span class="lab__badge"><i class="fa-solid fa-gears"></i> load balancing · cache</span>
+            </div>
+            <div class="lab__flow"><i class="fa-solid fa-arrow-down-long"></i></div>
+            <div class="lab__row">
+              <div class="lab__node lab__node--api"><i class="fa-brands fa-node-js"></i> API Node.js × 3 (Docker)</div>
+              <span class="lab__badge"><i class="fa-solid fa-shield"></i> validation &amp; requêtes paramétrées</span>
+            </div>
+            <div class="lab__flow"><i class="fa-solid fa-arrow-down-long"></i></div>
+            <div class="lab__row">
+              <div class="lab__node lab__node--db"><i class="fa-solid fa-database"></i> PostgreSQL</div>
+              <span class="lab__badge"><i class="fa-solid fa-copy"></i> réplication · sauvegardes</span>
+            </div>
+          </div>
+          <div class="lab__sec">
+            <h3 class="sub-title"><i class="fa-solid fa-shield-halved"></i> Durcissement appliqué</h3>
             <ul class="lab__list">
-              <li><i class="fa-solid fa-check"></i> Déploiement Wazuh manager + indexer + dashboard en conteneurs Docker</li>
-              <li><i class="fa-solid fa-check"></i> 3 agents Linux (Ubuntu, Debian) — collecte, logrotate et télémétrie</li>
-              <li><i class="fa-solid fa-check"></i> Règles de détection, corrélation d'événements et alertes temps réel</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Injection SQL</strong> : requêtes préparées (préparée statements) + ORM — aucune concaténation SQL</li>
+              <li><i class="fa-solid fa-check"></i> <strong>XSS</strong> : échappement systématique des sorties (HTML-encode) + CSP stricte</li>
+              <li><i class="fa-solid fa-check"></i> <strong>DDoS</strong> : rate-limiting (nodelimit/express-rate-limit), WAF, CDN &amp; filet de connexions</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Bugs &amp; crash</strong> : PM2 + healthchecks Docker — redémarrage auto en cas d'arrêt</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Journaux</strong> : Wazuh SIEM, audit des requêtes et alertes temps réel</li>
             </ul>
           </div>
-          <div class="lab__dia reveal" aria-label="Topologie simplifiée du homelab">
-            <div class="lab__node lab__node--edge">Internet</div>
-            <i class="fa-solid fa-arrow-down lab__flow"></i>
-            <div class="lab__node lab__node--fw">Pare-feu / VLAN</div>
-            <i class="fa-solid fa-arrow-down lab__flow"></i>
-            <div class="lab__vm">
-              <div class="lab__node lab__node--vm">VM 1 · Ubuntu</div>
-              <i class="fa-solid fa-arrow-down lab__flow lab__flow--vp"></i>
-              <div class="lab__node lab__node--vm">VM 2 · Ubuntu</div>
-              <i class="fa-solid fa-arrow-down lab__flow lab__flow--vp"></i>
-              <div class="lab__node lab__node--vm">VM 3 · CentOS</div>
+        </div>
+
+        <div class="labdemos reveal">
+          <article class="labdemo">
+            <div class="labdemo__head"><i class="fa-solid fa-database"></i> Injection SQL — prévention</div>
+            <p class="labdemo__desc">Teste un login avec une entrée « hostile » : <code>' OR 1=1 --</code></p>
+            <div class="labdemo__ctl">
+              <input type="text" class="crypto__input" id="sqlInput" value="' OR 1=1 --" spellcheck="false" />
+              <button type="button" class="ai__nn-run" id="sqlRun"><i class="fa-solid fa-bug"></i> Tenter</button>
             </div>
-            <i class="fa-solid fa-arrow-down lab__flow"></i>
-            <div class="lab__node lab__node--siem">SIEM Wazuh (Docker)</div>
-          </div>
+            <div class="labdemo__log" id="sqlLog" aria-live="polite">
+              <p class="arch__log-line">Requête paramétrée : SELECT * FROM users WHERE email = $1 — OK</p>
+            </div>
+          </article>
+
+          <article class="labdemo">
+            <div class="labdemo__head"><i class="fa-solid fa-code"></i> XSS — sortie échappée</div>
+            <p class="labdemo__desc">Un message stocké contenant du HTML malveillant est affiché sans être exécuté.</p>
+            <div class="labdemo__ctl">
+              <input type="text" class="crypto__input" id="xssInput" value="<script>alert('pwned')</script> Bonjour" spellcheck="false" />
+              <button type="button" class="ai__nn-run" id="xssRun"><i class="fa-solid fa-eye"></i> Afficher</button>
+            </div>
+            <div class="labdemo__preview" id="xssPreview"><i class="fa-solid fa-comment-dots"></i> <span id="xssText">…</span></div>
+          </article>
+
+          <article class="labdemo">
+            <div class="labdemo__head"><i class="fa-solid fa-bolt"></i> DDoS — rate-limit actif</div>
+            <p class="labdemo__desc">Génère une rafale de requêtes : le rate-limiter protège l'API.</p>
+            <div class="labdemo__ctl">
+              <button type="button" class="ai__nn-run" id="ddosRun"><i class="fa-solid fa-tower-broadcast"></i> Rafale 200 req/s</button>
+            </div>
+            <div class="labdemo__log" id="ddosLog" aria-live="polite">
+              <p class="arch__log-line">0 requêtes reçues · 0 bloquées (0%)</p>
+            </div>
+          </article>
+
+          <article class="labdemo">
+            <div class="labdemo__head"><i class="fa-solid fa-heart-pulse"></i> Reprise automatique — healthcheck</div>
+            <p class="labdemo__desc">Simule un crash du process : le healthcheck le redémarre tout seul.</p>
+            <div class="labdemo__ctl">
+              <button type="button" class="ai__nn-run" id="crashRun"><i class="fa-solid fa-skull"></i> Simuler un crash</button>
+            </div>
+            <div class="labdemo__procs" id="procs" aria-label="État des processus">
+              <div class="proc"><span class="proc__dot proc__dot--on"></span> api-1 · uptime 12:04</div>
+              <div class="proc"><span class="proc__dot proc__dot--on"></span> api-2 · uptime 12:04</div>
+              <div class="proc"><span class="proc__dot proc__dot--on"></span> api-3 · uptime 12:04</div>
+            </div>
+            <div class="labdemo__log" id="crashLog" aria-live="polite">
+              <p class="arch__log-line">healthcheck — 3/3 conteneurs opérationnels ✓</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>

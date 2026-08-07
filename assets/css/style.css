@@ -2608,22 +2608,98 @@ ul {
 
 .lab {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: 28px;
-  align-items: center;
+  align-items: start;
 }
 
-.lab__text p {
+.lab__schema {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-alt);
+}
+
+.lab__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.lab__node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.lab__node i {
+  color: var(--accent-2);
+}
+
+.lab__node--edge { border-color: rgba(77, 159, 255, 0.45); color: var(--accent-2); }
+.lab__node--edge i { color: var(--accent-2); }
+.lab__node--waf { border-color: rgba(255, 82, 82, 0.55); color: #ff5252; }
+.lab__node--waf i { color: #ff5252; }
+.lab__node--proxy { border-color: rgba(255, 178, 92, 0.5); color: #ffb25c; }
+.lab__node--proxy i { color: #ffb25c; }
+.lab__node--api { border-color: rgba(77, 159, 255, 0.4); }
+.lab__node--db { border-color: var(--success); color: var(--success); }
+.lab__node--db i { color: var(--success); }
+
+.lab__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
   color: var(--text-muted);
-  font-size: 1.02rem;
-  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.lab__badge i { color: var(--success); }
+.lab__badge--hot i { color: #ff5252; }
+
+.lab__flow {
+  align-self: center;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  margin: 0 auto;
+}
+
+.lab__sec {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.lab__sec .sub-title {
+  margin-bottom: 10px;
 }
 
 .lab__list {
   list-style: none;
-  margin-top: 8px;
+  margin-top: 6px;
   display: grid;
-  gap: 10px;
+  gap: 11px;
 }
 
 .lab__list li {
@@ -2631,55 +2707,147 @@ ul {
   gap: 9px;
   align-items: flex-start;
   color: var(--text);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 .lab__list li i {
   color: var(--success);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
-.lab__dia {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 22px 18px;
+.lab__list li strong {
+  color: var(--accent-2);
+}
+
+/* Démos interactives du lab */
+.labdemos {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.labdemo {
+  padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--card-alt);
+  background: var(--card);
+  box-shadow: var(--shadow);
 }
 
-.lab__node {
-  padding: 8px 18px;
+.labdemo__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.labdemo__head i {
+  color: var(--accent-2);
+}
+
+.labdemo__desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.labdemo__desc code,
+.labdemo__head + p code,
+.labdemo__log code {
+  font-family: var(--font-mono);
+  color: #ffb25c;
+}
+
+.labdemo__ctl {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.labdemo__ctl .crypto__input {
+  flex: 1;
+  min-width: 160px;
+}
+
+.labdemo__log {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(13, 17, 23, 0.6);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.labdemo__preview {
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--card);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.86rem;
   color: var(--text);
-  text-align: center;
+  min-height: 44px;
+  line-height: 1.5;
 }
 
-.lab__node--edge { border-color: rgba(77, 159, 255, 0.4); color: var(--accent-2); }
-.lab__node--fw { border-color: rgba(255, 82, 82, 0.5); color: #ff5252; }
-.lab__node--vm { border-color: rgba(255, 255, 255, 0.12); }
-.lab__node--siem { border-color: var(--success); color: var(--success); font-weight: 700; }
+.labdemo__preview i {
+  color: var(--accent-2);
+  margin-right: 7px;
+}
 
-.lab__vm {
+.labdemo__procs {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.proc {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-}
-
-.lab__flow {
-  color: var(--text-dim);
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  font-family: var(--font-mono);
   font-size: 0.8rem;
+  color: var(--text);
+  transition: all 0.35s ease;
 }
 
-.lab__flow--vp {
-  transform: scale(0.8);
+.proc__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--accent);
+}
+
+.proc__dot--on   { background: var(--success); box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.6); animation: socPulse 2.2s infinite; }
+.proc__dot--down { background: var(--accent); }
+.proc__dot--boot { background: var(--accent-3); }
+
+.proc--down {
+  border-color: rgba(255, 82, 82, 0.5);
+  color: var(--text-dim);
+}
+
+.proc--boot {
+  border-color: rgba(77, 159, 255, 0.5);
+}
+
+.xss-ok {
+  color: var(--success);
 }
 
 .crypto__label {
@@ -3003,7 +3171,8 @@ body.matrix-mode {
 
   .ai,
   .crypto,
-  .lab {
+  .lab,
+  .labdemos {
     grid-template-columns: 1fr;
   }
 

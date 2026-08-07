@@ -998,5 +998,99 @@
 
   if (mqSend) mqSend.addEventListener('click', mqSendMsg);
 
+  /* ---------- Homelab : démos de sécurité applicative ---------- */
+  function labAppend(el, text, cls) {
+    if (!el) return;
+    var p = document.createElement('p');
+    p.className = 'arch__log-line' + (cls ? ' ' + cls : '');
+    p.textContent = text;
+    el.appendChild(p);
+    el.scrollTop = el.scrollHeight;
+    if (el.childElementCount > 6) el.removeChild(el.firstElementChild);
+  }
+
+  /* 1 · Injection SQL */
+  var sqlInput = document.getElementById('sqlInput');
+  var sqlRun = document.getElementById('sqlRun');
+  var sqlLog = document.getElementById('sqlLog');
+  if (sqlInput && sqlRun && sqlLog) {
+    sqlRun.addEventListener('click', function () {
+      var raw = sqlInput.value;
+      var hostile = /('|--|;|OR\s+\d|UNION|DROP|SELECT\s+\*)/i.test(raw);
+      labAppend(sqlLog, 'requête reçue : SELECT * FROM users WHERE email = ?' + (hostile ? ' (entrée suspecte : « ' + raw + ' »)' : ''), hostile ? '' : 'xss-ok');
+      if (hostile) {
+        labAppend(sqlLog, 'BLOQUÉE — requête préparée : le paramètre est lié à la valeur, jamais concaténé.');
+        labAppend(sqlLog, 'résultat : 0 ligne renvoyée — injection neutralisée ✓');
+      } else {
+        labAppend(sqlLog, 'requête préparée : paramètre lié → 0 ligne renvoyée — OK');
+      }
+    });
+  }
+
+  /* 2 · XSS : échappement de sortie */
+  var xssInput = document.getElementById('xssInput');
+  var xssRun = document.getElementById('xssRun');
+  var xssText = document.getElementById('xssText');
+  if (xssInput && xssRun && xssText) {
+    var esc = function (s) {
+      var d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    };
+    xssRun.addEventListener('click', function () {
+      var raw = xssInput.value;
+      var hasHtml = /<[a-z\/]/i.test(raw);
+      xssText.textContent = esc(raw); // innerText ⇒ affiché en texte, jamais exécuté
+      if (hasHtml) {
+        labAppend(document.getElementById('xssLog') || sqlLog, 'HTML brut détecté : sortie échappée (HTML-encode) — aucun script exécuté ✓');
+      }
+    });
+  }
+
+  /* 3 · DDoS : rate-limit */
+  var ddosRun = document.getElementById('ddosRun');
+  var ddosLog = document.getElementById('ddosLog');
+  if (ddosRun && ddosLog) {
+    ddosRun.addEventListener('click', function () {
+      var burst = 200;
+      var allowed = Math.floor(burst * 0.15); // 30 req/s autorisées, le reste bloqué
+      var blocked = burst - allowed;
+      labAppend(ddosLog, 'rafale : ' + burst + ' requêtes en ~1 s');
+      labAppend(ddosLog, 'rate-limit : ' + allowed + ' servies · ' + blocked + ' bloquées (HTTP 429)');
+      labAppend(ddosLog, 'IP bannie temporairement (fail2ban) — API toujours disponible ✓');
+    });
+  }
+
+  /* 4 · Reprise automatique (healthcheck) */
+  var crashRun = document.getElementById('crashRun');
+  var procs = document.getElementById('procs');
+  var crashLog = document.getElementById('crashLog');
+  if (crashRun && procs && crashLog) {
+    var procEls = function () { return Array.prototype.slice.call(procs.querySelectorAll('.proc')); };
+    crashRun.addEventListener('click', function () {
+      if (crashRun._busy) return;
+      crashRun._busy = true;
+      var list = procEls();
+      var victim = Math.floor(Math.random() * list.length);
+      var v = list[victim];
+      labAppend(crashLog, 'crash détecté : ' + (v.textContent || 'api') + ' → EXIT (code 1)');
+      v.classList.add('proc--down');
+      v.querySelector('.proc__dot').className = 'proc__dot proc__dot--down';
+      setTimeout(function () {
+        labAppend(crashLog, 'healthcheck : 2/3 en ligne — redémarrage automatique du process…');
+        v.classList.remove('proc--down');
+        v.classList.add('proc--boot');
+        v.querySelector('.proc__dot').className = 'proc__dot proc__dot--boot';
+        setTimeout(function () {
+          labAppend(crashLog, 'process redémarré (PM2 · policy restart) — uptime 00:01, service rétabli ✓');
+          v.classList.remove('proc--boot');
+          v.querySelector('.proc__dot').className = 'proc__dot proc__dot--on';
+          labAppend(crashLog, 'healthcheck — 3/3 conteneurs opérationnels ✓');
+          crashRun._busy = false;
+        }, 900);
+      }, 900);
+    });
+  }
+
   /* ---------- Fin ---------- */
 })();
