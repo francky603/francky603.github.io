@@ -218,7 +218,7 @@
           cls = 't-out--err';
           break;
         case 'ls':
-          out = 'home/&nbsp;&nbsp;skills/&nbsp;&nbsp;projects/&nbsp;&nbsp;blog/&nbsp;&nbsp;parcours/&nbsp;&nbsp;contact/';
+          out = 'home/&nbsp;&nbsp;soc/&nbsp;&nbsp;reseau/&nbsp;&nbsp;ia/&nbsp;&nbsp;crypto/&nbsp;&nbsp;projets/&nbsp;&nbsp;lab/&nbsp;&nbsp;contact/';
           break;
         case 'date':
           out = new Date().toString();
@@ -282,8 +282,11 @@
 
   /* ---------- Compteur animé (0 → target) ---------- */
   function animateCounter(el) {
-    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var raw = (el.getAttribute('data-count') || '0').replace(',', '.');
+    var target = parseFloat(raw);
+    if (isNaN(target)) target = 0;
     var suffix = el.getAttribute('data-suffix') || '';
+    var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
     var duration = 1400;
     var start = null;
 
@@ -292,10 +295,10 @@
       var p = Math.min((ts - start) / duration, 1);
       // easing: ease-out cubic
       var eased = 1 - Math.pow(1 - p, 3);
-      var val = Math.round(target * eased);
+      var val = decimals > 0 ? (target * eased).toFixed(decimals) : String(Math.round(target * eased));
       el.textContent = val + suffix;
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target + suffix;
+      else el.textContent = (decimals > 0 ? target.toFixed(decimals) : String(target)) + suffix;
     }
     requestAnimationFrame(step);
   }

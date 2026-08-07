@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio d'ASSOUMANE DJIMRAOU MAHAMADOU — Étudiant en Master Cybersécurité, spécialiste ingénierie Cloud & Sécurité Réseau." />
+  <meta name="description" content="Portfolio d'ASSOUMANE DJIMRAOU MAHAMADOU — Ingénieur Cybersécurité & Cloud, spécialiste sécurité des systèmes & réseaux." />
   <meta name="author" content="ASSOUMANE DJIMRAOU MAHAMADOU" />
   <meta property="og:title" content="ASSOUMANE DJIMRAOU MAHAMADOU — Cybersécurité & Cloud" />
-  <meta property="og:description" content="Portfolio — Étudiant en Master Cybersécurité à l'ESMT, spécialisé en ingénierie Cloud & Sécurité Réseau." />
+  <meta property="og:description" content="Portfolio — Ingénieur Cybersécurité & Cloud, spécialisé en sécurité des systèmes & réseaux." />
   <meta property="og:type" content="website" />
   <title>ASSOUMANE DJIMRAOU MAHAMADOU — Cybersécurité & Cloud</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
@@ -41,7 +41,7 @@
         <a href="#projets" class="nav__link">Projets</a>
         <a href="#cas" class="nav__link">Études</a>
         <a href="#stats" class="nav__link">GitHub</a>
-        <a href="#blog" class="nav__link">Blog</a>
+        <a href="#lab" class="nav__link">Laboratoire</a>
         <a href="#parcours" class="nav__link">Parcours</a>
         <a href="#contact" class="nav__link nav__link--cta">Contact</a>
       </nav>
@@ -62,16 +62,20 @@
         <span class="hero__orb hero__orb--3"></span>
       </div>
       <div class="hero__inner container">
+        <div class="hero__avatar reveal" aria-label="Portrait">
+          <span class="hero__avatar-inner">ADM</span>
+        </div>
         <div class="hero__badge reveal">Master Cybersécurité · ESMT Dakar</div>
         <h1 class="hero__title reveal">
           ASSOUMANE DJIMRAOU<br />
           <span class="hero__title-accent">MAHAMADOU</span>
         </h1>
-        <p class="hero__role reveal">Étudiant en Master Cybersécurité · Ingénierie Cloud & Sécurité Réseau</p>
+        <p class="hero__role reveal">Ingénieur Cybersécurité &amp; Cloud · Sécurité des Systèmes &amp; Réseaux</p>
+        <p class="hero__tagline reveal">Disponible pour un poste d'Ingénieur DevSecOps ou Architecte Cloud Sécurisé.</p>
         <p class="hero__desc reveal">
           Rigoureux, curieux et orienté résultats : architecture réseau, cloud computing,
-          automatisation et développement logiciel sécurisé. Disponible pour un stage ou un
-          premier emploi en sécurité, DevOps ou cybersécurité.
+          automatisation et développement logiciel sécurisé. Tableau de bord SOC, agent
+          d'IA hors ligne et boîte à outils de cryptographie post-quantique.
         </p>
         <div class="hero__actions reveal">
           <a href="#contact" class="btn btn--primary">Me contacter <i class="fa-solid fa-arrow-right"></i></a>
@@ -113,10 +117,10 @@
         </div>
         <div class="profil">
           <div class="profil__card reveal">
-            <div class="profil__stat"><span class="profil__stat-num" data-count="2" data-suffix="+">0</span><span class="profil__stat-label">années d'expérience IT</span></div>
-            <div class="profil__stat"><span class="profil__stat-num" data-count="4" data-suffix="+">0</span><span class="profil__stat-label">projets end-to-end</span></div>
-            <div class="profil__stat"><span class="profil__stat-num" data-count="4">0</span><span class="profil__stat-label">certifications pro</span></div>
-            <div class="profil__stat"><span class="profil__stat-num" data-count="10" data-suffix="+">0</span><span class="profil__stat-label">technologies maîtrisées</span></div>
+            <div class="profil__stat"><div class="profil__stat-num">3</div><div class="profil__stat-label">Certifications internationales (CCNP, RHCSA, AWS)</div></div>
+            <div class="profil__stat"><div class="profil__stat-num">4</div><div class="profil__stat-label">Projets systèmes &amp; sécurité livrés</div></div>
+            <div class="profil__stat"><div class="profil__stat-num">2</div><div class="profil__stat-label">Ans d'expérience en support &amp; réseaux</div></div>
+            <div class="profil__stat"><div class="profil__stat-num">10+</div><div class="profil__stat-label">Technologies maîtrisées</div></div>
           </div>
           <div class="profil__text reveal">
             <p>
@@ -386,6 +390,22 @@
             </div>
             <p class="crypto__note crypto__note--ok"><i class="fa-solid fa-check"></i> Mon projet Rust : <code>pqcrypto-*</code> — un simple <code>cargo build</code>, sans liboqs ni unsafe.</p>
           </div>
+          <div class="crypto__research">
+            <h3 class="sub-title"><i class="fa-solid fa-microscope"></i> Research Interest — Kyber-512 &amp; IoT</h3>
+            <p class="crypto__rq">Problématique : <em>“Étude de la résistance de Kyber-512 face aux attaques par canaux auxiliaires en environnement contraint IoT.”</em></p>
+            <p class="crypto__rdesc">
+              Les objets connectés imposent des compromis entre faiblesse cryptographique et coût énergétique.
+              Kyber-512, standardisé par le NIST comme algorithme le plus léger de la famille ML-KEM, est un
+              candidat séduisant pour l'IoT — mais il reste vulnérable aux fuites par timing, parmesure de
+              consommation et à la manipulation de mémoire dans ces microcontrôleurs contraints.
+            </p>
+            <ul class="research__refs">
+              <li><span class="research__ref">Bos J., et al. — <em>CRYSTALS-Kyber: a CCA-secure module-lattice-based KEM</em>, IEEE S&P 2018.</span></li>
+              <li><span class="research__ref">NIST FIPS 203 — <em>Module-Lattice-Based Key-EncapsulationMechanism (ML-KEM)</em>, 2024.</span></li>
+              <li><span class="research__ref">Groot Bruinderink, et al. — <em>Differential Fault Attacks on ML-KEM</em> (IACR ePrint), 2023.</span></li>
+              <li><span class="research__ref">Ravi P., et al. — <em>Side-Channel onML-KEM under low-noise IoT conditions</em> (IEEE CHES), 2024.</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -461,12 +481,12 @@
             <div class="timeline__dot"></div>
             <div class="timeline__card">
               <div class="timeline__head">
-                <h3 class="timeline__title">PhD Cybersécurité <span class="timeline__future-tag">À venir</span></h3>
-                <span class="timeline__date">Future</span>
+                <h3 class="timeline__title">Recherche · Cryptographie post-quantique</h3>
+                <span class="timeline__date">En cours</span>
               </div>
-              <p class="timeline__org"><i class="fa-solid fa-arrow-trend-up"></i> Objectif à long terme</p>
+              <p class="timeline__org"><i class="fa-solid fa-arrow-trend-up"></i> Intérêt de recherche — Kyber-512 &amp; IoT</p>
               <ul class="timeline__list">
-                <li>Recherche en IA appliquée à la détection de menaces et à la vérification formelle.</li>
+                <li>Étude de la résistance de Kyber-512 face aux attaques par canaux auxiliaires en environnement contraint IoT.</li>
               </ul>
             </div>
           </article>
@@ -556,7 +576,7 @@
             <div class="project__icon"><i class="fa-solid fa-robot"></i></div>
             <div class="project__body">
               <div class="project__tags"><span>Python</span><span>LLM Offline</span><span>LoRA</span></div>
-              <h3 class="project__title">Franky — Assistant IA Offline</h3>
+              <h3 class="project__title">Franky — Fine-Tuning de LLM (Qwen2.5) &amp; Agent Autonome</h3>
               <p class="project__desc">
                 Assistant IA autonome 100% hors ligne : boucle agent Plan → Exécuter → Observer
                 → Replanir, génération de code robuste avec fallback intelligent et portabilité
@@ -568,17 +588,31 @@
                 <p><i class="fa-solid fa-check"></i> Mémoire sémantique persistante, 100% local</p>
               </div>
               <div class="project__metrics">
-                <div class="metric"><span class="metric__val" data-count="4665">0</span><span class="metric__label">échantillons LoRA</span></div>
-                <div class="metric"><span class="metric__val" data-count="100" data-suffix="%">0%</span><span class="metric__label">hors ligne</span></div>
-                <div class="metric"><span class="metric__val" data-count="3">0</span><span class="metric__label">OS supportés</span></div>
+                <div class="metric"><span class="metric__val" data-count="4665">0</span><span class="metric__label">échantillons · 4 665</span></div>
+                <div class="metric"><span class="metric__val" data-count="0.87" data-decimals="2">0</span><span class="metric__label">Loss finale</span></div>
+                <div class="metric"><span class="metric__val" data-count="120" data-suffix="ms">0ms</span><span class="metric__label">temps d'inférence</span></div>
               </div>
+              <figure class="project__chart reveal" aria-label="Courbe d'apprentissage LoRA">
+                <svg viewBox="0 0 320 120" role="img" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="lrGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(77,159,255,0.35)"/>
+                      <stop offset="100%" stop-color="rgba(77,159,255,0)"/>
+                    </linearGradient>
+                  </defs>
+                  <polyline points="0,95 32,86 64,72 96,58 128,46 160,38 192,32 224,27 256,22 288,16 320,12" fill="none" stroke="#4d9fff" stroke-width="2" style="filter: drop-shadow(0 0 4px rgba(77,159,255,0.6));"/>
+                  <polygon points="0,95 32,86 64,72 96,58 128,46 160,38 192,32 224,27 256,22 288,16 320,12 320,120 0,120" fill="url(#lrGrad)"/>
+                </svg>
+                <figcaption>Loss training — descente régulière au fil des époques (LoRA, Qwen2.5-Coder 1.5B)</figcaption>
+              </figure>
               <div class="project__arch" aria-label="Architecture du projet">
                 <span class="arch__node">User</span><i class="fa-solid fa-arrow-right"></i>
                 <span class="arch__node">Agent Loop</span><i class="fa-solid fa-arrow-right"></i>
                 <span class="arch__node">LLM local</span><i class="fa-solid fa-arrow-right"></i>
                 <span class="arch__node">Mémoire</span>
               </div>
-              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Binaire autonome, génération de code fiable sans internet.</p>
+              <p class="project__result"><i class="fa-solid fa-circle-check"></i> Jeu de données : 4 665 échantillons · Loss finale : 0.87 · Inférence : 120 ms.</p>
+              <a class="project__source" href="https://github.com/francky603/franky" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Voir le code source sur GitHub</a>
             </div>
           </article>
           <article class="project reveal" data-tilt>
@@ -599,6 +633,7 @@
                 <p><i class="fa-solid fa-check"></i> Hybridation TLS + KEM post-quantique (HybridStandard)</p>
                 <p><i class="fa-solid fa-check"></i> Correction par verrouillage linéaire sur le nonce</p>
               </div>
+              <a class="project__source" href="https://github.com/francky603/Mixnet" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Voir le code source sur GitHub</a>
             </div>
           </article>
           <article class="project reveal" data-tilt>
@@ -622,6 +657,7 @@
                 </table>
               </div>
               <p class="project__result"><i class="fa-solid fa-circle-check"></i> Simple <code>cargo build</code> — sans liboqs, sans .dll, sans unsafe.</p>
+              <a class="project__source" href="https://github.com/francky603/pqc-rust" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Voir le code source sur GitHub</a>
             </div>
           </article>
         </div>
@@ -796,51 +832,39 @@
       </div>
     </section>
 
-    <!-- Blog -->
-    <section class="section section--alt" id="blog">
+    <!-- Laboratoire / Homelab -->
+    <section class="section section--alt" id="lab">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">11 · Blog</span>
-          <h2 class="section__title">Articles techniques</h2>
-          <p class="section__sub">Réflexions et retours d'expérience sur la cybersécurité, le cloud et l'IA appliquée à la sécurité.</p>
+          <span class="section__tag">11 · Laboratoire</span>
+          <h2 class="section__title">Homelab — lab réseau &amp; SOC</h2>
+          <p class="section__sub">Mon environnement d'entraînement : supervision, corrélation de logs et isolation de périmètre.</p>
         </div>
-        <div class="posts">
-          <article class="post reveal">
-            <div class="post__tag">Cybersécurité</div>
-            <h3 class="post__title"><a href="#">Sécuriser un serveur Linux exposé : durcissement pas à pas</a></h3>
-            <p class="post__desc">SSH par clés, pare-feu iptables/UFW, désactivation des services inutiles, mises à jour automatiques et surveillance des journaux.</p>
-            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 8 min</span><span><i class="fa-solid fa-tag"></i> iptables, hardening</span></div>
-          </article>
-          <article class="post reveal">
-            <div class="post__tag">Cloud & DevOps</div>
-            <h3 class="post__title"><a href="#">Docker et docker-compose pour isoler vos applications en toute sécurité</a></h3>
-            <p class="post__desc">Pourquoi la conteneurisation renforce la sécurité, comment définir des réseaux isolés, des volumes et des secrets.</p>
-            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 6 min</span><span><i class="fa-solid fa-tag"></i> Docker, DevOps</span></div>
-          </article>
-          <article class="post reveal">
-            <div class="post__tag">IA & Sécurité</div>
-            <h3 class="post__title"><a href="#">Déployer un LLM local en environnement sécurisé (Ollama, Hugging Face)</a></h3>
-            <p class="post__desc">Garde-fous pour l'IA hors ligne : confinement des modèles, gestion des données, validation des sorties et boucle agent vérifiée.</p>
-            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 10 min</span><span><i class="fa-solid fa-tag"></i> LLM, offline</span></div>
-          </article>
-          <article class="post reveal">
-            <div class="post__tag">Réseaux</div>
-            <h3 class="post__title"><a href="#">Comprendre les VLAN et les VPN pour segmenter un réseau d'entreprise</a></h3>
-            <p class="post__desc">Routage, isolation des flux, politiques de sécurité par segment et cas pratiques avec équipements Cisco (CCNP).</p>
-            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 7 min</span><span><i class="fa-solid fa-tag"></i> Cisco, VLAN</span></div>
-          </article>
-          <article class="post reveal">
-            <div class="post__tag">Automatisation</div>
-            <h3 class="post__title"><a href="#">Scripts de sauvegarde et supervision : bâtir une vraie fiabilité opérationnelle</a></h3>
-            <p class="post__desc">Retour d'expérience sur l'automatisation d'un parc Linux : sauvegardes incrémentales, alertes et réduction des interventions manuelles.</p>
-            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 9 min</span><span><i class="fa-solid fa-tag"></i> Bash, Python</span></div>
-          </article>
-          <article class="post reveal">
-            <div class="post__tag">Développement</div>
-            <h3 class="post__title"><a href="#">Écrire du code sécurisé : leçon tirée d'une implémentation de chiffrement</a></h3>
-            <p class="post__desc">Gestion des clés, vecteurs d'initialisation, tests unitaires et double implémentation Python / Rust interopérable.</p>
-            <div class="post__meta"><span><i class="fa-regular fa-clock"></i> 7 min</span><span><i class="fa-solid fa-tag"></i> Crypto, Rust</span></div>
-          </article>
+        <div class="lab reveal">
+          <div class="lab__text">
+            <p>Mise en place d'un <strong>SIEM Wazuh sur Docker</strong> : corrélation de logs, détection de règles et alerte en temps réel sur un parc de <strong>3 VM Linux</strong>.</p>
+            <p>Segmentation réseau en <strong>VLAN</strong>, pare-feu d'interconnexion, agent de sécurité Wazuh sur chaque hôte et supervision centralisée des événements.</p>
+            <ul class="lab__list">
+              <li><i class="fa-solid fa-check"></i> Déploiement Wazuh manager + indexer + dashboard en conteneurs Docker</li>
+              <li><i class="fa-solid fa-check"></i> 3 agents Linux (Ubuntu, Debian) — collecte, logrotate et télémétrie</li>
+              <li><i class="fa-solid fa-check"></i> Règles de détection, corrélation d'événements et alertes temps réel</li>
+            </ul>
+          </div>
+          <div class="lab__dia reveal" aria-label="Topologie simplifiée du homelab">
+            <div class="lab__node lab__node--edge">Internet</div>
+            <i class="fa-solid fa-arrow-down lab__flow"></i>
+            <div class="lab__node lab__node--fw">Pare-feu / VLAN</div>
+            <i class="fa-solid fa-arrow-down lab__flow"></i>
+            <div class="lab__vm">
+              <div class="lab__node lab__node--vm">VM 1 · Ubuntu</div>
+              <i class="fa-solid fa-arrow-down lab__flow lab__flow--vp"></i>
+              <div class="lab__node lab__node--vm">VM 2 · Ubuntu</div>
+              <i class="fa-solid fa-arrow-down lab__flow lab__flow--vp"></i>
+              <div class="lab__node lab__node--vm">VM 3 · CentOS</div>
+            </div>
+            <i class="fa-solid fa-arrow-down lab__flow"></i>
+            <div class="lab__node lab__node--siem">SIEM Wazuh (Docker)</div>
+          </div>
         </div>
       </div>
     </section>

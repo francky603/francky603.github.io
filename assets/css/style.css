@@ -38,7 +38,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-mono);
   background: var(--bg);
   color: var(--text);
   line-height: 1.65;
@@ -281,6 +281,34 @@ ul {
   text-align: center;
 }
 
+.hero__avatar {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(from 0deg, var(--accent-2), var(--accent), var(--accent-2));
+  box-shadow: 0 0 24px rgba(77, 159, 255, 0.35);
+}
+
+.hero__avatar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background-image: linear-gradient(110deg, #ff5252 20%, #4d9fff 75%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .hero__badge {
   display: inline-flex;
   align-items: center;
@@ -293,7 +321,7 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   letter-spacing: 0.06em;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .hero__badge::before {
@@ -331,7 +359,18 @@ ul {
   font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   color: var(--accent-2);
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+.hero__tagline {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--accent-2);
+  border-radius: 999px;
+  color: var(--accent-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 18px;
 }
 
 .hero__desc {
@@ -1023,12 +1062,21 @@ ul {
 
 .profil__card {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 22px;
-  padding: 30px;
+  padding: 26px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
   box-shadow: var(--shadow);
+}
+
+.profil__stat {
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
 }
 
 .profil__stat-num {
@@ -1443,6 +1491,31 @@ ul {
 
 .project__result i {
   margin-right: 6px;
+}
+
+.project__source {
+  display: block;
+  margin-top: 14px;
+  padding: 12px 16px;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent-2);
+  color: var(--accent-2);
+  background: rgba(77, 159, 255, 0.08);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.15s ease, color 0.25s ease;
+}
+
+.project__source i {
+  margin-right: 8px;
+}
+
+.project__source:hover {
+  background: var(--accent-2);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .project__note {
@@ -2112,6 +2185,27 @@ ul {
 }
 
 /* ---------- Architecture projets ---------- */
+.project__chart {
+  margin: 8px 0;
+  padding: 12px 12px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(13, 17, 23, 0.6);
+  border: 1px solid var(--border);
+}
+
+.project__chart svg {
+  width: 100%;
+  height: 120px;
+  display: block;
+}
+
+.project__chart figcaption {
+  margin-top: 8px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+
 .project__arch {
   display: flex;
   align-items: center;
@@ -2388,6 +2482,45 @@ ul {
   gap: 24px;
 }
 
+.crypto__research {
+  grid-column: 1 / -1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 26px;
+}
+
+.crypto__rq {
+  margin-top: 12px;
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.crypto__rdesc {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.research__refs {
+  list-style: none;
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.research__refs li {
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: rgba(77, 159, 255, 0.06);
+  font-size: 0.86rem;
+  color: var(--text);
+}
+
 .crypto__hash,
 .crypto__pq {
   border: 1px solid var(--border);
@@ -2395,6 +2528,82 @@ ul {
   background: var(--card);
   box-shadow: var(--shadow);
   padding: 26px;
+}
+
+.lab {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.lab__text p {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  margin-bottom: 14px;
+}
+
+.lab__list {
+  list-style: none;
+  margin-top: 8px;
+  display: grid;
+  gap: 10px;
+}
+
+.lab__list li {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.lab__list li i {
+  color: var(--success);
+  margin-top: 2px;
+}
+
+.lab__dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-alt);
+}
+
+.lab__node {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.lab__node--edge { border-color: rgba(77, 159, 255, 0.4); color: var(--accent-2); }
+.lab__node--fw { border-color: rgba(255, 82, 82, 0.5); color: #ff5252; }
+.lab__node--vm { border-color: rgba(255, 255, 255, 0.12); }
+.lab__node--siem { border-color: var(--success); color: var(--success); font-weight: 700; }
+
+.lab__vm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.lab__flow {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.lab__flow--vp {
+  transform: scale(0.8);
 }
 
 .crypto__label {
@@ -2667,8 +2876,8 @@ body.matrix-mode {
     gap: 32px;
   }
 
-  .profil__card {
-    grid-template-columns: repeat(3, 1fr);
+.profil__card {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .radar__wrap {
@@ -2684,7 +2893,8 @@ body.matrix-mode {
   }
 
   .ai,
-  .crypto {
+  .crypto,
+  .lab {
     grid-template-columns: 1fr;
   }
 
