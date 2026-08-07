@@ -124,16 +124,17 @@
           </div>
           <div class="profil__text reveal">
             <p>
-              Étudiant en <strong>Master Sécurité des Systèmes d'Information</strong> à l'ESMT, je combine
-              une rigueur analytique et un intérêt soutenu pour les <strong>architectures réseau</strong>, le
-              <strong>cloud computing</strong> et la <strong>cybersécurité</strong>.
+              Ingénieur <strong>Cybersécurité &amp; Cloud</strong>, formé au <strong>Master Sécurité des
+              Systèmes d'Information</strong> de l'ESMT, je concilie une rigueur analytique et un intérêt
+              soutenu pour les <strong>architectures réseau</strong>, le <strong>cloud computing</strong>
+              et la <strong>cybersécurité</strong>.
             </p>
             <p>
               J'ai des compétences avérées en <strong>administration système</strong>, <strong>automatisation
               des processus</strong>, <strong>intégration de modèles d'IA locaux</strong> et
               <strong>développement logiciel sécurisé</strong>. Mon expérience opérationnelle en support
-              technique et en conduite de projets applicatifs me permet d'appréhender les enjeux
-              de bout en bout.
+              technique et en conduite de projets applicatifs me permet d'appréhender les enjeux de
+              bout en bout, du périmètre défini jusqu'au durcissement des services.
             </p>
             <div class="profil__chips">
               <span class="chip"><i class="fa-solid fa-shield-halved"></i> Sécurité</span>
@@ -318,34 +319,41 @@
       <div class="container">
         <div class="section__head reveal">
           <span class="section__tag">05 · IA</span>
-          <h2 class="section__title">Assistant IA — Franky, démo interactive</h2>
-          <p class="section__sub">Franky, mon assistant 100% hors ligne (Qwen2.5-Coder 1.5B, fine-tuning LoRA). Posez-lui une question : réponse et boucle agent en démonstration.</p>
+          <h2 class="section__title">Franky — réseau de neurones &amp; fine-tuning</h2>
+          <p class="section__sub">Le modèle Qwen2.5-Coder 1.5B est un réseau de neurones : propagation avant, fonction d'activation et calcul de la perte lors du fine-tuning LoRA.</p>
         </div>
         <div class="ai reveal">
-          <div class="ai__chat">
-            <div class="ai__bar">
-              <span class="ai__status"><span class="soc__pulse"></span> Franky · offline · Qwen2.5-Coder-1.5B</span>
+          <div class="ai__nn">
+            <div class="ai__nn-head">
+              <span class="ai__nn-app">Réseau · MLP 4-6-2</span>
+              <button type="button" class="ai__nn-run" id="nnRun">Propager <i class="fa-solid fa-play"></i></button>
             </div>
-            <div class="ai__log" id="aiLog" aria-live="polite">
-              <div class="ai__msg ai__msg--bot"><span class="ai__who">Franky</span><span class="ai__text">Salut ! Je suis Franky, assistant IA 100% hors ligne. Demande-moi ce que je sais faire, quel modèle j'utilise, ou pose-moi une question technique.</span></div>
+            <canvas class="ai__nn-canvas" id="nnCanvas" width="560" height="300" role="img" aria-label="Graphe de réseau de neurones : entrées, couche cachée et sorties"></canvas>
+            <div class="ai__nn-scale">
+              <span>-3</span><span>-1</span><span>0</span><span>+1</span><span>+3</span>
+              <div class="ai__nn-scalebar"><span id="nnActive"></span></div>
             </div>
-            <form class="ai__form" id="aiForm" autocomplete="off">
-              <input type="text" class="ai__input" id="aiInput" placeholder="Demande-moi quelque chose…" spellcheck="false" autocomplete="off" aria-label="Chat avec Franky" />
-              <button type="submit" class="ai__send" aria-label="Envoyer"><i class="fa-solid fa-paper-plane"></i></button>
-            </form>
+            <div class="ai__nn-mapping" id="nnMapping"></div>
           </div>
-          <div class="ai__agent">
-            <h3 class="sub-title"><i class="fa-solid fa-diagram-project"></i> Boucle agent</h3>
-            <div class="agent">
-              <div class="agent__step" data-step="plan"><span class="agent__icon"><i class="fa-solid fa-map"></i></span><div><strong>Plan</strong><small>décompose la demande</small></div></div>
-              <div class="agent__step" data-step="execute"><span class="agent__icon"><i class="fa-solid fa-code"></i></span><div><strong>Exécuter</strong><small>génère / appelle l'outil</small></div></div>
-              <div class="agent__step" data-step="observe"><span class="agent__icon"><i class="fa-solid fa-magnifying-glass"></i></span><div><strong>Observer</strong><small>vérifie le résultat</small></div></div>
-              <div class="agent__step" data-step="replan"><span class="agent__icon"><i class="fa-solid fa-rotate"></i></span><div><strong>Replanir</strong><small>corrige et itère</small></div></div>
-            </div>
+          <div class="ai__learn">
+            <h3 class="sub-title"><i class="fa-solid fa-square-root-variable"></i> La formule derrière</h3>
+            <pre class="ai__math">x₁ ──┐
+x₂ ──┤   h = σ(W·x + b)
+x₃ ──┤   ŷ = softmax(H·h)
+x₄ ──┘   Loss = −∑ y·log(ŷ)</pre>
+            <h3 class="sub-title"><i class="fa-solid fa-code"></i> Forward pass (pseudo-code)</h3>
+            <pre class="ai__code"><code><span class="c-kw">def</span> forward(x):
+    <span class="c-kw">for</span> W, b <span class="c-kw">in</span> layers:
+        x = relu(W @ x + b)
+    <span class="c-kw">return</span> softmax(x)
+
+<span class="c-kw"># fine-tuning LoRA</span>
+loRA = W + alpha * A @ B
+loss -= lr * grad</code></pre>
             <div class="ai__facts">
-              <div class="ai__fact"><span>4 665</span> échantillons LoRA (Fable5)</div>
-              <div class="ai__fact"><span>100%</span> hors ligne</div>
-              <div class="ai__fact"><span>3 OS</span> Windows · Mac · Linux</div>
+              <div class="ai__fact"><span>4 665</span> échantillons (Fable5)</div>
+              <div class="ai__fact"><span>0.87</span> loss finale</div>
+              <div class="ai__fact"><span>120ms</span> inférence</div>
             </div>
           </div>
         </div>
@@ -522,6 +530,7 @@
                 <div class="metric"><span class="metric__val" data-count="100" data-suffix="%">0%</span><span class="metric__label">sauvegardes automatisées</span></div>
               </div>
               <p class="project__result"><i class="fa-solid fa-circle-check"></i> Amélioration de la fiabilité opérationnelle et réduction significative des interventions manuelles.</p>
+              <a class="project__source" href="https://github.com/francky603/devops-project" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Voir le code source sur GitHub</a>
             </div>
           </article>
           <article class="project reveal" data-tilt>
@@ -570,6 +579,7 @@
                 <span class="arch__node">PostgreSQL</span><i class="fa-solid fa-arrow-right"></i>
                 <span class="arch__node">Docker</span>
               </div>
+              <a class="project__source" href="https://github.com/francky603/speedy-sales-pro" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Voir le code source sur GitHub</a>
             </div>
           </article>
           <article class="project reveal" data-tilt>

@@ -685,78 +685,171 @@
     }
   });
 
-  /* ---------- Démo IA : Franky ---------- */
-  var aiForm = document.getElementById('aiForm');
-  var aiInput = document.getElementById('aiInput');
-  var aiLog = document.getElementById('aiLog');
+  /* ---------- Réseau de neurones : propagation avant animée ---------- */
+  var nnCanvas = document.getElementById('nnCanvas');
+  var nnRun = document.getElementById('nnRun');
+  var nnActive = document.getElementById('nnActive');
+  var nnMapping = document.getElementById('nnMapping');
 
-  if (aiForm && aiInput && aiLog) {
-    var agentSteps = document.querySelectorAll('.agent__step');
-    var agentActive = 0;
+  var NN = { layers: [4, 6, 2], nodeR: 16, gaps: { x: 150, y: 34 } };
 
-    function runAgentLoop(callback) {
-      if (!agentSteps.length) { callback(); return; }
-      agentSteps.forEach(function (s) { s.classList.remove('agent__step--active'); });
-      agentActive = 0;
-      agentSteps[0].classList.add('agent__step--active');
-      var timer = setInterval(function () {
-        agentActive++;
-        if (agentActive >= agentSteps.length) {
-          clearInterval(timer);
-          agentSteps.forEach(function (s) { s.classList.remove('agent__step--active'); });
-          callback();
-          return;
+  function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+  function relu(x) { return Math.max(0, x); }
+
+  function nnLayout() {
+    var cols = [];
+    var colXs = [];
+    var totalW = NN.layers.length * NN.gaps.x;
+    var x0 = (nnCanvas.width - totalW) / 2 + NN.nodeR;
+    for (var L = 0; L < NN.layers.length; L++) {
+      var n = NN.layers[L];
+      var startY = (nnCanvas.height - (n - 1) * NN.gaps.y) / 2;
+      var col = [];
+      for (var i = 0; i < n; i++) {
+        col.push({ x: x0 + L * NN.gaps.x, y: startY + i * NN.gaps.y });
+      }
+      cols.push(col);
+    }
+    return cols;
+  }
+
+  function nnDraw(act) {
+    if (!nnCanvas) return;
+    var ctx = nnCanvas.getContext('2d');
+    var W = nnCanvas.width, H = nnCanvas.height;
+    ctx.clearRect(0, 0, W, H);
+    var pts = act && act.pts || nnLayout();
+    for (var L2 = 0; L2 < pts.length - 1; L2++) {
+      var prev = pts[L2], next = pts[L2 + 1];
+      for (var i = 0; i < prev.length; i++) {
+        for (var j = 0; j < next.length; j++) {
+          var a = prev[i], b = next[j];
+          var strength = act ? 0.1 + 0.9 * act.links[L2][j][i] : 0.18;
+          var c = 'rgba(77,159,255,' + (0.08 + strength * 0.5) + ')';
+          ctx.strokeStyle = c;
+          ctx.lineWidth = 0.6 + strength * 2;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
         }
-        agentSteps[agentActive].classList.add('agent__step--active');
-      }, 420);
+      }
     }
-
-    function addMsg(who, text) {
-      var m = document.createElement('div');
-      m.classList.add('ai__msg', who === 'user' ? 'ai__msg--user' : 'ai__msg--bot');
-      var w = document.createElement('span');
-      w.classList.add('ai__who');
-      w.textContent = who === 'user' ? 'Vous' : 'Franky';
-      var t = document.createElement('span');
-      t.classList.add('ai__text');
-      t.textContent = text;
-      m.appendChild(w);
-      m.appendChild(t);
-      aiLog.appendChild(m);
-      aiLog.scrollTop = aiLog.scrollHeight;
-      return t;
+    for (var L2 = 0; L2 < pts.length; L2++) {
+      for (var i2 = 0; i2 < pts[L2].length; i2++) {
+        var p = pts[L2][i2];
+        var actv = act ? act.acts[L2][i2] : 0;
+        var grad = actv > 0 ? 'rgba(61,220,151,' + (0.35 + actv * 0.6) + ')' : 'rgba(77,159,255,0.15)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, NN.nodeR, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        if (actv > 0.02) {
+          ctx.fillStyle = 'rgba(255,255,255,0.95)';
+          ctx.font = '700 11px "JetBrains Mono", monospace';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(actv.toFixed(1), p.x, p.y);
+        }
+      }
     }
+  }
 
-    function frankyReply(q) {
-      var s = q.toLowerCase();
-      if (/(bonjour|salut|hello|hey)/.test(s)) return 'Bonjour ! Content de te voir. Je peux te parler d\'IA hors ligne, de mes projets, ou de cybersécurité.';
-      if (/(model|modele|llm|qwen)/.test(s)) return 'Je tourne sur Qwen2.5-Coder 1.5B, optimisé par fine-tuning LoRA sur 4 665 échantillons du dataset Fable5. 100% hors ligne, aucune télémétrie.';
-      if (/(offline|hors ligne|internet|connexion)/.test(s)) return 'Aucune connexion requise : modèles locaux via Ollama/LM Studio, binaire autonome multi-OS. C\'est le cœur du projet Franky.';
-      if (/(projet|frank|portfolio)/.test(s)) return 'Franky inclut une boucle agent Plan → Exécuter → Observer → Replanir, une mémoire sémantique persistante et une génération de code avec vérification automatique.';
-      if (/(securit|security|attaque|crypto)/.test(s)) return 'Sécurité d\'abord : sandbox de génération, validation des sorties, chiffrement AES et signatures post-quantiques dans mes autres projets.';
-      if (/(skill|competence|techno|langage)/.test(s)) return 'Rust, Python, React/Node, Docker, Cisco (CCNP), AWS, et de la cryptographie. Voir la section Compétences pour le détail !';
-      if (/(cv|recruter|stage|emploi|embauche)/.test(s)) return 'Bonne idée ! Le CV est téléchargeable en haut de page (bouton CV). Je suis ouvert aux stages en sécurité, DevOps et cybersécurité.';
-      return 'Bonne question ! Je suis un assistant simulé dans ce portfolio. Sur le vrai projet Franky, ma réponse passerait par la boucle agent : planifier, exécuter, observer, replanifier.';
+  function nnActivate() {
+    var pts = nnLayout();
+    var acts = [];
+    var links = [];
+    // couche d'entrée : valeurs d'excitation aléatoires stabilisées
+    var inp = [];
+    for (var i = 0; i < NN.layers[0]; i++) inp.push(0.25 + Math.random() * 0.75);
+    acts.push(inp);
+    // couches suivantes
+    for (var L = 1; L < NN.layers.length; L++) {
+      var prev = acts[L - 1];
+      var cur = [];
+      var link = [];
+      for (var j = 0; j < NN.layers[L]; j++) {
+        var sum = 0;
+        var row = [];
+        for (var k = 0; k < prev.length; k++) {
+          var w = Math.random() * 2 - 1; // poids simulé
+          var contrib = prev[k] * Math.max(0, w);
+          row.push(contrib);
+          sum += contrib;
+        }
+        var bias = Math.random() * 0.5;
+        var out;
+        if (L === NN.layers.length - 1) { out = relu(sum) + bias; }
+        else { out = relu(sum + bias); }
+        cur.push(out);
+        link.push(row);
+      }
+      // softmax sur la sortie
+      if (L === NN.layers.length - 1) {
+        var ex = cur.map(function (v) { return Math.exp(v); });
+        var se = ex.reduce(function (a, b) { return a + b; }, 0);
+        cur = ex.map(function (v) { return v / (se || 1); });
+      }
+      acts.push(cur);
+      links.push(link);
     }
+    return { pts: pts, acts: acts, links: links };
+  }
 
-    aiForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var q = aiInput.value.trim();
-      if (!q) return;
-      addMsg('user', q);
-      aiInput.value = '';
-      runAgentLoop(function () {
-        var t = addMsg('bot', '');
-        var text = frankyReply(q);
-        var i = 0;
-        (function typeReply() {
-          if (i <= text.length) {
-            t.textContent = text.slice(0, i++);
-            aiLog.scrollTop = aiLog.scrollHeight;
-            setTimeout(typeReply, 14);
-          }
-        })();
-      });
+  function normalizeLinks(acts) {
+    var max = 0;
+    for (var l = 0; l < acts.links.length; l++) {
+      for (var i = 0; i < acts.links[l].length; i++) {
+        for (var j = 0; j < acts.links[l][i].length; j++) {
+          if (acts.links[l][i][j] > max) max = acts.links[l][i][j];
+        }
+      }
+    }
+    for (var l2 = 0; l2 < acts.links.length; l2++) {
+      for (var i2 = 0; i2 < acts.links[l2].length; i2++) {
+        for (var j2 = 0; j2 < acts.links[l2][i2].length; j2++) {
+          acts.links[l2][i2][j2] = (max > 0) ? acts.links[l2][i2][j2] / max : 0;
+        }
+      }
+    }
+    return acts;
+  }
+
+  function nnUpdateMapping(acts) {
+    if (!nnMapping) return;
+    var labels = ['attaque', 'normale'];
+    var out = acts.acts[acts.acts.length - 1];
+    nnMapping.innerHTML = '';
+    for (var i = 0; i < out.length; i++) {
+      var item = document.createElement('div');
+      item.className = 'ai__nn-map-item' + (out[i] > 0.5 ? ' nn-map--on' : '');
+      var nm = document.createElement('span');
+      nm.className = 'nm';
+      nm.textContent = i === 0 ? '⚠' : '✓';
+      var tx = document.createElement('span');
+      tx.textContent = labels[i] + '  ' + (out[i] * 100).toFixed(0) + '%';
+      item.appendChild(nm);
+      item.appendChild(tx);
+      nnMapping.appendChild(item);
+    }
+  }
+
+  if (nnCanvas) {
+    nnDraw();
+    if (nnRun) nnRun.addEventListener('click', function () {
+      var acts = nnActivate();
+      acts = normalizeLinks(acts);
+      nnDraw(acts);
+      nnUpdateMapping(acts);
+      var peak = 0;
+      for (var i = 0; i < 3; i++) {
+        var v = acts.acts[acts.acts.length - 1];
+        peak = Math.max(peak, v[0] > v[1] ? v[0] : v[1]);
+      }
+      if (nnActive) nnActive.style.width = Math.round(peak * 100) + '%';
     });
   }
 
