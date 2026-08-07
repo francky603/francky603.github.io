@@ -218,7 +218,7 @@
           cls = 't-out--err';
           break;
         case 'ls':
-          out = 'home/&nbsp;&nbsp;soc/&nbsp;&nbsp;reseau/&nbsp;&nbsp;ia/&nbsp;&nbsp;crypto/&nbsp;&nbsp;projets/&nbsp;&nbsp;lab/&nbsp;&nbsp;contact/';
+          out = 'home/&nbsp;&nbsp;arch/&nbsp;&nbsp;reseau/&nbsp;&nbsp;ia/&nbsp;&nbsp;crypto/&nbsp;&nbsp;projets/&nbsp;&nbsp;lab/&nbsp;&nbsp;contact/';
           break;
         case 'date':
           out = new Date().toString();
@@ -490,73 +490,103 @@
     }
   }
 
-  /* ---------- Dashboard SOC : animation temps réel ---------- */
-  var socEl = document.getElementById('socDashboard');
-  if (socEl) {
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var socCpuFill = document.getElementById('socCpuFill');
-    var socCpuVal = document.getElementById('socCpuVal');
-    var socMemFill = document.getElementById('socMemFill');
-    var socMemVal = document.getElementById('socMemVal');
-    var socNetFill = document.getElementById('socNetFill');
-    var socNetVal = document.getElementById('socNetVal');
-    var socThreat = document.getElementById('socThreat');
-    var socClock = document.getElementById('socClock');
-    var socScanline = document.getElementById('socScanline');
-    var socThreats = socEl.querySelector('.soc__footer span:first-child');
-
-    var socCpu = 42, socMem = 67, socNet = 0;
-    var threats = ['0 menaces actives', '1 alerte mineure', '0 menaces actives', '0 menaces actives'];
-    var ti = 0;
-
-    function tickClock() {
-      if (!socClock) return;
-      var d = new Date();
-      var p = function (n) { return (n < 10 ? '0' : '') + n; };
-      socClock.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
-    }
-
-    function tickSoc() {
-      if (reduceMotion) return;
-      socCpu += (Math.random() - 0.5) * 8;
-      socCpu = Math.min(95, Math.max(12, socCpu));
-      socMem += (Math.random() - 0.5) * 4;
-      socMem = Math.min(92, Math.max(45, socMem));
-      socNet += (Math.random() - 0.5) * 20;
-      socNet = Math.min(80, Math.max(0, socNet));
-      if (socCpuFill) socCpuFill.style.width = socCpu.toFixed(0) + '%';
-      if (socCpuVal) socCpuVal.textContent = socCpu.toFixed(0) + '%';
-      if (socMemFill) socMemFill.style.width = socMem.toFixed(0) + '%';
-      if (socMemVal) socMemVal.textContent = socMem.toFixed(0) + '%';
-      if (socNetFill) socNetFill.style.width = (socNet / 80 * 100).toFixed(0) + '%';
-      if (socNetVal) socNetVal.textContent = socNet.toFixed(0) + ' Mb/s';
-      if (socThreat) {
-        var tl = socCpu > 78 ? 'HIGH' : socCpu > 60 ? 'MEDIUM' : 'LOW';
-        socThreat.textContent = tl;
-        socThreat.style.background = tl === 'LOW' ? 'rgba(61,220,151,0.14)' : tl === 'MEDIUM' ? 'rgba(255,178,92,0.16)' : 'rgba(255,82,82,0.18)';
-        socThreat.style.color = tl === 'LOW' ? 'var(--success)' : tl === 'MEDIUM' ? '#ffb25c' : 'var(--accent)';
-        socThreat.style.borderColor = tl === 'LOW' ? 'rgba(61,220,151,0.35)' : tl === 'MEDIUM' ? 'rgba(255,178,92,0.4)' : 'rgba(255,82,82,0.45)';
-      }
-      if (socThreats) {
-        ti = (ti + 1) % threats.length;
-        socThreats.innerHTML = '<i class="fa-solid fa-robot"></i> ' + threats[ti];
-      }
-    }
-
-    tickClock();
-    setInterval(tickClock, 1000);
-    if (!reduceMotion) setInterval(tickSoc, 1800);
-
-    var socObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          socObs.disconnect();
-          if (socCpuFill) socCpuFill.style.width = socCpu + '%';
-          if (socMemFill) socMemFill.style.width = socMem + '%';
-        }
+  /* ---------- Architecture : simulateur de déploiement ---------- */
+  var archLog = document.getElementById('archLog');
+  var archBtn = document.getElementById('archDeploy');
+  if (archLog && archBtn) {
+    var archSteps = [
+      'terraform plan — 24 ressources, 0 à détruire ✓',
+      'aws ecr push — image api:1.2.0 (scan ok) ✓',
+      'kubectl/ECS rolling deploy — 3 réplicas, ha ✓',
+      'migration PostgreSQL — 0 erreur, indices rebuilt ✓',
+      'refresh cache Redis — hit ratio 92% ✓',
+      'healthcheck /healthz — 200 OK, observabilité connectée ✓'
+    ];
+    var archRunning = false;
+    archBtn.addEventListener('click', function () {
+      if (archRunning) return;
+      archRunning = true;
+      var delay = 0;
+      archSteps.forEach(function (step) {
+        setTimeout(function () {
+          var p = document.createElement('p');
+          p.className = 'arch__log-line';
+          p.textContent = step;
+          archLog.appendChild(p);
+          archLog.scrollTop = archLog.scrollHeight;
+          if (archLog.childElementCount > 8) archLog.removeChild(archLog.firstElementChild);
+          if (step === archSteps[archSteps.length - 1]) archRunning = false;
+        }, delay);
+        delay += 420;
       });
-    }, { threshold: 0.2 });
-    socObs.observe(socEl);
+    });
+  }
+
+  /* ---------- Web app scalable : auto-scaling sous charge ---------- */
+  var scaleSlider = document.getElementById('scaleSlider');
+  var scaleRack = document.getElementById('scaleRack');
+  if (scaleSlider && scaleRack) {
+    var scaleRps = document.getElementById('scaleRps');
+    var scaleReplicas = document.getElementById('scaleReplicas');
+    var scaleConn = document.getElementById('scaleConn');
+    var scaleCpu = document.getElementById('scaleCpu');
+    var scaleCpuVal = document.getElementById('scaleCpuVal');
+    var scaleSliderVal = document.getElementById('scaleSliderVal');
+    var scaleHint = document.getElementById('scaleHint');
+
+        var maxReps = 8;
+    var repByLoad = 400;
+
+    function rebuildRack(target) {
+      var count = scaleRack.children.length;
+      while (count < target) {
+        var d = document.createElement('div');
+        d.className = 'scale__rep';
+        d.innerHTML = '<i class="fa-solid fa-server"></i><span>API-inst ' + (count + 1) + '</span>';
+        scaleRack.appendChild(d);
+        count++;
+      }
+      while (count > target) {
+        scaleRack.removeChild(scaleRack.lastChild);
+        count--;
+      }
+    }
+
+    function updateScale(load) {
+      load = parseInt(load, 10);
+      var reps = Math.max(2, Math.ceil(load / repByLoad));
+      reps = Math.min(maxReps, reps);
+      var cpuPer = load === 0 ? 0 : Math.min(100, (load / (reps * repByLoad)) * 100);
+      cpuPer = Math.round(cpuPer);
+      var conns = Math.round(reps * 5 + cpuPer / 10);
+
+      if (scaleRps) scaleRps.textContent = load;
+      if (scaleReplicas) scaleReplicas.textContent = reps;
+      if (scaleConn) scaleConn.textContent = conns;
+      if (scaleSliderVal) scaleSliderVal.innerHTML = load + ' <small>req/s</small>';
+      if (scaleCpu) scaleCpu.style.width = cpuPer + '%';
+      if (scaleCpuVal) scaleCpuVal.textContent = cpuPer + '%';
+      if (scaleHint) {
+        scaleHint.textContent = cpuPer >= 70
+          ? 'Haute charge : montée en échelle horizontale déclenchée (' + reps + ' réplicas).'
+          : (cpuPer <= 30 && reps > 2
+            ? 'Charge faible : réduction progressive du nombre de réplicas.'
+            : 'Auto-scaling actif · seuil CPU 70%, ' + repByLoad + ' req/s par réplica.');
+      }
+
+      rebuildRack(reps);
+      for (var i = 0; i < reps; i++) {
+        var r = scaleRack.children[i];
+        if (r) r.classList.toggle('scale__rep--on', i < reps - (cpuPer >= 70 ? 1 : 0) || i < 2);
+      }
+      if (reps > 0) scaleRack.children[reps - 1].classList.add('scale__rep--on');
+    }
+
+    rebuildRack(2);
+    updateScale(scaleSlider.value);
+    scaleSlider.addEventListener('input', function () {
+      updateScale(this.value);
+    });
   }
 
   /* ---------- Carte réseau : infobulles au survol ---------- */
@@ -853,113 +883,71 @@
     });
   }
 
-  /* ---------- Atelier Crypto : hachage multi-algorithmes ---------- */
-  var hashInput = document.getElementById('hashInput');
-  var hashOutput = document.getElementById('hashOutput');
-  var hashHex = document.getElementById('hashHex');
-  var hashTag = document.getElementById('hashTag');
-  var hashAlgo = document.getElementById('hashAlgo');
+  /* ---------- Messagerie post-quantique : démo chiffrée ---------- */
+  var mqMessage = document.getElementById('mqMessage');
+  var mqSend = document.getElementById('mqSend');
+  var mqTrace = document.getElementById('mqTrace');
 
-  function md5(str) {
-    function md5cycle(x, k) {
-      var a = x[0], b = x[1], c = x[2], d = x[3];
-      a = ff(a, b, c, d, k[0], 7, -680876936); d = ff(d, a, b, c, k[1], 12, -389564586);
-      c = ff(c, d, a, b, k[2], 17, 606105819); b = ff(b, c, d, a, k[3], 22, -1044525330);
-      a = ff(a, b, c, d, k[4], 7, -176418897); d = ff(d, a, b, c, k[5], 12, 1200080426);
-      c = ff(c, d, a, b, k[6], 17, -1473231341); b = ff(b, c, d, a, k[7], 22, -45705983);
-      a = ff(a, b, c, d, k[8], 7, 1770035416); d = ff(d, a, b, c, k[9], 12, -1958414417);
-      c = ff(c, d, a, b, k[10], 17, -42063); b = ff(b, c, d, a, k[11], 22, -1990404162);
-      a = ff(a, b, c, d, k[12], 7, 1804603682); d = ff(d, a, b, c, k[13], 12, -40341101);
-      c = ff(c, d, a, b, k[14], 17, -1502002290); b = ff(b, c, d, a, k[15], 22, 1236535329);
-      a = gg(a, b, c, d, k[1], 5, -165796510); d = gg(d, a, b, c, k[6], 9, -1069501632);
-      c = gg(c, d, a, b, k[11], 14, 643717713); b = gg(b, c, d, a, k[0], 20, -373897302);
-      a = gg(a, b, c, d, k[5], 5, -701558691); d = gg(d, a, b, c, k[10], 9, 38016083);
-      c = gg(c, d, a, b, k[15], 14, -660478335); b = gg(b, c, d, a, k[4], 20, -405537848);
-      a = gg(a, b, c, d, k[9], 5, 568446438); d = gg(d, a, b, c, k[14], 9, -1019803690);
-      c = gg(c, d, a, b, k[3], 14, -187363961); b = gg(b, c, d, a, k[8], 20, 1163531501);
-      a = gg(a, b, c, d, k[13], 5, -1444681467); d = gg(d, a, b, c, k[2], 9, -51403784);
-      c = gg(c, d, a, b, k[7], 14, 1735328473); b = gg(b, c, d, a, k[12], 20, -1926607734);
-      a = hh(a, b, c, d, k[5], 4, -378558); d = hh(d, a, b, c, k[8], 11, -2022574463);
-      c = hh(c, d, a, b, k[11], 16, 1839030562); b = hh(b, c, d, a, k[14], 23, -35309556);
-      a = hh(a, b, c, d, k[1], 4, -1530992060); d = hh(d, a, b, c, k[4], 11, 1272893353);
-      c = hh(c, d, a, b, k[7], 16, -155497632); b = hh(b, c, d, a, k[10], 23, -1094730640);
-      a = hh(a, b, c, d, k[13], 4, 681279174); d = hh(d, a, b, c, k[0], 11, -358537222);
-      c = hh(c, d, a, b, k[3], 16, -722521979); b = hh(b, c, d, a, k[6], 23, 76029189);
-      a = hh(a, b, c, d, k[9], 4, -640364487); d = hh(d, a, b, c, k[12], 11, -421815835);
-      c = hh(c, d, a, b, k[15], 16, 530742520); b = hh(b, c, d, a, k[2], 23, -995338651);
-      a = ii(a, b, c, d, k[0], 6, -198630844); d = ii(d, a, b, c, k[7], 10, 1126891415);
-      c = ii(c, d, a, b, k[14], 15, -1416354905); b = ii(b, c, d, a, k[5], 21, -57434055);
-      a = ii(a, b, c, d, k[12], 6, 1700485571); d = ii(d, a, b, c, k[3], 10, -1894986606);
-      c = ii(c, d, a, b, k[10], 15, -1051523); b = ii(b, c, d, a, k[1], 21, -2054922799);
-      a = ii(a, b, c, d, k[8], 6, 1873313359); d = ii(d, a, b, c, k[15], 10, -30611744);
-      c = ii(c, d, a, b, k[6], 15, -1560198380); b = ii(b, c, d, a, k[13], 21, 1309151649);
-      a = ii(a, b, c, d, k[4], 6, -145523070); d = ii(d, a, b, c, k[11], 10, -1120210379);
-      c = ii(c, d, a, b, k[2], 15, 718787259); b = ii(b, c, d, a, k[9], 21, -343485551);
-      x[0] = add32(a, x[0]); x[1] = add32(b, x[1]);
-      x[2] = add32(c, x[2]); x[3] = add32(d, x[3]);
-    }
-    function cmn(q, a, b, x, s, t) { a = add32(add32(a, q), add32(x, t)); return add32((a << s) | (a >>> (32 - s)), b); }
-    function ff(a, b, c, d, x, s, t) { return cmn((b & c) | ((~b) & d), a, b, x, s, t); }
-    function gg(a, b, c, d, x, s, t) { return cmn((b & d) | (c & (~d)), a, b, x, s, t); }
-    function hh(a, b, c, d, x, s, t) { return cmn(b ^ c ^ d, a, b, x, s, t); }
-    function ii(a, b, c, d, x, s, t) { return cmn(c ^ (b | (~d)), a, b, x, s, t); }
-    function md51(s) {
-      var n = s.length, state = [1732584193, -271733879, -1732584194, 271733878], i;
-      for (i = 64; i <= s.length; i += 64) {
-        md5cycle(state, md5blk(s.substring(i - 64, i)));
-      }
-      s = s.substring(i - 64);
-      var tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      for (i = 0; i < s.length; i++) tail[i >> 2] |= s.charCodeAt(i) << ((i % 4) << 3);
-      tail[i >> 2] |= 0x80 << ((i % 4) << 3);
-      if (i > 55) { md5cycle(state, tail); tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; }
-      tail[14] = n * 8;
-      md5cycle(state, tail);
-      return state;
-    }
-    function md5blk(s) {
-      var md5blks = [], i;
-      for (i = 0; i < 64; i += 4) {
-        md5blks[i >> 2] = s.charCodeAt(i) + (s.charCodeAt(i + 1) << 8) + (s.charCodeAt(i + 2) << 16) + (s.charCodeAt(i + 3) << 24);
-      }
-      return md5blks;
-    }
-    function add32(a, b) { return (a + b) & 0xFFFFFFFF; }
-    var bin = md51(str);
-    function rhex(n) {
-      var s = '', j;
-      for (j = 0; j < 4; j++) s += hex_chr[(n >> (j * 8 + 4)) & 0x0F] + hex_chr[(n >> (j * 8)) & 0x0F];
-      return s;
-    }
-    var hex_chr = '0123456789abcdef'.split('');
-    return bin.map(rhex).join('');
+  function mqHex(bytes) {
+    return Array.prototype.map.call(bytes, function (b) {
+      return ('0' + b.toString(16)).slice(-2);
+    }).join('').slice(0, 96);
   }
 
-  function algoDigest(algo, str) {
-    if (algo === 'MD5') {
-      return Promise.resolve(md5(str));
+  function mqLogSteps() {
+    if (!mqTrace) return;
+    var steps = mqTrace.querySelectorAll('.mq__step');
+    steps.forEach(function (s, idx) {
+      setTimeout(function () {
+        s.classList.add('mq__step--on');
+        s.classList.remove('mq__step--done');
+        steps.forEach(function (o, oi) {
+          if (oi !== idx) o.classList.remove('mq__step--on');
+          if (oi < idx) o.classList.add('mq__step--done');
+        });
+      }, (idx + 1) * 320);
+    });
+  }
+
+  function mqSendMsg() {
+    if (!mqSend || !mqMessage || !mqTrace) return;
+    var plain = mqMessage.value || 'message vide';
+    var cryptoObj = window.crypto;
+
+    function toHex(buf) { return mqHex(new Uint8Array(buf)); }
+
+    function reportCt(ct) {
+      var c = mqTrace.querySelector('.mq__ct');
+      if (c) c.textContent = 'ciphertext = ' + ct;
     }
-    var enc = new TextEncoder().encode(str);
-    if (window.crypto && window.crypto.subtle) {
-      return window.crypto.subtle.digest(algo, enc).then(function (buf) {
-        return Array.prototype.map.call(new Uint8Array(buf), function (b) {
-          return ('0' + b.toString(16)).slice(-2);
-        }).join('');
+
+    function fallbackAes(plain) {
+      // repli démo si WebCrypto indisponible
+      var out = '';
+      for (var i = 0; i < plain.length; i++) { out += ('0' + (plain.charCodeAt(i) ^ (0x5a + i)).toString(16)).slice(-2); }
+      return Promise.resolve('AES-GCM[sim]·' + out.slice(0, 64));
+    }
+
+    mqLogSteps();
+    var enc = new TextEncoder();
+    var te = new TextEncoder();
+    if (cryptoObj && cryptoObj.subtle && cryptoObj.getRandomValues) {
+      // 1. Clé de session AES-GCM (issue du KEM Kyber-768 simulé)
+      var keyPromise = cryptoObj.subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt', 'decrypt']);
+      var iv = cryptoObj.getRandomValues(new Uint8Array(12));
+      keyPromise.then(function (key) {
+        return cryptoObj.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, te.encode(plain));
+      }).then(function (ct) {
+        reportCt('0x' + toHex(ct) + ' · iv=' + toHex(iv) + ' · Kyber768+1·Dilithium2');
+      }).catch(function () {
+        reportCt(fallbackAes(plain));
       });
+    } else {
+      reportCt(fallbackAes(plain));
     }
-    return Promise.resolve('—');
   }
 
-  if (hashInput && hashHex) {
-    function updateHash() {
-      var algo = hashAlgo ? hashAlgo.value : 'SHA-256';
-      if (hashTag) hashTag.textContent = algo;
-      algoDigest(algo, hashInput.value).then(function (h) {
-        hashHex.textContent = h;
-      });
-    }
-    hashInput.addEventListener('input', updateHash);
-    if (hashAlgo) hashAlgo.addEventListener('change', updateHash);
-    updateHash();
-  }
+  if (mqSend) mqSend.addEventListener('click', mqSendMsg);
+
+  /* ---------- Fin ---------- */
 })();

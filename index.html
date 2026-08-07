@@ -33,7 +33,7 @@
         <a href="#home" class="nav__link">Accueil</a>
         <a href="#profil" class="nav__link">Profil</a>
         <a href="#competences" class="nav__link">Compétences</a>
-        <a href="#soc" class="nav__link">SOC</a>
+        <a href="#architecture" class="nav__link">Architecture</a>
         <a href="#network" class="nav__link">Réseau</a>
         <a href="#ia" class="nav__link">IA</a>
         <a href="#crypto" class="nav__link">Crypto</a>
@@ -74,8 +74,8 @@
         <p class="hero__tagline reveal">Disponible pour un poste d'Ingénieur DevSecOps ou Architecte Cloud Sécurisé.</p>
         <p class="hero__desc reveal">
           Rigoureux, curieux et orienté résultats : architecture réseau, cloud computing,
-          automatisation et développement logiciel sécurisé. Tableau de bord SOC, agent
-          d'IA hors ligne et boîte à outils de cryptographie post-quantique.
+          automatisation et développement logiciel sécurisé. Infrastructures cloud hybride,
+          agent d'IA hors ligne et boîte à outils de cryptographie post-quantique.
         </p>
         <div class="hero__actions reveal">
           <a href="#contact" class="btn btn--primary">Me contacter <i class="fa-solid fa-arrow-right"></i></a>
@@ -218,61 +218,92 @@
       </div>
     </section>
 
-    <!-- Dashboard SOC -->
-    <section class="section" id="soc">
+    <!-- Architecture infogérance & cloud -->
+    <section class="section" id="architecture">
       <div class="container">
         <div class="section__head reveal">
-          <span class="section__tag">03 · SOC</span>
-          <h2 class="section__title">Centre de supervision de sécurité</h2>
-          <p class="section__sub">État des systèmes en temps réel : supervision, charge et posture de sécurité.</p>
+          <span class="section__tag">03 · Architecture</span>
+          <h2 class="section__title">Architecture d'infrastructure — du client jusqu'aux données</h2>
+          <p class="section__sub">Stack cloud hybride : conteneurs, haute disponibilité, observabilité et infrastructure as code.</p>
         </div>
-        <div class="soc reveal" id="socDashboard">
-          <div class="soc__top">
-            <div class="soc__status"><span class="soc__pulse"></span> <span id="socClock">--:--:--</span> &nbsp;·&nbsp; SIEM ACTIVE</div>
-            <div class="soc__tabs"><span class="soc__tab soc__tab--active">Overview</span><span class="soc__tab">Alerts</span><span class="soc__tab">Network</span></div>
+
+        <div class="arch reveal" id="archDiagram">
+          <div class="arch__flow" aria-hidden="true">
+            <div class="arch__flowline arch__flowline--1"></div>
+            <div class="arch__flowline arch__flowline--2"></div>
+            <div class="arch__flowline arch__flowline--3"></div>
           </div>
-          <div class="soc__grid">
-            <div class="soc__card">
-              <span class="soc__label"><i class="fa-solid fa-microchip"></i> CPU</span>
-              <div class="soc__bar"><span class="soc__fill" id="socCpuFill"></span></div>
-              <div class="soc__meta"><span class="soc__val" id="socCpuVal">0%</span><span class="soc__hint">12 cores · 2 vCPU</span></div>
-            </div>
-            <div class="soc__card">
-              <span class="soc__label"><i class="fa-solid fa-memory"></i> Mémoire</span>
-              <div class="soc__bar"><span class="soc__fill soc__fill--blue" id="socMemFill"></span></div>
-              <div class="soc__meta"><span class="soc__val" id="socMemVal">0%</span><span class="soc__hint">16 GB DDR4</span></div>
-            </div>
-            <div class="soc__card">
-              <span class="soc__label"><i class="fa-solid fa-network-wired"></i> Réseau</span>
-              <div class="soc__bar"><span class="soc__fill soc__fill--orange" id="socNetFill"></span></div>
-              <div class="soc__meta"><span class="soc__val" id="socNetVal">0 Mb/s</span><span class="soc__hint">en temps réel</span></div>
-            </div>
-            <div class="soc__card">
-              <span class="soc__label"><i class="fa-solid fa-shield-halved"></i> Threat Level</span>
-              <div class="soc__threat"><span class="soc__threat-badge" id="socThreat">LOW</span></div>
-              <div class="soc__meta"><span class="soc__hint">analyse continue</span></div>
-            </div>
-            <div class="soc__card">
-              <span class="soc__label"><i class="fa-solid fa-fire"></i> Firewall</span>
-              <div class="soc__onoff soc__onoff--on" id="socFirewall"><i class="fa-solid fa-lock"></i> ACTIVE</div>
-              <div class="soc__meta"><span class="soc__hint">iptables · UFW</span></div>
-            </div>
-            <div class="soc__card">
-              <span class="soc__label"><i class="fa-solid fa-vault"></i> VPN</span>
-              <div class="soc__onoff soc__onoff--on" id="socVpn"><i class="fa-solid fa-circle-check"></i> CONNECTED</div>
-              <div class="soc__meta"><span class="soc__hint">tunnel sécurisé</span></div>
-            </div>
-            <div class="soc__card soc__card--wide">
-              <span class="soc__label"><i class="fa-solid fa-magnifying-glass"></i> Dernière analyse</span>
-              <div class="soc__scanline" id="socScanline"></div>
-              <div class="soc__meta"><span class="soc__val soc__val--ok"><i class="fa-solid fa-circle-check"></i> OK</span><span class="soc__hint">aucune vulnérabilité critique détectée</span></div>
+
+          <div class="arch__lane">
+            <div class="arch__lane-label"><span>Clients</span></div>
+            <div class="arch__nodes">
+              <div class="arch__node"><i class="fa-solid fa-globe"></i><span>Navigateur</span><small>HTTPS / TLS 1.3</small></div>
+              <div class="arch__node"><i class="fa-solid fa-mobile-screen-button"></i><span>Mobile</span><small>API REST / JSON</small></div>
             </div>
           </div>
-          <div class="soc__footer">
-            <span><i class="fa-solid fa-robot"></i> 0 menaces actives</span>
-            <span><i class="fa-solid fa-user-secret"></i> 3 connecteurs</span>
-            <span><i class="fa-solid fa-file-shield"></i> 99.98% disponibilité</span>
+
+          <div class="arch__lane">
+            <div class="arch__lane-label"><span>Edge &amp; sécurité</span></div>
+            <div class="arch__nodes">
+              <div class="arch__node"><i class="fa-solid fa-shield-halved"></i><span>WAF</span><small>Cloudflare / OWASP</small></div>
+              <div class="arch__node"><i class="fa-solid fa-right-left"></i><span>Reverse proxy</span><small>Traefik / Nginx</small></div>
+              <div class="arch__node"><i class="fa-solid fa-scale-balanced"></i><span>Load balancer</span><small>AWS ALB · sticky</small></div>
+            </div>
           </div>
+
+          <div class="arch__lane">
+            <div class="arch__lane-label"><span>Application</span></div>
+            <div class="arch__nodes">
+              <div class="arch__node"><i class="fa-brands fa-docker"></i><span>API conteneurisée</span><small>Docker · ECS / EC2</small></div>
+              <div class="arch__node"><i class="fa-solid fa-gears"></i><span>Workers</span><small>File d'attente · async</small></div>
+            </div>
+          </div>
+
+          <div class="arch__lane">
+            <div class="arch__lane-label"><span>Données</span></div>
+            <div class="arch__nodes">
+              <div class="arch__node"><i class="fa-solid fa-database"></i><span>PostgreSQL</span><small>RDS · réplication</small></div>
+              <div class="arch__node"><i class="fa-solid fa-bolt"></i><span>Redis</span><small>Cache · sessions</small></div>
+              <div class="arch__node"><i class="fa-solid fa-box-archive"></i><span>S3</span><small>Sauvegardes · objets</small></div>
+            </div>
+          </div>
+
+          <div class="arch__bar">
+            <div class="arch__bar-item"><i class="fa-solid fa-satellite-dish"></i> Observabilité · Prometheus, Grafana, Wazuh</div>
+            <div class="arch__bar-item"><i class="fa-solid fa-cubes"></i> Infrastructure as Code · Terraform</div>
+            <div class="arch__bar-item"><i class="fa-solid fa-arrows-rotate"></i> CI/CD · GitHub Actions, tests, image scan</div>
+          </div>
+        </div>
+
+        <div class="arch__ops reveal">
+          <button class="btn btn--ghost" id="archDeploy"><i class="fa-solid fa-rocket"></i> Simuler un déploiement</button>
+          <div class="arch__log" id="archLog" role="log" aria-live="polite">
+            <p class="arch__log-line">terraform init — backend: AWS S3 ✓</p>
+            <p class="arch__log-line">terraform plan — 24 ressources, 0 à détruire ✓</p>
+          </div>
+        </div>
+
+        <div class="scale reveal" id="scaleApp">
+          <div class="scale__head">
+            <span class="arch__lane-label"><span>Web app scalable</span></span>
+            <div class="scale__stats">
+              <span class="scale__stat"><i class="fa-solid fa-gauge-high"></i> Charge <b id="scaleRps">0</b> req/s</span>
+              <span class="scale__stat"><i class="fa-solid fa-server"></i> Réplicas <b id="scaleReplicas">2</b></span>
+              <span class="scale__stat"><i class="fa-solid fa-database"></i> Connexions BDD <b id="scaleConn">10</b></span>
+            </div>
+          </div>
+          <div class="scale__control">
+            <label for="scaleSlider">Trafic entrant</label>
+            <input type="range" id="scaleSlider" min="0" max="4000" step="50" value="400" />
+            <span class="scale__val" id="scaleSliderVal">400 <small>req/s</small></span>
+          </div>
+          <div class="scale__rack" id="scaleRack" aria-label="Réplicas en cours"></div>
+          <div class="scale__bar">
+            <span class="scale__bar-label">CPU moyen</span>
+            <div class="scale__bar-track"><span class="scale__bar-fill" id="scaleCpu"></span></div>
+            <span class="scale__cpu-val" id="scaleCpuVal">0%</span>
+          </div>
+          <p class="scale__hint" id="scaleHint">Auto-scaling actif · seuil CPU 70%, 400 req/s par réplica.</p>
         </div>
       </div>
     </section>
@@ -360,32 +391,30 @@ loss -= lr * grad</code></pre>
       </div>
     </section>
 
-    <!-- Atelier Cryptographie -->
+    <!-- Messagerie post-quantique -->
     <section class="section section--alt" id="crypto">
       <div class="container">
         <div class="section__head reveal">
           <span class="section__tag">06 · Crypto</span>
-          <h2 class="section__title">Atelier cryptographie — testez en direct</h2>
-          <p class="section__sub">Hachage de texte dans votre navigateur et exploration de la cryptographie post-quantique.</p>
+          <h2 class="section__title">Messagerie sécurisée post-quantique</h2>
+          <p class="section__sub">Simulation d'un canal de bout en bout résistant aux ordinateurs quantiques : KEM Kyber, chiffrement symétrique et signature Dilithium.</p>
         </div>
         <div class="crypto reveal">
-          <div class="crypto__hash">
-            <label class="crypto__label" for="hashInput"><i class="fa-solid fa-fingerprint"></i> Texte à hacher</label>
-            <div class="crypto__select-row">
-              <select class="crypto__select" id="hashAlgo">
-                <option value="SHA-256">SHA-256</option>
-                <option value="SHA-512">SHA-512</option>
-                <option value="SHA-384">SHA-384</option>
-                <option value="SHA-1">SHA-1</option>
-                <option value="MD5">MD5</option>
-              </select>
-              <input type="text" class="crypto__input" id="hashInput" value="Bonjour, monde sécurisé" spellcheck="false" />
+          <div class="crypto__mq">
+            <h3 class="sub-title"><i class="fa-solid fa-envelope-circle-check"></i> Échange chiffré — démonstration</h3>
+            <div class="mq__actors">
+              <div class="mq__actor"><span class="mq__who">Alice</span><input type="text" class="crypto__input" id="mqMessage" value="RDV à 14h — accès sécurisé applique exactement le même algorithme !" spellcheck="false" /></div>
+              <i class="fa-solid fa-arrow-right-long mq__arrow"></i>
+              <div class="mq__actor"><span class="mq__who">Bob</span><div class="mq__outs"><button type="button" class="ai__nn-run" id="mqSend"><i class="fa-solid fa-bolt"></i> Chiffrer &amp; envoyer</button></div></div>
             </div>
-            <div class="crypto__result" id="hashOutput">
-              <span class="crypto__tag" id="hashTag">SHA-256</span>
-              <code id="hashHex">—</code>
+            <div class="mq__trace" id="mqTrace" aria-live="polite">
+              <div class="mq__step">1 · KEM Kyber-768 — encapsulation de clé</div>
+              <div class="mq__step">2 · Clé de session partagée (négociée)</div>
+              <div class="mq__step">3 · Chiffrement AES-GCM du message</div>
+              <div class="mq__step">4 · Signature Dilithium — intégrité &amp; origine</div>
+              <code class="mq__ct">ciphertext = …</code>
             </div>
-            <p class="crypto__note"><i class="fa-solid fa-circle-info"></i> Le hachage s'exécute dans votre navigateur, rien n'est envoyé en ligne. Un hachage est une empreinte irréversible.</p>
+            <p class="crypto__note"><i class="fa-solid fa-circle-info"></i> Exécuté localement dans votre navigateur (WebCrypto pour AES-GCM ; Kyber/Dilithium simulés pour la démo). Le flux reste entièrement chiffré de bout en bout.</p>
           </div>
           <div class="crypto__pq">
             <h3 class="sub-title"><i class="fa-solid fa-cubes"></i> Cryptographie post-quantique</h3>
@@ -404,14 +433,14 @@ loss -= lr * grad</code></pre>
             <p class="crypto__rdesc">
               Les objets connectés imposent des compromis entre faiblesse cryptographique et coût énergétique.
               Kyber-512, standardisé par le NIST comme algorithme le plus léger de la famille ML-KEM, est un
-              candidat séduisant pour l'IoT — mais il reste vulnérable aux fuites par timing, parmesure de
-              consommation et à la manipulation de mémoire dans ces microcontrôleurs contraints.
+              candidat séduisant pour l'IoT — mais il reste vulnérable aux fuites par timing, par
+              mesure de consommation et à la manipulation de mémoire dans ces microcontrôleurs contraints.
             </p>
             <ul class="research__refs">
               <li><span class="research__ref">Bos J., et al. — <em>CRYSTALS-Kyber: a CCA-secure module-lattice-based KEM</em>, IEEE S&P 2018.</span></li>
-              <li><span class="research__ref">NIST FIPS 203 — <em>Module-Lattice-Based Key-EncapsulationMechanism (ML-KEM)</em>, 2024.</span></li>
+              <li><span class="research__ref">NIST FIPS 203 — <em>Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM)</em>, 2024.</span></li>
               <li><span class="research__ref">Groot Bruinderink, et al. — <em>Differential Fault Attacks on ML-KEM</em> (IACR ePrint), 2023.</span></li>
-              <li><span class="research__ref">Ravi P., et al. — <em>Side-Channel onML-KEM under low-noise IoT conditions</em> (IEEE CHES), 2024.</span></li>
+              <li><span class="research__ref">Ravi P., et al. — <em>Side-Channel on ML-KEM under low-noise IoT conditions</em> (IEEE CHES), 2024.</span></li>
             </ul>
           </div>
         </div>
