@@ -743,11 +743,12 @@
     return cols;
   }
 
-  function nnDraw(act) {
+  function nnDraw(act, t) {
     if (!nnCanvas) return;
     var ctx = nnCanvas.getContext('2d');
     var W = nnCanvas.width, H = nnCanvas.height;
     ctx.clearRect(0, 0, W, H);
+    t = t || 0;
     var pts = act && act.pts || nnLayout();
     for (var L2 = 0; L2 < pts.length - 1; L2++) {
       var prev = pts[L2], next = pts[L2 + 1];
@@ -762,6 +763,19 @@
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
           ctx.stroke();
+          // impulsion circulant le long de la connexion
+          var seg = 0.12 + 0.76 * strength;
+          var pulseT = (t * (0.5 + strength) + (i + j) * 0.13) % 1;
+          var px = a.x + (b.x - a.x) * pulseT;
+          var py = a.y + (b.y - a.y) * pulseT;
+          if (pulseT < seg) {
+            ctx.beginPath();
+            ctx.arc(px, py, 1.6 + strength * 1.4, 0, Math.PI * 2);
+            ctx.fillStyle = act && strength > 0.4
+              ? 'rgba(61,220,151,' + (0.3 + 0.6 * strength) + ')'
+              : 'rgba(255,255,255,' + (0.12 + 0.5 * strength) + ')';
+            ctx.fill();
+          }
         }
       }
     }
@@ -769,9 +783,10 @@
       for (var i2 = 0; i2 < pts[L2].length; i2++) {
         var p = pts[L2][i2];
         var actv = act ? act.acts[L2][i2] : 0;
-        var grad = actv > 0 ? 'rgba(61,220,151,' + (0.35 + actv * 0.6) + ')' : 'rgba(77,159,255,0.15)';
+        var breathe = 0.75 + 0.25 * Math.sin(t * 2 + L2 * 0.8 + i2 * 0.5);
+        var grad = actv > 0 ? 'rgba(61,220,151,' + (0.35 + actv * 0.6) + ')' : 'rgba(77,159,255,' + (0.1 + 0.12 * breathe) + ')';
         ctx.beginPath();
-        ctx.arc(p.x, p.y, NN.nodeR, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, NN.nodeR * breathe, 0, Math.PI * 2);
         ctx.fillStyle = grad;
         ctx.fill();
         ctx.strokeStyle = 'rgba(255,255,255,0.2)';
@@ -868,11 +883,25 @@
   }
 
   if (nnCanvas) {
+    var nnReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nnAct = null;
+    var nnT = 0;
     nnDraw();
+
+    function nnFrame() {
+      nnT += 0.016;
+      nnDraw(nnAct, nnT);
+      nnAnimId = requestAnimationFrame(nnFrame);
+    }
+
+    var nnAnimId = 0;
+    if (!nnReduce) nnAnimId = requestAnimationFrame(nnFrame);
+
     if (nnRun) nnRun.addEventListener('click', function () {
       var acts = nnActivate();
       acts = normalizeLinks(acts);
-      nnDraw(acts);
+      nnAct = acts;
+      nnDraw(nnAct, nnT);
       nnUpdateMapping(acts);
       var peak = 0;
       for (var i = 0; i < 3; i++) {
