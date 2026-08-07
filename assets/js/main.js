@@ -449,7 +449,7 @@
           if (el === radarCanvas) drawRadar();
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0, rootMargin: '0px' }
     );
 
     revealEls.forEach(function (el) { observer.observe(el); });
@@ -468,6 +468,26 @@
     });
     drawRadar();
   }
+
+  /* Filet de sécurité : si un compteur ou un reveal est encore à l'état
+     initial (0 / invisible) peu après le chargement, on affiche la vraie
+     valeur. Garantit qu'aucun "0" ne traîne même si l'IntersectionObserver
+     ne s'est pas déclenché. */
+  setTimeout(function () {
+    revealEls.forEach(function (el) { if (!el.classList.contains('visible')) el.classList.add('visible'); });
+    counters.forEach(function (el) {
+      var target = (el.getAttribute('data-count') || '').replace(',', '.');
+      var suffix = el.getAttribute('data-suffix') || '';
+      var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+      var val = decimals > 0 ? parseFloat(target).toFixed(decimals).replace('NaN', '0') : String(Math.round(parseFloat(target) || 0));
+      el.textContent = val + suffix;
+    });
+    fills.forEach(function (el) {
+      var p = el.getAttribute('data-width') || el.style.getPropertyValue('--pct') || '100%';
+      if (p.indexOf('%') === -1) p += '%';
+      el.style.width = p;
+    });
+  }, 3500);
 
   /* ---------- Démarrage des particules quand le hero est visible ---------- */
   var heroEl = document.querySelector('.hero');
