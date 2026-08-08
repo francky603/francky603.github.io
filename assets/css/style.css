@@ -8,6 +8,7 @@
   --bg-alt: #111826;
   --bg-soft: #151d2d;
   --card: #131b2b;
+  --card-alt: #171c2a;
   --border: rgba(255, 82, 82, 0.18);
   --border-strong: rgba(255, 82, 82, 0.35);
   --text: #e8eef7;
@@ -160,8 +161,8 @@ ul {
 }
 
 .nav__link.active {
-  color: var(--accent-2);
-  background: rgba(77, 159, 255, 0.1);
+  color: var(--accent);
+  background: rgba(255, 82, 82, 0.1);
 }
 
 .nav__link--cta {
@@ -357,7 +358,7 @@ ul {
 
 .hero__role {
   font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-  color: var(--accent-2);
+  color: var(--accent);
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -495,7 +496,7 @@ ul {
 }
 
 .t-prompt {
-  color: var(--accent-2);
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -621,7 +622,7 @@ ul {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: var(--accent-2);
+  color: var(--accent);
   letter-spacing: 0.1em;
   margin-bottom: 12px;
 }
@@ -630,6 +631,20 @@ ul {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 800;
   letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.section__title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(255, 82, 82, 0.6);
 }
 
 .section__sub {
@@ -640,7 +655,7 @@ ul {
 }
 
 .inline-link {
-  color: var(--accent-2);
+  color: var(--accent);
   font-weight: 600;
 }
 
