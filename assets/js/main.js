@@ -109,7 +109,7 @@
       if (p.y < 0 || p.y > H) p.vy *= -1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(77, 159, 255, 0.55)';
+      ctx.fillStyle = 'rgba(129, 140, 248, 0.6)';
       ctx.fill();
       for (var j = i + 1; j < particles.length; j++) {
         var q = particles[j];
@@ -118,7 +118,7 @@
         var d2 = dx * dx + dy * dy;
         if (d2 < linkDist * linkDist) {
           var a = 1 - Math.sqrt(d2) / linkDist;
-          ctx.strokeStyle = 'rgba(77, 159, 255, ' + (a * 0.16).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(129, 140, 248, ' + (a * 0.16).toFixed(3) + ')';
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
@@ -331,10 +331,10 @@
 
     var labels = ['Réseaux', 'Sécurité', 'Cloud', 'Dev & IA', 'Systèmes', 'Automatisation'];
     var series = [
-      { color: '#ff5252', values: [0.9, 0.85, 0.75, 0.85, 0.85, 0.9] },
-      { color: '#4d9fff', values: [0.75, 0.7, 0.85, 0.8, 0.7, 0.8] },
-      { color: '#ff8a5c', values: [0.8, 0.75, 0.8, 0.95, 0.75, 0.85] },
-      { color: '#3ddc97', values: [0.85, 0.8, 0.75, 0.85, 0.95, 0.9] }
+      { color: '#818cf8', values: [0.9, 0.85, 0.75, 0.85, 0.85, 0.9] },
+      { color: '#60a5fa', values: [0.75, 0.7, 0.85, 0.8, 0.7, 0.8] },
+      { color: '#a78bfa', values: [0.8, 0.75, 0.8, 0.95, 0.75, 0.85] },
+      { color: '#10b981', values: [0.85, 0.8, 0.75, 0.85, 0.95, 0.9] }
     ];
     var N = labels.length;
     var anim = { p: 0 };
@@ -661,7 +661,7 @@
     var H = matrixCanvas.height;
     matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.08)';
     matrixCtx.fillRect(0, 0, matrixCanvas.width, H);
-    matrixCtx.fillStyle = '#3ddc97';
+    matrixCtx.fillStyle = '#10b981';
     matrixCtx.font = '14px monospace';
     for (var i = 0; i < matrixDrops.length; i++) {
       var ch = String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96));
