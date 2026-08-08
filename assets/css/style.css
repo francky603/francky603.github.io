@@ -8,12 +8,12 @@
   --bg-alt: #0f172a;
   --bg-soft: #1e293b;
   --card: #0f172a;
-  --card-alt: #111c33;
-  --border: rgba(148, 163, 184, 0.14);
-  --border-strong: rgba(148, 163, 184, 0.3);
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
+  --card-alt: #1e293b;
+  --border: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(148, 163, 184, 0.32);
+  --text: #ffffff;
+  --text-muted: #cbd5e1;
+  --text-dim: #94a3b8;
   --accent: #818cf8;
   --accent-2: #6366f1;
   --accent-3: #60a5fa;
