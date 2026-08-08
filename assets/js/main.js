@@ -370,7 +370,7 @@
   }
 
   function drawGrid(ctx, cx, cy, R, N, p) {
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+    ctx.strokeStyle = 'rgba(51, 65, 85, 0.25)';
     ctx.lineWidth = 1;
     for (var ring = 1; ring <= 4; ring++) {
       var r = (R * ring) / 4 * p;
@@ -776,7 +776,7 @@
         for (var j = 0; j < next.length; j++) {
           var a = prev[i], b = next[j];
           var strength = act ? 0.1 + 0.9 * act.links[L2][j][i] : 0.18;
-          var c = 'rgba(77,159,255,' + (0.08 + strength * 0.5) + ')';
+          var c = 'rgba(79,70,229,' + (0.08 + strength * 0.5) + ')';
           ctx.strokeStyle = c;
           ctx.lineWidth = 0.6 + strength * 2;
           ctx.beginPath();
@@ -792,8 +792,8 @@
             ctx.beginPath();
             ctx.arc(px, py, 1.6 + strength * 1.4, 0, Math.PI * 2);
             ctx.fillStyle = act && strength > 0.4
-              ? 'rgba(61,220,151,' + (0.3 + 0.6 * strength) + ')'
-              : 'rgba(255,255,255,' + (0.12 + 0.5 * strength) + ')';
+              ? 'rgba(5,150,105,' + (0.3 + 0.6 * strength) + ')'
+              : 'rgba(79,70,229,' + (0.12 + 0.5 * strength) + ')';
             ctx.fill();
           }
         }
@@ -804,16 +804,16 @@
         var p = pts[L2][i2];
         var actv = act ? act.acts[L2][i2] : 0;
         var breathe = 0.75 + 0.25 * Math.sin(t * 2 + L2 * 0.8 + i2 * 0.5);
-        var grad = actv > 0 ? 'rgba(61,220,151,' + (0.35 + actv * 0.6) + ')' : 'rgba(77,159,255,' + (0.1 + 0.12 * breathe) + ')';
+        var grad = actv > 0 ? 'rgba(5,150,105,' + (0.35 + actv * 0.6) + ')' : 'rgba(79,70,229,' + (0.1 + 0.12 * breathe) + ')';
         ctx.beginPath();
         ctx.arc(p.x, p.y, NN.nodeR * breathe, 0, Math.PI * 2);
         ctx.fillStyle = grad;
         ctx.fill();
-        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+        ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)';
         ctx.lineWidth = 1;
         ctx.stroke();
         if (actv > 0.02) {
-          ctx.fillStyle = 'rgba(255,255,255,0.95)';
+          ctx.fillStyle = '#0f172a';
           ctx.font = '700 11px "JetBrains Mono", monospace';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
