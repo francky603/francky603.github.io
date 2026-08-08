@@ -1,28 +1,28 @@
-Ôªø/* ============================================================
-   Portfolio ‚Äî ASSOUMANE DJIMRAOU MAHAMADOU
-   Modern dark theme ¬∑ Cyber / Cloud aesthetic
+/* ============================================================
+   Portfolio ó ASSOUMANE DJIMRAOU MAHAMADOU
+   Modern dark theme ∑ Cyber / Cloud aesthetic
    ============================================================ */
 
 :root {
-  --bg: #0d1117;
-  --bg-alt: #111826;
-  --bg-soft: #151d2d;
-  --card: #131b2b;
-  --card-alt: #171c2a;
-  --border: rgba(255, 82, 82, 0.18);
-  --border-strong: rgba(255, 82, 82, 0.35);
-  --text: #e8eef7;
-  --text-muted: #9fb0c8;
-  --text-dim: #6d7f9c;
+  --bg: #f4f6fb;
+  --bg-alt: #eef1f8;
+  --bg-soft: #e7ecf6;
+  --card: #ffffff;
+  --card-alt: #ffffff;
+  --border: rgba(13, 27, 47, 0.14);
+  --border-strong: rgba(13, 27, 47, 0.24);
+  --text: #101a2b;
+  --text-muted: #4a5a73;
+  --text-dim: #7b8aa3;
   --accent: #ff5252;
-  --accent-2: #4d9fff;
+  --accent-2: #2563eb;
   --accent-3: #ff8a5c;
-  --success: #3ddc97;
-  --gradient: linear-gradient(120deg, #ff5252, #4d9fff);
+  --success: #0f9d6a;
+  --gradient: linear-gradient(120deg, #ff5252, #2563eb);
   --gradient-2: linear-gradient(120deg, #ff8a5c, #ff5252);
   --radius: 16px;
   --radius-sm: 10px;
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow: 0 20px 60px rgba(13, 27, 47, 0.14);
   --max-w: 1160px;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
 }
@@ -92,7 +92,7 @@ ul {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  background: rgba(13, 17, 23, 0.75);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid transparent;
@@ -101,7 +101,7 @@ ul {
 
 .nav.scrolled {
   border-bottom-color: var(--border);
-  background: rgba(13, 17, 23, 0.92);
+  background: rgba(255, 255, 255, 0.88);
 }
 
 .nav__inner {
@@ -457,7 +457,7 @@ ul {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  background: rgba(17, 24, 38, 0.9);
+  background: rgba(241, 244, 250, 0.9);
   box-shadow: var(--shadow);
   backdrop-filter: blur(8px);
 }
@@ -467,7 +467,7 @@ ul {
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
   border-bottom: 1px solid var(--border);
 }
 
@@ -560,7 +560,7 @@ ul {
   padding: 10px 22px 14px;
   font-family: var(--font-mono);
   border-top: 1px solid var(--border);
-  background: rgba(13, 17, 23, 0.35);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .shell__input {
@@ -663,7 +663,7 @@ ul {
   text-decoration: underline;
 }
 
-/* √âtudes de cas */
+/* …tudes de cas */
 .cases {
   display: grid;
   gap: 24px;
@@ -777,12 +777,12 @@ ul {
 .case code {
   font-family: var(--font-mono);
   font-size: 0.85em;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(13, 27, 47, 0.07);
   padding: 2px 6px;
   border-radius: 5px;
 }
 
-/* D√©monstrations */
+/* DÈmonstrations */
 .demos {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -929,7 +929,7 @@ ul {
 .ghlang__track {
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(13, 27, 47, 0.08);
   overflow: hidden;
 }
 
@@ -1090,7 +1090,7 @@ ul {
   text-align: center;
   padding: 14px 10px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(13, 27, 47, 0.05);
   border: 1px solid var(--border);
 }
 
@@ -1235,7 +1235,7 @@ ul {
   grid-column: 1 / -1;
   height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(13, 27, 47, 0.07);
   overflow: hidden;
 }
 
@@ -1249,7 +1249,7 @@ ul {
   transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Timeline / Exp√©rience */
+/* Timeline / ExpÈrience */
 .timeline {
   position: relative;
   padding-left: 28px;
@@ -1343,7 +1343,7 @@ ul {
 }
 
 .timeline__list li::before {
-  content: '‚ñπ';
+  content: '?';
   position: absolute;
   left: 0;
   color: var(--accent-2);
@@ -1391,7 +1391,7 @@ ul {
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background: radial-gradient(600px circle at var(--tilt-xp, 50%) var(--tilt-yp, 50%), rgba(255, 255, 255, 0.08), transparent 45%);
+  background: radial-gradient(600px circle at var(--tilt-xp, 50%) var(--tilt-yp, 50%), rgba(13, 27, 47, 0.09), transparent 45%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1563,7 +1563,7 @@ ul {
 .project__note code {
   font-family: var(--font-mono);
   font-size: 0.85em;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(13, 27, 47, 0.09);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -1597,7 +1597,7 @@ ul {
 }
 
 .project__table thead th:first-child {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(13, 27, 47, 0.06);
   color: var(--text-dim);
 }
 
@@ -1615,7 +1615,7 @@ ul {
 }
 
 .project__table tbody tr:hover td {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
 }
 
 .project__table tbody td i {
@@ -1757,7 +1757,7 @@ ul {
 .lang__bar {
   height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(13, 27, 47, 0.07);
   overflow: hidden;
 }
 
@@ -1776,7 +1776,7 @@ ul {
   font-size: 0.8rem;
 }
 
-/* Int√©r√™ts */
+/* IntÈrÍts */
 .interests {
   padding: 30px;
   border-radius: var(--radius);
@@ -1878,7 +1878,7 @@ ul {
   color: var(--accent-2);
 }
 
-/* ---------- Architecture infog√©rance & cloud ---------- */
+/* ---------- Architecture infogÈrance & cloud ---------- */
 .arch {
   position: relative;
   border: 1px solid var(--border);
@@ -1953,7 +1953,7 @@ ul {
   padding: 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(13, 27, 47, 0.045);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
@@ -2014,7 +2014,7 @@ ul {
   padding: 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(13, 17, 23, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   font-family: var(--font-mono);
   font-size: 0.78rem;
   line-height: 1.6;
@@ -2027,7 +2027,7 @@ ul {
 }
 
 .arch__log-line::before {
-  content: '‚ñ∏';
+  content: '?';
   color: var(--success);
   margin-right: 8px;
 }
@@ -2122,7 +2122,7 @@ ul {
   padding: 12px 8px 8px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(13, 27, 47, 0.045);
   text-align: center;
   transition: all 0.3s ease;
   opacity: 0.35;
@@ -2178,7 +2178,7 @@ ul {
   flex: 1;
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(13, 27, 47, 0.07);
   overflow: hidden;
 }
 
@@ -2208,7 +2208,7 @@ ul {
   padding-left: 10px;
 }
 
-/* ---------- Carte r√©seau interactive ---------- */
+/* ---------- Carte rÈseau interactive ---------- */
 .netmap {
   position: relative;
   display: flex;
@@ -2285,7 +2285,7 @@ ul {
   padding: 16px;
   border: 1px dashed var(--border-strong);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(13, 27, 47, 0.045);
 }
 
 .netmap__zone-title {
@@ -2308,7 +2308,7 @@ ul {
   border-radius: 999px;
   font-size: 0.8rem;
   color: var(--text-muted);
-  background: rgba(13, 17, 23, 0.9);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--border);
   white-space: nowrap;
   transition: all 0.25s ease;
@@ -2320,7 +2320,7 @@ ul {
   margin: 8px 0;
   padding: 12px 12px 8px;
   border-radius: var(--radius-sm);
-  background: rgba(13, 17, 23, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--border);
 }
 
@@ -2345,7 +2345,7 @@ ul {
   margin: 8px 0;
   padding: 10px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
   border: 1px solid var(--border);
 }
 
@@ -2373,7 +2373,7 @@ ul {
   transform: translateY(-2px);
 }
 
-/* ---------- Timeline : √©l√©ment futur ---------- */
+/* ---------- Timeline : ÈlÈment futur ---------- */
 .timeline__future-tag {
   display: inline-block;
   margin-left: 6px;
@@ -2391,7 +2391,7 @@ ul {
   box-shadow: 0 0 0 4px rgba(255, 138, 92, 0.2);
 }
 
-/* ---------- D√©mo IA ---------- */
+/* ---------- DÈmo IA ---------- */
 .ai {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -2447,7 +2447,7 @@ ul {
   width: 100%;
   height: auto;
   display: block;
-  background: rgba(13, 17, 23, 0.5);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   margin: 10px 0 8px;
@@ -2469,7 +2469,7 @@ ul {
   height: 6px;
   max-width: 180px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(13, 27, 47, 0.07);
   border: 1px solid var(--border);
   overflow: hidden;
 }
@@ -2497,7 +2497,7 @@ ul {
   padding: 8px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(13, 27, 47, 0.045);
   font-size: 0.8rem;
   color: var(--text-muted);
 }
@@ -2542,7 +2542,7 @@ ul {
   margin: 6px 0;
   padding: 16px 18px;
   border-radius: var(--radius-sm);
-  background: rgba(13, 17, 23, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   border: 1px solid var(--border);
   font-family: var(--font-mono);
   font-size: 0.86rem;
@@ -2682,7 +2682,7 @@ ul {
   gap: 6px;
   font-size: 0.72rem;
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
   border: 1px solid var(--border);
   padding: 4px 9px;
   border-radius: 999px;
@@ -2735,7 +2735,7 @@ ul {
   color: var(--accent-2);
 }
 
-/* D√©mos interactives du lab */
+/* DÈmos interactives du lab */
 .labdemos {
   margin-top: 24px;
   display: grid;
@@ -2794,7 +2794,7 @@ ul {
 .labdemo__log {
   padding: 12px;
   border-radius: var(--radius-sm);
-  background: rgba(13, 17, 23, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--border);
   font-family: var(--font-mono);
   font-size: 0.76rem;
@@ -2808,7 +2808,7 @@ ul {
   padding: 12px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
   font-size: 0.86rem;
   color: var(--text);
   min-height: 44px;
@@ -2833,7 +2833,7 @@ ul {
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(13, 27, 47, 0.045);
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--text);
@@ -2884,7 +2884,7 @@ ul {
   padding: 12px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
   color: var(--text);
   font-family: var(--font-mono);
   font-size: 0.9rem;
@@ -2933,7 +2933,7 @@ ul {
   margin-top: 16px;
   padding: 16px;
   border-radius: var(--radius-sm);
-  background: rgba(13, 17, 23, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--border);
   display: grid;
   gap: 8px;
@@ -2952,7 +2952,7 @@ ul {
 }
 
 .mq__step::before {
-  content: '‚óã';
+  content: '?';
   font-family: var(--font-mono);
 }
 
@@ -2963,7 +2963,7 @@ ul {
 }
 
 .mq__step--on::before {
-  content: '‚óè';
+  content: '?';
   color: var(--accent-2);
 }
 
@@ -2973,7 +2973,7 @@ ul {
 }
 
 .mq__step--done::before {
-  content: '‚óè';
+  content: '?';
   color: var(--success);
 }
 
@@ -2982,7 +2982,7 @@ ul {
   display: block;
   padding: 10px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(13, 27, 47, 0.05);
   font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--accent-2);
@@ -3007,7 +3007,7 @@ ul {
 
 .crypto__note code {
   font-family: var(--font-mono);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(13, 27, 47, 0.09);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -3033,7 +3033,7 @@ ul {
   padding: 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(13, 27, 47, 0.045);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
@@ -3086,7 +3086,7 @@ body.matrix-mode {
   cursor: crosshair;
 }
 
-/* ---------- R√©duction des animations ---------- */
+/* ---------- RÈduction des animations ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -3103,7 +3103,7 @@ body.matrix-mode {
   }
 }
 
-/* ---------- Curseur √† halo ---------- */
+/* ---------- Curseur ‡ halo ---------- */
 .cursor-glow {
   position: fixed;
   top: 0;
@@ -3230,7 +3230,7 @@ body.matrix-mode {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: rgba(13, 17, 23, 0.98);
+    background: rgba(255, 255, 255, 0.98);
     border-bottom: 1px solid var(--border);
     padding: 12px 24px 20px;
     transform: translateY(-110%);
