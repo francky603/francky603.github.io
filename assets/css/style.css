@@ -112,7 +112,7 @@ ul {
   height: 68px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .nav__logo {
@@ -461,6 +461,25 @@ ul {
 .hero__meta a:hover {
   color: var(--accent-2);
 }
+.hero__meta a[href^="mailto"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+.hero__remote {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--success);
+  background: rgba(5, 150, 105, 0.1);
+  color: var(--success);
+  font-weight: 600;
+}
+.hero__remote i { color: var(--success); }
 
 /* Terminal */
 .hero__terminal {
@@ -3249,8 +3268,15 @@ body.matrix-mode {
 }
 
 @media (max-width: 720px) {
+  .nav__inner {
+    justify-content: space-between;
+  }
   .nav__toggle {
     display: flex;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .nav__menu {
